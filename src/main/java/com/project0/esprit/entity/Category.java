@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -76,8 +78,27 @@ public class Category extends AuditModel {
 		this.categoryType = categoryType;
 	}
 
+	public Ray getRay() {
+		return ray;
+	}
+
+	public void setRay(Ray ray) {
+		this.ray = ray;
+	}
+
 	public Set<Product> getProducts() {
 		return products;
+	}
+
+	public Category(Long category_id, String categoryName, String tags, String categoryType, Set<Product> products,
+			Ray ray) {
+		super();
+		this.category_id = category_id;
+		this.categoryName = categoryName;
+		this.tags = tags;
+		this.categoryType = categoryType;
+		this.products = products;
+		this.ray = ray;
 	}
 
 	public void setProducts(Set<Product> products) {
@@ -87,6 +108,14 @@ public class Category extends AuditModel {
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)
 	    private Set<Product> products;
+    
+    
+    
+    @JsonIgnore
+   	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+   	    @JoinColumn(name = "ray_id", nullable = false)
+   	    private Ray ray;
+
 	
 	
 

@@ -21,8 +21,11 @@ public class Livreur {
 	@Column(name="deliverylastname")
 	private String deliverylastName  ;
 	
-	@Column(name="location")
-	private Location loc  ;
+	@Column(name="locationlongitude")
+	private Integer longitude  ;
+	
+	@Column(name="locationlatitude")
+	private Integer latitude  ;
 	
 	@Column(name="email")
 	private String email  ;
@@ -34,13 +37,14 @@ public class Livreur {
 		super();
 	}
 
-	public Livreur(Long delivrey_id, String deliveryName, String deliverylastName, Location loc, String email,
+	public Livreur(Long delivrey_id, String deliveryName, String deliverylastName, Integer loc, Integer lat, String email,
 			Integer workLoad) {
 		super();
 		this.delivrey_id = delivrey_id;
 		this.deliveryName = deliveryName;
 		this.deliverylastName = deliverylastName;
-		this.loc = loc;
+	     this.latitude = lat;
+	     this.longitude = loc;
 		this.email = email;
 		this.workLoad = workLoad;
 	}
@@ -69,12 +73,22 @@ public class Livreur {
 		this.deliverylastName = deliverylastName;
 	}
 
-	public Location getLoc() {
-		return loc;
+	
+
+	public Integer getLongitude() {
+		return longitude;
 	}
 
-	public void setLoc(Location loc) {
-		this.loc = loc;
+	public void setLongitude(Integer longitude) {
+		this.longitude = longitude;
+	}
+
+	public Integer getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Integer latitude) {
+		this.latitude = latitude;
 	}
 
 	public String getEmail() {

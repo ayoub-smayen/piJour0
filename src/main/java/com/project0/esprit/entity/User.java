@@ -5,12 +5,16 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,10 +29,35 @@ public class User extends AuditModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long user_id;
+	@ColumnDefault("0")
+	//@Column(name="role",columnDefinition = "int  default 2 ")
+	@Enumerated(EnumType.ORDINAL)
+	private Role role;
 	
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	@Column(name="firstname")
 	private String membre_username ;
 	
+	public User(Long user_id, Role role, String membre_username, String password, String confirm_password, String email,
+			String group, String city, String address, String phone_number, Set<Messages> message) {
+		super();
+		this.user_id = user_id;
+		this.role = role;
+		this.membre_username = membre_username;
+		this.password = password;
+		this.confirm_password = confirm_password;
+		this.email = email;
+		this.group = group;
+		this.city = city;
+		this.address = address;
+		this.phone_number = phone_number;
+		this.message = message;
+	}
 	@Column(name="password")
 	private String password  ;
 	

@@ -105,8 +105,14 @@ public class Product extends AuditModel {
 	}
     @JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	    @JoinColumn(name = "category_id", nullable = false)
+	    @JoinColumn(name = "category_id", nullable = true)
 	    private Category category;
+
+    
+    @JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	    @JoinColumn(name = "order_id", nullable = true)
+	    private Orders orders;
 
 	public Product(Long product_id, String productname, String productdescription, Integer quantity, Double price,
 			String brand, byte[] productImg, Category category) {
