@@ -1,6 +1,7 @@
 package com.project0.esprit.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="delivry")
-public class Livreur {
+public class Livreur  extends AuditModel{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,9 @@ public class Livreur {
 	
 	@Column(name="deliverylastname")
 	private String deliverylastName  ;
+	
+	/*@Embedded
+	private Location location;*/
 	
 	@Column(name="locationlongitude")
 	private Integer longitude  ;

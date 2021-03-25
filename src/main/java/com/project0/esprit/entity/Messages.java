@@ -20,16 +20,20 @@ public class Messages  extends AuditModel{
 	private Long message_id;
 	@Column(name="messagetext")
 	private String MessageText ;
+	
+	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User1 user;
+	
+	
 
 	public Messages() {
 		super();
 	}
 
-	public Messages(Long message_id, String messageText, User user) {
+	public Messages(Long message_id, String messageText, User1 user) {
 		super();
 		this.message_id = message_id;
 		MessageText = messageText;
@@ -52,11 +56,11 @@ public class Messages  extends AuditModel{
 		MessageText = messageText;
 	}
 
-	public User getUser() {
+	public User1 getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(User1 user) {
 		this.user = user;
 	}
 	

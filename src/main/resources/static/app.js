@@ -18,6 +18,19 @@ function setConnected(connected) {
 }
 
 function connect() {
+	
+	$.ajax({
+	    url: 'http://localhost:8091',
+	    type: 'post',
+	    data: {},
+	  /*  headers: {
+	        "Authorization": "Bearer "+jwtToken,   //key word **Bearer**  should pass before the token string
+	    },*/
+	    dataType: 'json',
+	    success: function (data) {
+	        console.info(data);
+	    }
+	});
     var socket = new SockJS('/gs-guide-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {

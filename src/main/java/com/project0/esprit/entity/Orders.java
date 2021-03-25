@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="orders")
-public class Orders {
+public class Orders  {
 
 	
 	@Id
@@ -26,7 +26,7 @@ public class Orders {
 	@Column(name="ordername")
 	private String ordername ;
 	
-	public Orders(Long order_id, String ordername, String point, String typepay, Set<Product> products) {
+	public Orders(Long order_id, String ordername, String point, String typepay, Set<Product1> products) {
 		super();
 		this.order_id = order_id;
 		this.ordername = ordername;
@@ -48,7 +48,7 @@ public class Orders {
 	@JsonIgnore
 	@OneToMany(mappedBy = "orders", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)
-	    private Set<Product> products;
+	    private Set<Product1> products;
 
 	public Long getOrder_id() {
 		return order_id;
@@ -82,11 +82,11 @@ public class Orders {
 		this.typepay = typepay;
 	}
 
-	public Set<Product> getProducts() {
+	public Set<Product1> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(Set<Product1> products) {
 		this.products = products;
 	}
     

@@ -1,0 +1,81 @@
+package com.project0.esprit.entity;
+
+
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dashboard")
+public class Dashboard  extends AuditModel{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long dashboard_id;
+	
+	@Column(name="productsold")
+	private Integer product_sold ;
+	@Column(name="monthlypayment")
+	private Float monthly_payment ;
+	public Dashboard(Long dashboard_id, Integer product_sold, Float monthly_payment) {
+		super();
+		this.dashboard_id = dashboard_id;
+		this.product_sold = product_sold;
+		this.monthly_payment = monthly_payment;
+	}
+	public Long getDashboard_id() {
+		return dashboard_id;
+	}
+	public void setDashboard_id(Long dashboard_id) {
+		this.dashboard_id = dashboard_id;
+	}
+	public Integer getProduct_sold() {
+		return product_sold;
+	}
+	public void setProduct_sold(Integer product_sold) {
+		this.product_sold = product_sold;
+	}
+	public Float getMonthly_payment() {
+		return monthly_payment;
+	}
+	public void setMonthly_payment(Float monthly_payment) {
+		this.monthly_payment = monthly_payment;
+	}
+	public Dashboard() {
+		super();
+	}
+	public Dashboard(Integer product_sold, Float monthly_payment) {
+		super();
+		this.product_sold = product_sold;
+		this.monthly_payment = monthly_payment;
+	}
+	
+	
+	/*
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "dashboard")
+	private List<Product1> best_product ;
+	
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

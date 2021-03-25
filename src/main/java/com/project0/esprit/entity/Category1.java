@@ -14,12 +14,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="category")
-public class Category extends AuditModel {
+public class Category1 extends AuditModel {
 	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long category_id;
@@ -33,10 +40,7 @@ public class Category extends AuditModel {
 	@Column(name="categorytype")
 	private String categoryType;
 	
-	 public Category() {
-		super();
-	}
-
+	 
 	public Long getCategory_id() {
 		return category_id;
 	}
@@ -45,13 +49,16 @@ public class Category extends AuditModel {
 		this.category_id = category_id;
 	}
 
-	public Category(Long category_id, String categoryName, String tags, String categoryType, Set<Product> products) {
+	public Category1(Long category_id, String categoryName, String tags, String categoryType, Set<Product1> products) {
 		super();
 		this.category_id = category_id;
 		this.categoryName = categoryName;
 		this.tags = tags;
 		this.categoryType = categoryType;
 		this.products = products;
+	}
+	public Category1() {
+		super();
 	}
 
 	public String getCategoryName() {
@@ -86,11 +93,13 @@ public class Category extends AuditModel {
 		this.ray = ray;
 	}
 
-	public Set<Product> getProducts() {
+	public Set<Product1> getProducts() {
 		return products;
 	}
 
-	public Category(Long category_id, String categoryName, String tags, String categoryType, Set<Product> products,
+	
+
+	public Category1(Long category_id, String categoryName, String tags, String categoryType, Set<Product1> products,
 			Ray ray) {
 		super();
 		this.category_id = category_id;
@@ -101,19 +110,21 @@ public class Category extends AuditModel {
 		this.ray = ray;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(Set<Product1> products) {
 		this.products = products;
 	}
-    @JsonIgnore
+	
+	@JsonManagedReference
+    //@JsonIgnore
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)
-	    private Set<Product> products;
+	    private Set<Product1> products;
     
     
-    
-    @JsonIgnore
+	@JsonBackReference
+    //@JsonIgnore
    	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-   	    @JoinColumn(name = "ray_id", nullable = false)
+   	    @JoinColumn(name = "ray_id", nullable = true)
    	    private Ray ray;
 
 	

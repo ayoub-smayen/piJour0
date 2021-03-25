@@ -13,10 +13,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="ray")
-public class Ray {
+public class Ray  extends AuditModel{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +31,7 @@ public class Ray {
 	@Column(name="rayvison")
 	private String rayvision;
 	
-    public Ray(Long ray_id, String rayname, String raytag, String rayvision, Set<Category> categories) {
+    public Ray(Long ray_id, String rayname, String raytag, String rayvision, Set<Category1> categories) {
 		super();
 		this.ray_id = ray_id;
 		this.rayname = rayname;
@@ -43,10 +44,11 @@ public class Ray {
 		super();
 	}
 
-	@JsonIgnore
+	@JsonManagedReference
+	//@JsonIgnore
 	@OneToMany(mappedBy = "ray", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)
-	    private Set<Category> categories;
+	    private Set<Category1> categories;
 
 	public Long getRay_id() {
 		return ray_id;
@@ -80,11 +82,11 @@ public class Ray {
 		this.rayvision = rayvision;
 	}
 
-	public Set<Category> getCategories() {
+	public Set<Category1> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(Set<Category> categories) {
+	public void setCategories(Set<Category1> categories) {
 		this.categories = categories;
 	}
     

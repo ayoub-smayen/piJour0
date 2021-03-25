@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="user")
-public class User extends AuditModel {
+public class User1 extends AuditModel {
 	
 	/**
 	 * 
@@ -43,7 +43,7 @@ public class User extends AuditModel {
 	@Column(name="firstname")
 	private String membre_username ;
 	
-	public User(Long user_id, Role role, String membre_username, String password, String confirm_password, String email,
+	public User1(Long user_id, Role role, String membre_username, String password, String confirm_password, String email,
 			String group, String city, String address, String phone_number, Set<Messages> message) {
 		super();
 		this.user_id = user_id;
@@ -79,12 +79,16 @@ public class User extends AuditModel {
 	@Column(name="phonenumber")
 	private String phone_number  ;
 	
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<Messages> message;
 	
-	public User(Long user_id, String membre_username, String password, String confirm_password, String email,
+	
+	
+	
+	public User1(Long user_id, String membre_username, String password, String confirm_password, String email,
 			String group, String city, String address, String phone_number, Set<Messages> message) {
 		super();
 		this.user_id = user_id;
@@ -98,6 +102,7 @@ public class User extends AuditModel {
 		this.phone_number = phone_number;
 		this.message = message;
 	}
+	
 	public Set<Messages> getMessage() {
 		return message;
 	}
@@ -160,10 +165,10 @@ public class User extends AuditModel {
 	}
 	
 	
-	public User() {
+	public User1() {
 		super();
 	}
-	public User(Long user_id, String membre_username, String password, String confirm_password, String email,
+	public User1(Long user_id, String membre_username, String password, String confirm_password, String email,
 			String group, String city, String address, String phone_number) {
 		super();
 		this.user_id = user_id;

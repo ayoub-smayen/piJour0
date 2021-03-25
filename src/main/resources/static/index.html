@@ -8,6 +8,7 @@
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/app.js"></script>
+    <script src="index.js"></script>
     
     <style type="text/css">
     .user-avatar-circle {
@@ -22,6 +23,48 @@
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
+    <script type="text/javascript">
+    
+    $.ajax({
+    	url: "linechartdata",
+    	/*headers: {
+            "Autorization": "Bearer "+jwtToken,   //key word **Bearer**  should pass before the token string
+        },*/
+    	success: function(result){
+    		var category = JSON.parse(result).categories;
+    		var series = JSON.parse(result).series;
+    		drawLineChart(category, series);
+    	}
+    });
+
+    function drawLineChart(category, series){
+    	Highcharts.chart('container', {
+    	    chart: {
+    	        type: 'line',
+    	        width: 500
+    	    },
+    	    
+    	    title: {
+    	        text: 'Width is set to 300px'
+    	    },
+    	
+    	    xAxis: {
+    	        categories: category
+    	    },
+    	    
+    	    tooltip: {
+    	        formatter: function() {
+    	          return '<strong>'+this.x+': </strong>'+ this.y;
+    	        }
+    	    },
+    	
+    	    series: [{
+    	        data: series
+    	    }]
+    	});
+    }
+    </script>
+    <div id="container" style="height: 400px"></div>
 <div id="main-content" class="container">
     <div class="row">
         <div class="col-md-6">
@@ -59,5 +102,40 @@
         </div>
     </div>
 </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+function createLocalstorageItem(txtJwtTokenValue) {
+  sessionStorage.setItem("jwtToken", txtJwtTokenValue);
+}
+
+function readValue() {
+ var jwtToken = sessionStorage.getItem("jwtToken");
+console.log("jwtToken : "+jwtToken );
+return jwtToken ;
+
+}
+    
+function getDataFromAPiByPassingJwtTokenInHeader(){
+var jwtToken=readValue();
+$.ajax({
+    url: 'http://localhost:8091',
+    type: 'post',
+    data: {},
+  /*  headers: {
+        Bearer Token: "Bearer "+jwtToken,   //key word **Bearer**  should pass before the token string
+    },*/
+    dataType: 'json',
+    success: function (data) {
+        console.info(data);
+    }
+});
+}
+
+</script>
+
+
 </body>
 </html>
