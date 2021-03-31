@@ -9,6 +9,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.json.JSONException;
@@ -19,7 +22,10 @@ import org.json.JSONArray;
 public class Model {
 
 	static JSONArray json = null;
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long model0_id;
 	static {
 
 		try {
@@ -54,4 +60,4 @@ public class Model {
 	public static String getModelDataList() {
 		return json.toString();
 	}
-}               
+}             

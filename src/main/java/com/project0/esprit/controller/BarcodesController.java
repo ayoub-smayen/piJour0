@@ -1,5 +1,13 @@
 package com.project0.esprit.controller;
 
+
+/*
+ * 
+ * 
+ * ayub
+ * tache  generate  qr code product 
+ * 
+ */
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

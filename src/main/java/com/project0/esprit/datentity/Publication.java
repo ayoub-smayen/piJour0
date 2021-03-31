@@ -54,8 +54,8 @@ public class Publication extends AuditModel {
    // @JsonIgnore
     private User user2;
 
-	@JsonManagedReference
-	//@JsonIgnore
+	//@JsonManagedReference
+	@JsonIgnore
     @OneToMany(cascade=CascadeType.ALL,mappedBy = "publication")
     private List<Comments> comments ;
 	

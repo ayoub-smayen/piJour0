@@ -1,3 +1,4 @@
+
 package com.project0.esprit.service;
 
 import javax.mail.internet.MimeMessage;
@@ -25,8 +26,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import com.project0.esprit.entity.UserSendMail;
 import com.project0.esprit.repository.ImageRepository;
+import com.project0.esprit.repository.ProductRepository;
 import com.project0.esprit.datentity.User;
 import com.project0.esprit.entity.ImageT;
+import com.project0.esprit.entity.Product1;
 @Service
 public class MailService {
 
@@ -35,7 +38,7 @@ public class MailService {
 
 	
 	@Autowired
-	ImageRepository imageRepository;
+	ProductRepository imageRepository;
 	/**
 	 * 
 	 * @param javaMailSender
@@ -140,7 +143,7 @@ public class MailService {
 
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 		
-		 List<ImageT> imgs= (List<ImageT>) imageRepository.findAll();
+		 List<Product1> imgs= (List<Product1>) imageRepository.findAll();
 		 
 		 
 		 
@@ -153,9 +156,9 @@ public class MailService {
 		
 		ClassPathResource classPathResource = new ClassPathResource("Attachment.pdf");
 		
-		for (ImageT im : imgs) {
-			final InputStreamSource fileStreamSource = new ByteArrayResource(decompressBytes(im.getPicByte()));
-			helper.addAttachment(im.getName(), fileStreamSource);
+		for (Product1 im : imgs) {
+			final InputStreamSource fileStreamSource = new ByteArrayResource(decompressBytes(im.getProductImg()));
+			helper.addAttachment(im.getProductname(), fileStreamSource);
 		}
 		//helper.addAttachment(classPathResource.getFilename(), classPathResource);
 

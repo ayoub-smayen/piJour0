@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="dashboard")
@@ -23,10 +24,12 @@ public class Dashboard  extends AuditModel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long dashboard_id;
-	
+	@NotNull(message = "product_soldis required.")
 	@Column(name="productsold")
 	private Integer product_sold ;
 	@Column(name="monthlypayment")
+	
+	
 	private Float monthly_payment ;
 	public Dashboard(Long dashboard_id, Integer product_sold, Float monthly_payment) {
 		super();

@@ -3,6 +3,7 @@ package com.project0.esprit.entity;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -14,17 +15,23 @@ import com.project0.esprit.datentity.User;
 @Entity
 @Table(name="cart0")
 public class Cart0 extends AuditModel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long Id_Cart;
 	
+	@NotNull(message = "SUBtotlal name is required.")
 	private double Subtotal;
 	
 	//relation  between cart=>user
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne
-	//@JsonBackReference
+	@JsonBackReference
 	//@JsonIgnore
 	//@JoinColumn(name = "user_id" ,  nullable = true)
 	private User user;

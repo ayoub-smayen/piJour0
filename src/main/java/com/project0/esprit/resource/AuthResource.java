@@ -134,13 +134,15 @@ public class AuthResource {
         Map<String, String> response2 = new HashMap<>();
         //response.put("login", login);
         //response.put("token", token);
-        response2.put("login", userDetails.getUsername());
-       
+        response2.put("username", userDetails.getUsername());
+        response2.put("email", user.getEmail());
+        
+        response2.put("roles1", userDetails.getAuthorities().toString());
         response2.put("token", token);
 
 
         // Return the token
-        return ResponseEntity.ok(Collections.singletonMap("token", token));
-        //return ResponseEntity.ok(response2);
+        //return ResponseEntity.ok(Collections.singletonMap("token", token));
+        return ResponseEntity.ok(response2);
     }
 }

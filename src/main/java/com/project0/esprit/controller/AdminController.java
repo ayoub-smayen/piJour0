@@ -1,5 +1,17 @@
 package com.project0.esprit.controller;
 
+
+
+ /*
+  * 
+  * 
+  * router admin  if user has rule Admin can enter else not
+  * qr code generate 
+  * add crud admin 
+  * 
+  * 
+  */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

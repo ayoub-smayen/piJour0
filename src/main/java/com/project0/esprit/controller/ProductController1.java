@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,8 @@ import com.project0.esprit.entity.Product1;
 import com.project0.esprit.entity.User1;
 import com.project0.esprit.repository.ProductRepository;
 import com.project0.esprit.service.CategoryService;
+import com.project0.esprit.service.Iayproduct;
+import com.project0.esprit.service.impl.Aproductimpl;
 
 @CrossOrigin("*")
 @RestController
@@ -31,21 +36,46 @@ import com.project0.esprit.service.CategoryService;
 @RequestMapping("/api")
 public class ProductController1 {
 
-	
+	//Logger l  =new Logger() ;
+ 
 	private byte[] bytes;
+	
+	@Autowired
+	private Iayproduct iaprod;
 	
 	@Autowired
 	 private ProductRepository c;
 	
 	
+	@GetMapping("/newproducts")
+	
+	public List<Product1> getNewproduct(){
+		return c.getIhgff();
+	}
+	
+	@GetMapping("/newprod")
+	public List<Product1> getAllNewProd(){
+		return iaprod.getAllProducts();
+	}
 @PostMapping("/upload")
 public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
 	this.bytes = file.getBytes();
 }
+
+@PostMapping("/addmyprod/{category_id}/c/{publicity_id}")
+public ResponseEntity<?> saveprodh(@Valid @RequestBody Product1 p1,@PathVariable("category_id") String category_id, @PathVariable("publicity_id")  String publicity_id){
+	
+	 Product1 p2 = iaprod.Addproduct(p1, this.bytes, Long.parseLong( category_id),Long.parseLong( publicity_id));
+	
+	this.bytes = null;
+	return ResponseEntity.status(HttpStatus.CREATED).body(p2);
+	
+	
+}
 //@RequestParam("imageFile") MultipartFile file
 
   @PostMapping("/addprowithImag")
-  public void createBook(@RequestBody Product1 p) throws IOException {
+  public void createBook(@Valid  @RequestBody Product1 p) throws IOException {
 		p.setProductImg(this.bytes);
 		c.save(p);
 		this.bytes = null;
@@ -105,6 +135,11 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
 		return c.findByFirstNameAndLastName2();
 	}
 	
+	@GetMapping("/ser")
+	public ResponseEntity<?> getserachingprod(@RequestParam("productname") String productname){
+		List<Product1> ps1 =c.getProductSearching(productname);
+		return ResponseEntity.status(HttpStatus.OK).body(ps1);
+	}
 	
 	@RequestMapping(value = "/findbyinterval/{price1}/{price2}", method = RequestMethod.GET)
 	@ResponseBody

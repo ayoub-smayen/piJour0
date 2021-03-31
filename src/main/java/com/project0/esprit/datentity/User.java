@@ -242,7 +242,7 @@ public   class User implements UserDetails {
 		this.carts0 = carts0;
 	}
 
-	//@JsonManagedReference
+	@JsonManagedReference
 	@JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Cart0> carts0 ;

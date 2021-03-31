@@ -3,6 +3,7 @@ package com.project0.esprit.entity;
 import java.math.BigDecimal;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,10 +12,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class CartItem0 extends AuditModel {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long Id_Item;
 	
+	@NotNull(message = "Product name is required.")
 	private int Quantity;
 	
 	

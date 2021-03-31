@@ -21,7 +21,7 @@ import com.project0.esprit.repository.UserRepository;
 import com.project0.esprit.service.IPublicationInterface;
 
 @RestController
-@RequestMapping("pub")
+@RequestMapping("/pub")
 @CrossOrigin("*")
 public class PublicationController {
 	

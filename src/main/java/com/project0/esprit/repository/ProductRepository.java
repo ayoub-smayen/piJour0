@@ -39,7 +39,15 @@ public interface ProductRepository extends JpaRepository<Product1, Long> {
 	
 	@Query("SELECT a FROM Product1 a WHERE category_id = ?1 ")
     List<Product1> findByCategory(@Param("cat_id") Long cat_id);
+	
+	
+	@Query("select a from Product1 a  WHERE DATEDIFF(date(created_at) , date(NOW())) <=1  ")
+	
+	List<Product1> getIhgff();
  
+	
+	@Query("select a from Product1 a  WHERE  productname  like %?1%")
+	List<Product1> getProductSearching(@Param("productname") String productname);
 
 	
 	

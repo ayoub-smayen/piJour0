@@ -15,6 +15,9 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -30,17 +33,21 @@ public class Product1 extends AuditModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long product_id;
-/*	@NotNull(message = "Product name is required.")
-    @Basic(optional = false)*/
+	@NotNull(message = "Product name is required.")
+    @Basic(optional = false)
+	
 	@Column(name="productname")
 	private String productname ;
-	
+
+    @NotBlank(message = "description  is mandatory")
 	@Column(name="productdescription")
 	private String productdescription  ;
 	@Column(name="quantity")
 	private Integer Quantity  ;
 	@Column(name="price")
 	private Double price  ;
+
+    @NotBlank(message = "Brand is mandatory")
 	@Column(name="brand")
 	private String Brand ;
 	
@@ -118,7 +125,8 @@ public class Product1 extends AuditModel {
 	public String getCodebar() {
 		return codebar;
 	}
-
+	//@Max(value = 12)
+	//@Min(value=10)
 	public void setCodebar(String codebar) {
 		this.codebar = codebar;
 	}
@@ -142,7 +150,7 @@ public class Product1 extends AuditModel {
 	private byte[] ProductImg;
 	
 	@JsonIgnore
-	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@ManyToOne(fetch=FetchType.LAZY, optional=true)
 	@JoinColumn(name="publicity_id",nullable = true)
 	private Publicity publicity;
 	
@@ -246,7 +254,7 @@ public class Product1 extends AuditModel {
 	}
 	@JsonBackReference
     //@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	    @JoinColumn(name = "category_id", nullable = true)
 	    private Category1 category;
 	
@@ -302,9 +310,27 @@ public class Product1 extends AuditModel {
 		this.comments = comments;
 		this.orders = orders;
 	}
+	public Product1(Long product_id, String productname, String productdescription, Integer quantity, Double price,
+			String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments) {
+		super();
+		this.product_id = product_id;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+	}
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	    @JoinColumn(name = "order_id", nullable = true)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	    @JoinColumn(name = "order_id",referencedColumnName = "order_id",insertable = false, nullable = true)
 	    private Orders orders;
 
 	public Product1(Long product_id, String productname, String productdescription, Integer quantity, Double price,

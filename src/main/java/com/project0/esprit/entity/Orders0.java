@@ -117,6 +117,9 @@ public class Orders0 extends AuditModel{
 	@OneToMany(mappedBy="orders",fetch =  FetchType.LAZY)
 	private Set<CartItem0> catitem_list;
 	
-
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name="liv_id")
+	private Delivery_Man liv;
 }
 

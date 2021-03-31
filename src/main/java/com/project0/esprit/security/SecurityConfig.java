@@ -90,6 +90,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/gs-guide-websocket/**",
                         "/webjars/jquery/jquery.min.map",
                         "/app.js",
+                       "/socket/",
+                        
+                        "/pub/**",
+                        
+                        
+                        
+                        
+                        "/socket/info",
+                        "/socket/**",
                         "/webjars/stomp-websocket/stomp.min.js"
                         
                 )

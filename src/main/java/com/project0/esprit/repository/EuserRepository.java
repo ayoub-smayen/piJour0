@@ -25,4 +25,12 @@ public interface EuserRepository extends CrudRepository<Euser, Long> {
 	@Query("SELECT a FROM Euser a WHERE user_id = ?1")
 	public Euser findByIdd(@Param(value="user_id" ) Long user_id);
 	
+	
+	
+	@Query("select count(u)  from Euser  u  WHERE  u.city = ?1 ")
+	public int getCityCount(@Param(value = " city")  String city);
+	
+	@Query("select count(u)  from Euser  u  WHERE  u.age = ?1 ")
+	public int getAgeCount(@Param(value = " age")  Integer age);
+	
 }

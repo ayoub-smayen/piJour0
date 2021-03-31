@@ -1,5 +1,11 @@
 package com.project0.esprit.controller;
 
+/*
+ * 
+ * category  crud  
+ * 
+ * generate new categroy  for  all  product added  
+ */
 import java.io.IOException;
 import java.util.List;
 

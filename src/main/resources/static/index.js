@@ -1,4 +1,4 @@
-.ajax({
+$.ajax({
 	url: "multiplelinechart",	
 	headers: {
         Bearer Token: "Bearer "+jwtToken,   //key word **Bearer**  should pass before the token string

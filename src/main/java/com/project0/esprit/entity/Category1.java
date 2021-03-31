@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,12 +32,18 @@ public class Category1 extends AuditModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long category_id;
 	
+	@NotNull(message = "categoryname  is required.")
+	
 	@Column(name="categoryname")
 	private String categoryName ;
 	
+	
+	@NotNull(message = "categoryname name is required.")
 	@Column(name="tags")
 	private String tags  ;
 	
+	
+	@NotNull(message = "categoryType name is required.")
 	@Column(name="categorytype")
 	private String categoryType;
 	
