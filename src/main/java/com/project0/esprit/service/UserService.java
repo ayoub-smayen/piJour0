@@ -79,6 +79,10 @@ public class UserService {
     	 
     	  //return null;
      }
+     public User CureentDetails(Principal p1) {
+    	 User u = userRepository.findByUsernameAndFetchRoles(p1.getName());
+    	 return u;
+     }
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }

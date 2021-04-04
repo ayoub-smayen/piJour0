@@ -37,11 +37,6 @@ public class DashboardServiceImpl implements DashboardService {
 		this.userService = userService;
 		
 	}
-
-	
-	
-	
-	
 	private static final Logger L=LogManager.getLogger(DashboardServiceImpl.class);
 
 	@Transactional

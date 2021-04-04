@@ -69,6 +69,11 @@ public class UserResource {
     	
     }
     
+    @GetMapping("/cuurentdetail")
+    public ResponseEntity<?> getCureentUserDetails(Principal p1){
+    	return ResponseEntity.status(HttpStatus.FOUND).body(userService.CureentDetails(p1));
+    }
+    
     @GetMapping("/getprofile")
 
     

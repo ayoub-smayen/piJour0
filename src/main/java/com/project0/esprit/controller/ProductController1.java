@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,9 @@ import com.project0.esprit.service.impl.Aproductimpl;
 public class ProductController1 {
 
 	//Logger l  =new Logger() ;
+	
+	
+	 private static final Logger logger = LoggerFactory.getLogger(ProductController1.class);
  
 	private byte[] bytes;
 	
@@ -50,20 +54,28 @@ public class ProductController1 {
 	@GetMapping("/newproducts")
 	
 	public List<Product1> getNewproduct(){
+		logger.info("product list");
 		return c.getIhgff();
 	}
 	
 	@GetMapping("/newprod")
 	public List<Product1> getAllNewProd(){
+		
+		logger.info("new product  created ");
 		return iaprod.getAllProducts();
 	}
 @PostMapping("/upload")
 public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
+	
+	logger.info("upload image for  products");
 	this.bytes = file.getBytes();
 }
 
 @PostMapping("/addmyprod/{category_id}/c/{publicity_id}")
 public ResponseEntity<?> saveprodh(@Valid @RequestBody Product1 p1,@PathVariable("category_id") String category_id, @PathVariable("publicity_id")  String publicity_id){
+	
+	
+	  logger.info("affectation de produit dans un category");
 	
 	 Product1 p2 = iaprod.Addproduct(p1, this.bytes, Long.parseLong( category_id),Long.parseLong( publicity_id));
 	
@@ -90,6 +102,8 @@ public ResponseEntity<?> saveprodh(@Valid @RequestBody Product1 p1,@PathVariable
 	@GetMapping("/products1")
 	
 	public Iterable<Product1> getAll(){
+		
+		logger.info("all products ");
 		return this.c.findAll();
 	}
 @GetMapping("/productAsc")

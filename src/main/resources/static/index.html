@@ -64,6 +64,26 @@
     	});
     }
     </script>
+    
+    
+      <script>
+      
+      $.getJSON( "http://localhost:8091/api/getlocal", function( data ) {
+    	  var items = [];
+    	  $.each( data, function( key, val ) {
+    		  alert(val);
+    	    items.push( "<li id='" + key + "'>" + val + "</li>" );
+    	  });
+    	 
+    	  $( "<ul/>", {
+    	    "class": "my-new-list",
+    	    html: items.join( "" )
+    	  }).appendTo( "body" );
+    	});
+      </script>
+    
+    
+    
     <div id="container" style="height: 400px"></div>
 <div id="main-content" class="container">
     <div class="row">

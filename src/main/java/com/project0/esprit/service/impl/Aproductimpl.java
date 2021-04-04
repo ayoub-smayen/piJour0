@@ -3,6 +3,8 @@ package com.project0.esprit.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.project0.esprit.entity.Category1;
@@ -107,4 +109,72 @@ public class Aproductimpl  implements  Iayproduct{
 		//return null;
 	}
 
+	@Override
+	public Product1 findOne(String productId) {
+		// TODO Auto-generated method stub
+		
+		return productrepo.findById2(Long.parseLong(productId));
+		//return null;
+	}
+/*
+	@Override
+	public Page<Product1> findUpAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Product1> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Product1> findAllInCategory(Integer categoryType, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void increaseStock(String productId, int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void decreaseStock(String productId, int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Product1 offSale(String productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product1 onSale(String productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product1 update(Product1 productInfo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product1 save(Product1 productInfo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(String productId) {
+		// TODO Auto-generated method stub
+		
+	}
+*/
 }

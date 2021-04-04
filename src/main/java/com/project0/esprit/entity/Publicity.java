@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /*
  * 
@@ -69,7 +70,8 @@ public class Publicity extends AuditModel {
 		this.publictyBody = publictyBody;
 		this.products = products;
 	}
-  @JsonIgnore
+	@JsonManagedReference
+ // @JsonIgnore
 	@OneToMany(mappedBy = "publicity", fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Product1> products;
 

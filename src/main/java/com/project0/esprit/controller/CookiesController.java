@@ -59,6 +59,8 @@ public class CookiesController {
 		/*if(username.equals(null)){
 			 Cookie cookie = new Cookie("username", "guest");
 		}*/
+		
+		
 	    Cookie cookie = new Cookie("user0", username.username);
 
 	    //add cookie to response

@@ -32,11 +32,81 @@ public class Product1 extends AuditModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Long product_id;
 	@NotNull(message = "Product name is required.")
     @Basic(optional = false)
 	
-	@Column(name="productname")
+	@Column(name="productweight",nullable = true)
+	private Double productWieght ;
+	
+	
+	
+	public Double getProductWieght() {
+		return productWieght;
+	}
+
+	public Product1(@NotNull(message = "Product name is required.") Double productWieght, String productsize,
+			String productname, @NotBlank(message = "description  is mandatory") String productdescription,
+			Integer quantity, Double price, @NotBlank(message = "Brand is mandatory") String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, Orders orders) {
+		super();
+		this.productWieght = productWieght;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.orders = orders;
+	}
+
+	public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
+			String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, Orders orders) {
+		super();
+		this.product_id = product_id;
+		this.productWieght = productWieght;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.orders = orders;
+	}
+
+	public void setProductWieght(Double productWieght) {
+		this.productWieght = productWieght;
+	}
+
+	public String getProductsize() {
+		return productsize;
+	}
+
+	public void setProductsize(String productsize) {
+		this.productsize = productsize;
+	}
+	@Column(name="productsize",nullable = true)
+	private String productsize ;
+	
+	@Column(name="productname",unique = true)
 	private String productname ;
 
     @NotBlank(message = "description  is mandatory")
@@ -148,8 +218,8 @@ public class Product1 extends AuditModel {
 	@Lob
 	@Column(name="productimg")
 	private byte[] ProductImg;
-	
-	@JsonIgnore
+	@JsonBackReference
+	//@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY, optional=true)
 	@JoinColumn(name="publicity_id",nullable = true)
 	private Publicity publicity;
@@ -220,7 +290,7 @@ public class Product1 extends AuditModel {
 	public void setQuantity(Integer quantity) {
 		Quantity = quantity;
 	}
-
+//id  entity =  entity_id
 	public Double getPrice() {
 		return price;
 	}
@@ -255,7 +325,7 @@ public class Product1 extends AuditModel {
 	@JsonBackReference
     //@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	    @JoinColumn(name = "category_id", nullable = true)
+	    @JoinColumn(name = "category_id", nullable = true,referencedColumnName = "category_id")
 	    private Category1 category;
 	
 	

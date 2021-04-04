@@ -2,6 +2,8 @@ package com.project0.esprit.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -49,6 +51,6 @@ public interface ProductRepository extends JpaRepository<Product1, Long> {
 	@Query("select a from Product1 a  WHERE  productname  like %?1%")
 	List<Product1> getProductSearching(@Param("productname") String productname);
 
-	
+  //  Page<Product1> findAllByOrderByProduct_id(Pageable pageable);
 	
 }

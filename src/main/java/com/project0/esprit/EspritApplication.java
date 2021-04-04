@@ -6,13 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.http.converter.BufferedImageHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,20 +31,29 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.google.maps.model.LatLng;
 import com.project0.esprit.entity.Mail;
+import com.project0.esprit.entity.Shop;
+import com.project0.esprit.repository.MemoryStore;
+import com.project0.esprit.repository.Store;
 import com.project0.esprit.service.EmailSenderService;
+import com.project0.esprit.service.GeocodeService;
+
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 
 @EnableScheduling
 @SpringBootApplication
-@ComponentScan({"com.project0.esprit.mycharts","com.project0.esprit.mycharts.service","com.project0.esprit.mycharts.Dao","com.project0.esprit.mycharts.Model","com.project0.esprit.mycharts.Controller","com.project0.esprit.mycharts.service.impl","com.project0.esprit.service","com.project0.esprit.resource","com.project0.esprit","com.project0.esprit.dao","com.project0.esprit.datentity","com.project0.esprit.utils","com.project0.esprit.security","com.project0.esprit.dao","com.project0.esprit.controller","com.project0.esprit.entity","com.project0.esprit.repository","com.project0.esprit.config"})
+@EnableAspectJAutoProxy(proxyTargetClass=true)
+@ComponentScan({"com.project0.esprit.aspect","com.project0.esprit.mycharts","com.project0.esprit.mycharts.service","com.project0.esprit.mycharts.Dao","com.project0.esprit.mycharts.Model","com.project0.esprit.mycharts.Controller","com.project0.esprit.mycharts.service.impl","com.project0.esprit.service","com.project0.esprit.resource","com.project0.esprit","com.project0.esprit.dao","com.project0.esprit.datentity","com.project0.esprit.utils","com.project0.esprit.security","com.project0.esprit.dao","com.project0.esprit.controller","com.project0.esprit.entity","com.project0.esprit.repository","com.project0.esprit.config"})
 /*@EnableAutoConfiguration(exclude = { //  
         DataSourceAutoConfiguration.class, //
         DataSourceTransactionManagerAutoConfiguration.class, //
@@ -63,6 +73,21 @@ public class EspritApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EspritApplication.class, args);
 	}
+	
+	@Bean(name = "geocodeService")
+	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+	@ConfigurationProperties(prefix = "config")
+	public GeocodeService getGeocodeService() {
+		GeocodeService service = new GeocodeService();
+		return service;
+	}
+
+	@Bean(name = "memoryStore")
+	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+	public Store<Shop, LatLng> getMemoryStore() {
+		return new MemoryStore();
+	}
+	
 	/*@Bean(name = "dataSource")
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
