@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 
@@ -34,9 +35,48 @@ public class Euser extends AuditModel{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long user_id;
 	
+	@NotNull(message="firstname is required")
+	@Size(min=1, max=32, message="First name must be between 1 and 32 characters")
 	@Column(name="firstname")
 	private String membre_username ;
-	@NotNull(message="firstname is required")
+	
+	
+	@NotNull(message="password is required")
+	@Column(name="password")
+	private String password  ;
+	
+	
+	
+	@Column(name="confirmpassword")
+	@NotNull(message="confirmpassword is required")
+	private String confirm_password  ;
+
+	@Column(name="email")
+	@NotNull(message="email is required")
+	//@Email
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Email address is invalid")
+	private String email  ;
+	
+	@Column(name="groups")
+	@NotNull(message="groups is required")
+	private String group ;
+	
+	@Column(name="city")
+	@NotNull(message="city is required")
+	private String city  ;
+	@Column(name="address")
+	private String address  ;
+	@NotNull(message="phone is required")
+	@Pattern(regexp = "[0-9] {8}")
+	@Column(name="phonenumber")
+	private String phone_number  ;
+	@Column(name="age")
+	private String age ;
+	@NotNull(message="sexe is required")
+	@Column(name="sexe")
+	private String sexe ;
+
+	
 	public Long getUser_id() {
 		return user_id;
 	}
@@ -110,76 +150,32 @@ public class Euser extends AuditModel{
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
+public String getAge() {
+		return age;
+	}
+public void setAge(String age) {
+	this.age = age;
+}
 
-	@Column(name="password")
-	private String password  ;
-	@NotNull(message="password is required")
+
+	public String getSexe() {
+		return sexe;
+	}
+
+	public void setSexe(String sexe) {
+		this.sexe = sexe;
+	}
+
+	
 	public Euser() {
 		super();
 	}
-
-
-
-	@Column(name="confirmpassword")
-	@NotNull(message="confirmpassword is required")
-	private String confirm_password  ;
-	
-	@Column(name="email")
-	@NotNull(message="email is required")
-	@Email
-	private String email  ;
-	
-	@Column(name="groups")
-	@NotNull(message="groups is required")
-	private String group ;
-	
-	@Column(name="city")
-	@NotNull(message="city is required")
-	private String city  ;
-	
-	
-
-	public Euser(Long user_id, String membre_username, String password,
-			@NotNull(message = "confirmpassword is required") String confirm_password,
-			@NotNull(message = "email is required") @Email String email,
-			@NotNull(message = "groups is required") String group, @NotNull(message = "city is required") String city,
-			String address,
-			@NotNull(message = "phone is required") @Pattern(regexp = "[0-9] {8}") String phone_number) {
-		super();
-		this.user_id = user_id;
-		this.membre_username = membre_username;
-		this.password = password;
-		this.confirm_password = confirm_password;
-		this.email = email;
-		this.group = group;
-		this.city = city;
-		this.address = address;
-		this.phone_number = phone_number;
-		
-	}
-
-	@Column(name="address")
-	private String address  ;
-	@NotNull(message="phone is required")
-	@Pattern(regexp = "[0-9] {8}")
-	@Column(name="phonenumber")
-	private String phone_number  ;
-	@Column(name="age")
-	private Integer age ;
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
 	public Euser(Long user_id, String membre_username, String password,
 			@NotNull(message = "confirmpassword is required") String confirm_password,
 			@NotNull(message = "email is required") @Email String email,
 			@NotNull(message = "groups is required") String group, @NotNull(message = "city is required") String city,
 			String address, @NotNull(message = "phone is required") @Pattern(regexp = "[0-9] {8}") String phone_number,
-			Integer age) {
+			String age, @NotNull(message="sexe is required")String sexe) {
 		super();
 		this.user_id = user_id;
 		this.membre_username = membre_username;
@@ -191,7 +187,30 @@ public class Euser extends AuditModel{
 		this.address = address;
 		this.phone_number = phone_number;
 		this.age = age;
+		this.sexe = sexe;
 	}
+
+	public Euser(String membre_username, String password,
+			@NotNull(message = "confirmpassword is required") String confirm_password,
+			@NotNull(message = "email is required") @Email String email,
+			@NotNull(message = "groups is required") String group, @NotNull(message = "city is required") String city,
+			String address, @NotNull(message = "phone is required") @Pattern(regexp = "[0-9] {8}") String phone_number,
+			String age,@NotNull(message="sexe is required") String sexe) {
+		super();
+		this.membre_username = membre_username;
+		this.password = password;
+		this.confirm_password = confirm_password;
+		this.email = email;
+		this.group = group;
+		this.city = city;
+		this.address = address;
+		this.phone_number = phone_number;
+		this.age = age;
+		this.sexe = sexe;
+	}
+
+	
+
 
 
 	

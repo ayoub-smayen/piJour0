@@ -90,7 +90,7 @@ public class DashboardController {
 		dashboardservice.deleteDashboard(id);
 	}
   
-	@GetMapping("/dashboard2/produitbest")
+/*	@GetMapping("/dashboard2/{quantity}")
 	//@Secured("ROLE_ADMIN")
 	private List<Product1>  getBestprod(){
 		List<Product1>  bestproduct =new ArrayList<>();
@@ -106,7 +106,11 @@ public class DashboardController {
 		
 		 return bestproduct;
 	
-	}
+	}*/
+	
+	/////.???????????????????
+	
+	
 	/*
 	@GetMapping("/userview")
 	@Secured("ROLE_ADMIN")

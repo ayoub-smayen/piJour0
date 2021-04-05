@@ -1,4 +1,4 @@
-package com.project0.esprit.config;
+/*package com.project0.esprit.config;
 
 import java.nio.charset.StandardCharsets;
 
@@ -17,7 +17,6 @@ public class ThymeleafTemplateConfig {
         templateEngine.addTemplateResolver(htmlTemplateResolver());
         return templateEngine;
     }
-
     @Bean
     public SpringResourceTemplateResolver htmlTemplateResolver(){
         SpringResourceTemplateResolver emailTemplateResolver = new SpringResourceTemplateResolver();
@@ -27,4 +26,4 @@ public class ThymeleafTemplateConfig {
         emailTemplateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
         return emailTemplateResolver;
     }
-}
+}*/

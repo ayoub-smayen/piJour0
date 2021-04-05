@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import com.project0.esprit.entity.Mail;
-import com.project0.esprit.service.EmailSenderService;
+//import com.project0.esprit.service.EmailSenderService;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -54,7 +54,7 @@ public class EspritApplication {
     private Environment env;*/
 	
 	@Autowired
-    private EmailSenderService emailService;
+    //private EmailSenderService emailService;
 	
 	private static Logger log = LoggerFactory.getLogger(SpringApplication.class); 
 	
@@ -132,7 +132,7 @@ public class EspritApplication {
         model.put("sign", "Java Developer");
         mail.setProps(model);
 
-        emailService.sendEmail(mail);
+       // emailService.sendEmail(mail);
         log.info("END... Email sent success");
 		
 	}

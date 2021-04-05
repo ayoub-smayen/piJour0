@@ -57,7 +57,10 @@ public class EuserServiceimpl implements EuserService {
 		
 	}
 
-	
+	/*public Euser findByUsername(String membre_name) {
+		Euser user = userRepository.findByUsername(membre_name);
+	    return user;
+	  }*/
 	
 }
 

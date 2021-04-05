@@ -1,4 +1,4 @@
-package com.project0.esprit.service;
+/*package com.project0.esprit.service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -47,4 +47,4 @@ public class EmailSenderService {
         emailSender.send(message);
     }
 
-}
+}*/
