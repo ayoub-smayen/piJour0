@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project0.esprit.datentity.Comment;
+import com.project0.esprit.datentity.Favourite;
 @Entity
 @Table(name="product")
 public class Product1 extends AuditModel {
@@ -32,7 +33,7 @@ public class Product1 extends AuditModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+	@Column(name = "product_id")
 	private Long product_id;
 	@NotNull(message = "Product name is required.")
     @Basic(optional = false)
@@ -224,8 +225,69 @@ public class Product1 extends AuditModel {
 	@JoinColumn(name="publicity_id",nullable = true)
 	private Publicity publicity;
 	
-	
-	 public Publicity getPublicity() {
+	public Favourite getFavourite() {
+		return favourite;
+	}
+
+	public void setFavourite(Favourite favourite) {
+		this.favourite = favourite;
+	}
+
+	public Product1(@NotNull(message = "Product name is required.") Double productWieght, String productsize,
+			String productname, @NotBlank(message = "description  is mandatory") String productdescription,
+			Integer quantity, Double price, @NotBlank(message = "Brand is mandatory") String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Favourite favourite, Category1 category, Set<Comment> comments,
+			Orders orders) {
+		super();
+		this.productWieght = productWieght;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.favourite = favourite;
+		this.category = category;
+		this.comments = comments;
+		this.orders = orders;
+	}
+	@JsonBackReference
+	//@JsonIgnore
+	@ManyToOne(fetch=FetchType.LAZY, optional=true)
+	@JoinColumn(name="favourite_id",nullable = true)
+	private Favourite favourite;
+	 public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
+			String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Favourite favourite, Category1 category, Set<Comment> comments,
+			Orders orders) {
+		super();
+		this.product_id = product_id;
+		this.productWieght = productWieght;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.favourite = favourite;
+		this.category = category;
+		this.comments = comments;
+		this.orders = orders;
+	}
+
+	public Publicity getPublicity() {
 		return publicity;
 	}
 

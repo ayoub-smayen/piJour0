@@ -109,7 +109,7 @@ public class Comments  extends AuditModel {
 	@Column
 	private String Comment_field;
 	
-	//@JsonBackReference
+	@JsonBackReference
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "pub_id",nullable = true)

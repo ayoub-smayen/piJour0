@@ -42,6 +42,9 @@ public class CookiesController {
 	@RequestMapping(value = "/home/cookie", method = RequestMethod.GET)
 	public String readCookie(HttpServletRequest request) {
 	  
+		 
+		
+		 
 	    Cookie[] cookies = request.getCookies();
 	    Cookie coki = null;
 	    for (Cookie cookie : cookies) {

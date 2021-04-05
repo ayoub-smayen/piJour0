@@ -9,12 +9,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.project0.esprit.datentity.User;
 
 /*
  * 
@@ -71,9 +76,50 @@ public class Publicity extends AuditModel {
 		this.products = products;
 	}
 	@JsonManagedReference
- // @JsonIgnore
+   // @JsonIgnore
 	@OneToMany(mappedBy = "publicity", fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Product1> products;
+	
+	
+    //  @JsonManagedReference
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+	@OneToOne( cascade = CascadeType.ALL)
+	   
+	    //@JoinColumn(name = "user_id")
+		private User users;
+	
+	
+	
+
+	public Publicity(String publictyname, String publictytag, String publictyBody, Set<Product1> products,
+			User users) {
+		super();
+		this.publictyname = publictyname;
+		this.publictytag = publictytag;
+		this.publictyBody = publictyBody;
+		this.products = products;
+		this.users = users;
+	}
+
+	public Publicity(Long publicity_id, String publictyname, String publictytag, String publictyBody,
+			Set<Product1> products, User users) {
+		super();
+		this.publicity_id = publicity_id;
+		this.publictyname = publictyname;
+		this.publictytag = publictytag;
+		this.publictyBody = publictyBody;
+		this.products = products;
+		this.users = users;
+	}
+
+	public User getUsers() {
+		return users;
+	}
+
+	public void setUsers(User users) {
+		this.users = users;
+	}
 
 	public String getPublictyname() {
 		return publictyname;

@@ -30,6 +30,7 @@ public class Category1 extends AuditModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "category_id")
 	private Long category_id;
 	
 	@NotNull(message = "categoryname  is required.")
