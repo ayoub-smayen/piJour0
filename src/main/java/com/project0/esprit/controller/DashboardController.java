@@ -133,7 +133,7 @@ public ResponseEntity<?> getPieChart1() {
     return new ResponseEntity<>(graphData, HttpStatus.OK);
 }
 
- //bestproduct
+ //BestProduct
  //http://localhost:8091/api/dashboard2
     @GetMapping("/dashboard2")
 	//@Secured("ROLE_ADMIN")
