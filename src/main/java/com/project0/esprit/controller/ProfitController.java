@@ -1,7 +1,6 @@
 package com.project0.esprit.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +21,6 @@ import com.project0.esprit.entity.Product1;
 import com.project0.esprit.entity.Profit;
 import com.project0.esprit.repository.ProductRepository;
 import com.project0.esprit.service.ProfitService;
-
-
-
-import com.project0.esprit.service.DashboardService;
-import com.project0.esprit.service.ProductService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RequestMapping(path="api")
@@ -99,15 +88,7 @@ public class ProfitController {
 	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
 	}
 
-	@GetMapping("/profit1")
-	  
-	@ResponseBody public ResponseEntity<?> getGain1()
-	{
-		
-		HashMap<String, Object> k = profitservice.getTodayRevenueDash();
-	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
-	}
-	
+
 	/*@GetMapping("/profit2")
 	  
 	@ResponseBody public ResponseEntity<?> getGain2()
@@ -117,7 +98,7 @@ public class ProfitController {
 	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
 	}*/
 	
-	@GetMapping("/dashboard2")
+/*	@GetMapping("/dashboard2")
 	//@Secured("ROLE_ADMIN")
 	private List<Product1>  getBestprod(){
 		List<Product1>  bestproduct =new ArrayList<>();
@@ -133,19 +114,10 @@ public class ProfitController {
 		
 		 return bestproduct;
 	
-	}
+	}*/
 	
 	
 
-	
-//@PathVariable("income") double income,@PathVariable("outcome") double outcome nzidha bech twali dynamique?
-	/*    @GetMapping("/dashboard1")
-	    public String getDashDetails(Model model) {
-	        /**
-	         * Populate company revenue data
-	         */
-	      /*  model.addAttribute("cr", profitservice.getTodayRevenueDash());
-	        return "/dashboard1";
-	    }*/
+
 	}
 

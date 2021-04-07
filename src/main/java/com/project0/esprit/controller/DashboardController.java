@@ -1,12 +1,14 @@
 package com.project0.esprit.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +20,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project0.esprit.datentity.User;
+
 import com.project0.esprit.entity.Dashboard;
+import com.project0.esprit.entity.Euser;
 import com.project0.esprit.entity.Product1;
+import com.project0.esprit.entity.Profit;
+import com.project0.esprit.model.Product;
+import com.project0.esprit.repository.EuserRepository;
 import com.project0.esprit.repository.ProductRepository;
+import com.project0.esprit.repository.ProfitRepository;
 import com.project0.esprit.service.DashboardService;
+import com.project0.esprit.service.ProductService;
+import com.project0.esprit.service.ProfitService;
 
 @RestController
 @CrossOrigin("*")
@@ -32,10 +41,17 @@ public class DashboardController {
 	
 	@Autowired
 	private DashboardService dashboardservice;
-	
-	
 	@Autowired 
-	private ProductRepository c;
+	private ProductService productservice ;
+	@Autowired
+	private EuserRepository euserrep;
+	@Autowired
+	private ProfitRepository profitRepository;
+	@Autowired
+	private ProductRepository productRepository;
+	@Autowired
+	private ProfitService profitService;
+	
 	
 	
 	
@@ -90,11 +106,41 @@ public class DashboardController {
 		dashboardservice.deleteDashboard(id);
 	}
   
-/*	@GetMapping("/dashboard2/{quantity}")
+
+
+//les vues selon l'age,le sexe et city
+//http://localhost:8091/api/get-data
+@GetMapping("/get-data")
+public ResponseEntity<Map<String, Integer>> getPieChart() {
+    Map<String, Integer> graphData = new TreeMap<>();
+    for(Euser e :euserrep.findAll() ) {
+    	graphData.put(e.getCity(),   euserrep.getCityCount(e.getCity())  );
+    	graphData.put(e.getSexe(),   euserrep.getSexeCount(e.getSexe())  );
+    	graphData.put(e.getAge(),   euserrep.getAgeCount(e.getAge())  );
+    }
+    
+    return new ResponseEntity<>(graphData, HttpStatus.OK);
+}
+
+//profit
+//http://localhost:8091/api/get-data1
+ @GetMapping("/get-data1")
+public ResponseEntity<?> getPieChart1() {
+    Map<String, Double> graphData = new TreeMap<>();
+    for(Profit p :profitRepository.findAll() ) {
+    	graphData.put(p.getMonth(),profitService.getAllGain(p.getIncome(), p.getOutcome()));
+    }
+    return new ResponseEntity<>(graphData, HttpStatus.OK);
+}
+
+ //bestproduct
+ //http://localhost:8091/api/dashboard2
+    @GetMapping("/dashboard2")
 	//@Secured("ROLE_ADMIN")
 	private List<Product1>  getBestprod(){
 		List<Product1>  bestproduct =new ArrayList<>();
-		List<Product1> p1 = c.findAll();
+		//List<Product1> p1 =  productservice.findAll();
+		List<Product1> p1 = productRepository.findAll();
 		
 		for (Product1  x: p1 ) {
 			
@@ -103,12 +149,25 @@ public class DashboardController {
 			}
 			
 		}
-		
 		 return bestproduct;
 	
-	}*/
-	
-	/////.???????????????????
+	}
+
+ //outcome,income,marge ,total income,total outcome,total marge
+ //http://localhost:8091/api/profit1
+ @GetMapping("/profit1")
+ 
+	@ResponseBody public ResponseEntity<?> getGain1()
+	{
+		
+		HashMap<String, Object> k = profitService.getTodayRevenueDash();
+	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
+	}
+ 
+ 
+ 
+
+	////////////////////////////////
 	
 	
 	/*

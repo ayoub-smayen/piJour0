@@ -7,16 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.project0.esprit.entity.Category1;
 import com.project0.esprit.entity.Product1;
-import com.project0.esprit.entity.User1;
+
 
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product1, Long> {
 	
 	 
-	 List<Product1> findByBestProduct( boolean bestproduct);
+	// List<Product1> findByBestProduct( boolean bestproduct);
 	 
 	@Query("SELECT a FROM Product1 a WHERE productname = ?1")
     List<Product1> findByFirstNameAndLastName(@Param("productname") String productname);

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.project0.esprit.entity.Product1;
+
 import com.project0.esprit.entity.Profit;
 import com.project0.esprit.repository.ProductRepository;
 import com.project0.esprit.repository.ProfitRepository;
@@ -19,7 +19,7 @@ import com.project0.esprit.service.ProfitService;
 import java.text.NumberFormat;
 
 @Service
-public class ProfitServiceImpl implements ProfitService {
+public  class ProfitServiceImpl implements ProfitService {
     @Autowired
 	ProfitRepository profitRepository;
     @Autowired
@@ -47,23 +47,19 @@ public class ProfitServiceImpl implements ProfitService {
 			return p;
 	}
 	@Override
-	public double getAllGain(double income, double outcome) {
-		 double res = 0.0;
+	public Double getAllGain(Double income, Double outcome) {
+		Double res = 0.0;
 		  List<Profit> p = (List<Profit> )  profitRepository.findAll();
 		  
 		  
 		for ( Profit s : p) {
 			
 			
-			 Double max_income =  (double) (s.getIncome()  < income ?   income : s.getIncome()) ;
+			 Double max_income =  (Double) (s.getIncome()  < income ?   income : s.getIncome()) ;
 			 
-			 Double max_outcome =  (double) (s.getOutcome()  < outcome ?   outcome : s.getOutcome()) ;
-			 
-			 
-			// Double max_salary =    (double) (s.getSalary()  < salary ?   salary : s.getSalary()) ;
-			 
-			 res = (res +       ( max_income -max_outcome)  /     (max_income ))   *1  ;
-			 System.out.println(  ( max_income -max_outcome )  /     (max_income));
+			 Double max_outcome =  (Double) (s.getOutcome()  < outcome ?   outcome : s.getOutcome()) ;
+			 res = (res +( max_income-max_outcome)/(max_income ));
+			 System.out.println(  ( max_income-max_outcome )/(max_income));
 			 System.out.println(res);
 			 
 			
@@ -112,23 +108,7 @@ public class ProfitServiceImpl implements ProfitService {
         companyRevenueMap.put("totalIncome", CurrencyFormatter.format(totalRevenue));
         return companyRevenueMap;
     }
-  /*  @Override
-    public HashMap<String, Object> getBestProduct() {
-        HashMap<String, Object> bestProductMap = new HashMap<>();
 
-        List<Product1> BestProductList = productRepository.findByBestProduct(true);
-
-        List<String> productname = new ArrayList<>();
-        List<String> percent = new ArrayList<>();
-
-        for (Product1 product1 : BestProductList) {
-        	productname.add(product1.getProductname());
-            percent.add(String.valueOf(product1.getPercentage()));
-        }
-        bestProductMap.put("productnames", productname.toString());
-        bestProductMap.put("Percents", percent.toString());
-        return bestProductMap;
-    }*/
    
 }
 
