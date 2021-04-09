@@ -25,7 +25,6 @@ import com.project0.esprit.entity.Dashboard;
 import com.project0.esprit.entity.Euser;
 import com.project0.esprit.entity.Product1;
 import com.project0.esprit.entity.Profit;
-import com.project0.esprit.model.Product;
 import com.project0.esprit.repository.EuserRepository;
 import com.project0.esprit.repository.ProductRepository;
 import com.project0.esprit.repository.ProfitRepository;
@@ -163,9 +162,6 @@ public ResponseEntity<?> getPieChart1() {
 		HashMap<String, Object> k = profitService.getTodayRevenueDash();
 	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
 	}
- 
- 
- 
 
 	////////////////////////////////
 	

@@ -1,8 +1,13 @@
 package com.project0.esprit.controller;
 
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +20,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.project0.esprit.entity.Euser;
+import com.project0.esprit.entity.Product1;
+import com.project0.esprit.repository.EuserRepository;
 import com.project0.esprit.service.EuserService;
 
 @RequestMapping(path="api")
@@ -27,8 +37,13 @@ import com.project0.esprit.service.EuserService;
 
 public class EuserController {
 
+	 private static final Logger logger = LoggerFactory.getLogger(EuserController.class);
+	 private byte[] bytes;
+		
 	@Autowired
 	private EuserService userservice;
+	@Autowired
+	private EuserRepository euserrepository;
 	
 	@GetMapping("/euser/get")
 	public @ResponseBody ResponseEntity<List<Euser>> getUser ()
@@ -50,13 +65,13 @@ public class EuserController {
 	return userservice.retrieveUser(id);
 	}
 	
-	@PostMapping("/euser/add")
+/*	@PostMapping("/euser/add")
     public @ResponseBody ResponseEntity<Euser> addUser(@RequestBody Euser u)
 	
 	{
 		
 		return new ResponseEntity<Euser>(userservice.addUser(u),HttpStatus.CREATED);
-	}
+	}*/
 	/*@PostMapping("/add")
 	@ResponseBody
 	public User addUser(@RequestBody User u) {
@@ -86,5 +101,20 @@ public class EuserController {
 		
 	}
   
-	
+	///////////////////////////////////////
+	@PostMapping("/upload")
+	public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
+		
+		logger.info("upload image for user");
+		this.bytes = file.getBytes();
+	}
+
+
+	  @PostMapping("/adduserwithImage")
+	  public Euser addUser(@RequestBody Euser e) throws IOException {
+			e.setUserimg(this.bytes);
+			euserrepository.save(e);
+			this.bytes = null;
+			return e;
+		}
 }

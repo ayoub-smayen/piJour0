@@ -74,18 +74,7 @@ public class FavouriteController {
 		
 		
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(prodrep.save(prod1));
-		
-		
-		
-		
 		 
-		
-		
-		
-		 
-		
-		
-		
 		
 		
 	}

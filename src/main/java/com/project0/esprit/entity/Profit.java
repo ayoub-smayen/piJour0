@@ -1,6 +1,8 @@
 package com.project0.esprit.entity;
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,20 +13,77 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.project0.esprit.repository.ProfitRepository;
+
 @Entity
 @Table(name="profit")
 public class Profit extends AuditModel {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long profit_id;
 	
 	@Column(name="outcome")
 	private Double outcome ;
+	@Column(name="month")
+	private String month ;
 	
+	
+	public Profit() {
+		super();
+	}
+
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+
+
+	public Profit(Double outcome, String month, Double income, Double margins) {
+		super();
+		this.outcome = outcome;
+		this.month = month;
+		this.income = income;
+		this.margins = margins;
+	}
+
+	public Profit(Long profit_id, Double outcome, String month, Double income, Double margins) {
+		super();
+		this.profit_id = profit_id;
+		this.outcome = outcome;
+		this.month = month;
+		this.income = income;
+		this.margins = margins;
+	}
+
+	public Double getMargins() {
+		return margins;
+	}
+
+	public void setMargins(Double margins) {
+		this.margins = margins;
+	}
+
+
+
 	@Column(name="income")     
 	private Double income ;
+	
+	@Column(name="margins")
+	private Double margins ;
 	
 	public Long getProfit_id() {
 		return profit_id;
@@ -50,27 +109,19 @@ public class Profit extends AuditModel {
 		this.income = income;
 	}
 
-	public Double getSalary() {
-		return salary;
-	}
 
-	public void setSalary(Double salary) {
-		this.salary = salary;
-	}
-
-	public Profit() {
-		super();
-	}
-
-	@Column(name="salary")
-	private Double salary ;
-
-	public Profit(Long profit_id, Double outcome, Double income, Double salary) {
-		super();
-		this.profit_id = profit_id;
-		this.outcome = outcome;
-		this.income = income;
-		this.salary = salary;
-	}
 	
-}
+	
+	}
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+

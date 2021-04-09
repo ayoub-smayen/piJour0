@@ -182,7 +182,7 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
 	
 	/*eya*/
 	
-	@GetMapping("/dashboard/produitbest")
+	/*@GetMapping("/dashboard/produitbest")
 	//@Secured("ROLE_ADMIN")
 	private List<Product1>  getBestprod(){
 		List<Product1>  bestproduct =new ArrayList<>();
@@ -196,12 +196,12 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
 			
 		}
 		
-		 return bestproduct;
+		 return bestproduct;*/
 		
 	//	List<Product1> lp1 = c.getBesProducts();
 		 //return  lp1;
 				 //ResponseEntity.status(201).body(lp1);
-	}
+	//}
 
 
 }

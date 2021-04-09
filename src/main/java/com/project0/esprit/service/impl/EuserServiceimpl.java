@@ -5,9 +5,14 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import com.project0.esprit.dao.ProductDao;
 import com.project0.esprit.entity.Euser;
+import com.project0.esprit.exception.EuserNotFoundException;
+import com.project0.esprit.exception.ProductNotFoundException;
+import com.project0.esprit.model.Product;
 import com.project0.esprit.repository.EuserRepository;
 import com.project0.esprit.service.EuserService;
 
@@ -15,14 +20,16 @@ import com.project0.esprit.service.EuserService;
 public class EuserServiceimpl implements EuserService {
     @Autowired
 	EuserRepository userRepository;
+    @Autowired
+    EuserService euserservice;
 	private static final Logger L=LogManager.getLogger(EuserServiceimpl.class);
 	
 	
-	@Override
+	/*@Override
 	public Euser addUser(Euser u) {
 		return userRepository.save(u);
 		
-	}
+	}*/
 
 	@Override
 	public Euser updateUser(Euser u) {
@@ -56,8 +63,18 @@ public class EuserServiceimpl implements EuserService {
 		
 		
 	}
-
 	
+
+	@Override
+	public Euser findByIdd(Long user_id) throws EuserNotFoundException
+	{
+	Euser user = euserservice.findByIdd(user_id);
+    	if (user != null)
+			return user;
+		else
+			throw new EuserNotFoundException();
+	}
+
 	
 }
 
