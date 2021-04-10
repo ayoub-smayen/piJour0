@@ -31,7 +31,7 @@ public class Cart0 extends AuditModel {
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne
-	@JsonBackReference
+	//@JsonBackReference
 	//@JsonIgnore
 	//@JoinColumn(name = "user_id" ,  nullable = true)
 	private User user;

@@ -63,7 +63,7 @@ public class ColisController {
 
 	    
 	   
-	   
+	   private static int r =0;
 	   
 	   
 	    private String[] slotMachineSymbols = {
@@ -78,6 +78,31 @@ public class ColisController {
 	    public int getRandomNumber(){
 	        return new   Random().nextInt() % 50;
 	    }
+	    
+	    
+	    @RequestMapping("/visited")
+	    public int  getvisiteder() {
+	    	this.r++;
+	    	return  r;
+	    }
+	    
+	    @RequestMapping("lvisit")
+	    //@HystrixCommand(fallbackMethod = "defaultSpinResult")
+	    public String visited(){
+	    	 return String.format("%s",getVisitor());
+	    	
+	    }
+ private String getVisitor(){
+	    	
+	    	
+	        int randomNumber = restTemplate.getForObject("http://localhost:8091/api/visited", Integer.class);
+	       
+	      
+	         
+	        return    Integer.toString(randomNumber);
+	    }
+ 
+	    
 
 	    @RequestMapping("/play")
 	    //@HystrixCommand(fallbackMethod = "defaultSpinResult")

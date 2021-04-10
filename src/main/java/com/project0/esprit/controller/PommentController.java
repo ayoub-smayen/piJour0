@@ -31,6 +31,7 @@ public class PommentController {
 	 UserRepository userRepository;
 	 
 	 @Autowired
+	 
 	 PublicationRepository pubserv;
 	 
 	 

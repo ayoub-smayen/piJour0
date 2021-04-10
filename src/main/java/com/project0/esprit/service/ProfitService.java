@@ -1,4 +1,5 @@
 package com.project0.esprit.service;
+import java.util.HashMap;
 import com.project0.esprit.entity.Profit;
 public interface ProfitService {
 
@@ -6,9 +7,10 @@ public interface ProfitService {
 	   Profit updateProfit(Profit d);
 	   void deleteProfit(Long id);
 	   Profit retrieveProfit(Long id);
-	   
-	   
-	   
-	   double getAllGain(double income , double outcome , double salary);
+	   HashMap<String, Object> getTodayRevenueDash();
+	   Double getAllGain(Double income , Double outcome );
+	 //  HashMap<String, Object> getBestProduct();
+		
+	
 	   
 }

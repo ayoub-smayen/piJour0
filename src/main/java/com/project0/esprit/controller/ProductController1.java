@@ -120,7 +120,7 @@ public ResponseEntity<?> saveprodh(@Valid @RequestBody Product1 p1,@PathVariable
 			map1.put("id", p3.getProduct_id());
 			map1.put("name", p3.getProductname());
 			map1.put("brand", p3.getBrand());
-			map1.put("cooemnt", p3.getComments());
+			map1.put("comments", p3.getComments());
 			
 			map1.put("image", p3.getProductImg());
 			map1.put("codebar","#" + p3.getCodebar());
@@ -218,7 +218,7 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
 	
 	/*eya*/
 	
-	@GetMapping("/dashboard/produitbest")
+	/*@GetMapping("/dashboard/produitbest")
 	//@Secured("ROLE_ADMIN")
 	private List<Product1>  getBestprod(){
 		List<Product1>  bestproduct =new ArrayList<>();
@@ -232,12 +232,12 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
 			
 		}
 		
-		 return bestproduct;
+		 return bestproduct;*/
 		
 	//	List<Product1> lp1 = c.getBesProducts();
 		 //return  lp1;
 				 //ResponseEntity.status(201).body(lp1);
-	}
+	//}
 
 
 }

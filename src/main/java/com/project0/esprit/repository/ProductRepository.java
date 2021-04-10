@@ -30,6 +30,10 @@ public interface ProductRepository extends JpaRepository<Product1, Long> {
 	List<Product1> findBylikes();
 	
 	
+	@Query("SELECT a  , min(a.deslike),max(a.likes)  from Product1 a  ")
+	List<Product1> findBylikesanddeslikes();
+	
+	
 	/*@Query("SELECT a  from Product1  a  limit 3  ")
 	List<Product1> findThreeprod();
 	*/

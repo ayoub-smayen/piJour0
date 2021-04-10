@@ -1,6 +1,6 @@
 package com.project0.esprit.service.impl;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -13,10 +13,9 @@ import org.springframework.stereotype.Service;
 import com.project0.esprit.datentity.Role;
 import com.project0.esprit.datentity.User;
 import com.project0.esprit.entity.Dashboard;
-import com.project0.esprit.entity.Product1;
+
 import com.project0.esprit.repository.DashboardRepository;
-import com.project0.esprit.repository.ProductRepository;
-import com.project0.esprit.repository.UserRepository;
+
 import com.project0.esprit.service.DashboardService;
 import com.project0.esprit.service.UserService;
 
@@ -37,6 +36,7 @@ public class DashboardServiceImpl implements DashboardService {
 		this.userService = userService;
 		
 	}
+	
 	private static final Logger L=LogManager.getLogger(DashboardServiceImpl.class);
 
 	@Transactional
@@ -108,10 +108,8 @@ public class DashboardServiceImpl implements DashboardService {
 		 return u;
 	}
 
-	@Override
-	public List<Product1> getBesProducts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+	
 
 }
