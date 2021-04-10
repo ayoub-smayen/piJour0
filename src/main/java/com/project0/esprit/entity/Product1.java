@@ -22,9 +22,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.project0.esprit.datentity.Comment;
+import com.project0.esprit.datentity.Favourite;
+
+import com.project0.esprit.datentity.WishList;
 @Entity
 @Table(name="product")
 public class Product1 extends AuditModel {
@@ -41,7 +47,74 @@ public class Product1 extends AuditModel {
 	private Double productWieght ;
 	
 	
+
 	
+
+	
+
+	
+	@JsonBackReference
+	//@JsonIgnore
+	@ManyToOne(fetch=FetchType.LAZY, optional=true)
+	@JoinColumn(name="favourite_id",nullable = true)
+	private Favourite favourite;
+	public Favourite getFavourite() {
+		return favourite;
+	}
+
+	public Product1(@NotNull(message = "Product name is required.") Double productWieght, Favourite favourite,
+			String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, Orders orders) {
+		super();
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.orders = orders;
+	}
+
+	public void setFavourite(Favourite favourite) {
+		this.favourite = favourite;
+	}
+
+	public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
+			Favourite favourite, String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, Orders orders) {
+		super();
+		this.product_id = product_id;
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.orders = orders;
+	}
+
 	public Double getProductWieght() {
 		return productWieght;
 	}
@@ -128,6 +201,184 @@ public class Product1 extends AuditModel {
 	
 	
 	
+	@Column(columnDefinition = "integer default 0")
+	private Integer likes ;
+	
+	
+	@Column(columnDefinition = "integer default 0")
+	private Integer deslike ;
+	
+
+
+	
+	
+	
+	
+	
+
+	
+	public  void   adddesLike() {
+		
+		deslike ++ ;
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	public Product1(@NotNull(message = "Product name is required.") Double productWieght, Favourite favourite,
+			String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price, Integer like, Integer deslike,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, WishList wishlist,
+			Orders orders) {
+		super();
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.likes = like;
+		this.deslike = deslike;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.wishlist = wishlist;
+		this.orders = orders;
+	}
+
+	public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
+			Favourite favourite, String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price, Integer like, Integer deslike,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, WishList wishlist,
+			Orders orders) {
+		super();
+		this.product_id = product_id;
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.likes = like;
+		this.deslike = deslike;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.wishlist = wishlist;
+		this.orders = orders;
+	}
+
+	public Integer getDeslike() {
+		return deslike;
+	}
+
+	public void setDeslike(Integer deslike) {
+		this.deslike = deslike;
+	}
+
+	public void decrese() {
+		deslike --;
+		
+	}
+	
+	
+	public void increment() {
+		
+		likes++;
+	}
+	
+	public  void decrements() {
+		if(likes==0) {
+			likes=0;
+		}
+		else likes--;
+	}
+	
+	
+	public Product1(@NotNull(message = "Product name is required.") Double productWieght, Favourite favourite,
+			String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price, Integer like,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, WishList wishlist,
+			Orders orders) {
+		super();
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.likes = like;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.wishlist = wishlist;
+		this.orders = orders;
+	}
+
+	public Integer getLike() {
+		return likes;
+	}
+
+	public void setLike(Integer like) {
+		this.likes = like;
+	}
+
+	public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
+			Favourite favourite, String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price, Integer like,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, WishList wishlist,
+			Orders orders) {
+		super();
+		this.product_id = product_id;
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.likes = like;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.wishlist = wishlist;
+		this.orders = orders;
+	}
+
 	public Product1(String productname, String productdescription, Integer quantity, Double price, String brand,
 			Double remise_price,
 			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
@@ -215,9 +466,12 @@ public class Product1 extends AuditModel {
 		this.category = category;
 		this.orders = orders;
 	}
+	
 	@Lob
 	@Column(name="productimg")
 	private byte[] ProductImg;
+	
+	
 	@JsonBackReference
 	//@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY, optional=true)
@@ -322,21 +576,87 @@ public class Product1 extends AuditModel {
 	public void setCategory(Category1 category) {
 		this.category = category;
 	}
-	@JsonBackReference
-    //@JsonIgnore
+	//@JsonBackReference(value = "cat1")
+    @JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	    @JoinColumn(name = "category_id", nullable = true,referencedColumnName = "category_id")
 	    private Category1 category;
 	
 	
-	@JsonManagedReference
-	//@JsonIgnore
+	//@JsonManagedReference(value = "prod1")
+	@JsonIgnore
 	@OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
 	private Set<Comment> comments ;
 	
     
-   
+	//@JsonBackReference(value = "cat1")
+    @JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	    @JoinColumn(name = "wishlist_id", nullable = true,referencedColumnName = "id")
+	    private WishList wishlist;
 
+
+
+	public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
+			Favourite favourite, String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, WishList wishlist,
+			Orders orders) {
+		super();
+		this.product_id = product_id;
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.wishlist = wishlist;
+		this.orders = orders;
+	}
+
+	public Product1(@NotNull(message = "Product name is required.") Double productWieght, Favourite favourite,
+			String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, WishList wishlist,
+			Orders orders) {
+		super();
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.wishlist = wishlist;
+		this.orders = orders;
+	}
+
+	public WishList getWishlist() {
+		return wishlist;
+	}
+
+	public void setWishlist(WishList wishlist) {
+		this.wishlist = wishlist;
+	}
 
 	public Set<Comment> getComments() {
 		return comments;
@@ -415,8 +735,33 @@ public class Product1 extends AuditModel {
 		ProductImg = productImg;
 		this.category = category;
 	}
+
+	/*public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
+			Favourite favourite, String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, Orders orders) {
+		super();
+		this.product_id = product_id;
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.orders = orders;
+	}
 	
-	
+	*/
 	
 	
 

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.project0.esprit.entity.Cart0;
 import com.project0.esprit.entity.Orders0;
+import com.project0.esprit.entity.Product1;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -50,7 +51,185 @@ public   class User implements UserDetails {
     private boolean disabled;
     
     
-    public User(Long id, String username, @Email String email, String password, boolean disabled, Lprofile lprofile,
+    public User(Long id, String username, @Email String email, String password, boolean disabled, Favourite favourite,
+			Lprofile lprofile, List<Role> roles, List<Poll> polls, List<Orders0> orders0, List<Cart0> carts0,
+			List<Publication> publications, List<Comment> comments, List<Comments> pcomments) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.disabled = disabled;
+		this.favourite = favourite;
+		this.lprofile = lprofile;
+		this.roles = roles;
+		this.polls = polls;
+		this.orders0 = orders0;
+		this.carts0 = carts0;
+		this.publications = publications;
+		this.comments = comments;
+		this.pcomments = pcomments;
+	}
+
+	public Favourite getFavourite() {
+		return favourite;
+	}
+
+	public User(String username, @Email String email, String password, boolean disabled, Favourite favourite,
+			Lprofile lprofile, List<Role> roles, List<Poll> polls, List<Orders0> orders0, List<Cart0> carts0,
+			List<Publication> publications, List<Comment> comments, List<Comments> pcomments) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.disabled = disabled;
+		this.favourite = favourite;
+		this.lprofile = lprofile;
+		this.roles = roles;
+		this.polls = polls;
+		this.orders0 = orders0;
+		this.carts0 = carts0;
+		this.publications = publications;
+		this.comments = comments;
+		this.pcomments = pcomments;
+	}
+
+	public void setFavourite(Favourite favourite) {
+		this.favourite = favourite;
+	}
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "user",optional = true)
+	  //  @PrimaryKeyJoinColumn
+	    private Favourite favourite;
+	
+	
+	@Column(columnDefinition="tinyint(1) default 0")
+	private  Boolean fav;
+	
+	
+	
+	
+	public Boolean getFav() {
+		return fav;
+	}
+
+	public User(String username, @Email String email, String password, boolean disabled, Favourite favourite,
+			Boolean fav, Boolean lik, WishList wishlist, Lprofile lprofile, List<Role> roles, List<Poll> polls,
+			List<Orders0> orders0, List<Cart0> carts0, List<Publication> publications, List<Comment> comments,
+			List<Comments> pcomments) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.disabled = disabled;
+		this.favourite = favourite;
+		this.fav = fav;
+		
+		this.wishlist = wishlist;
+		this.lprofile = lprofile;
+		this.roles = roles;
+		this.polls = polls;
+		this.orders0 = orders0;
+		this.carts0 = carts0;
+		this.publications = publications;
+		this.comments = comments;
+		this.pcomments = pcomments;
+	}
+
+	public void setFav(Boolean fav) {
+		this.fav = fav;
+	}
+
+	public User(Long id, String username, @Email String email, String password, boolean disabled, Favourite favourite,
+			Boolean fav, Boolean lik, WishList wishlist, Lprofile lprofile, List<Role> roles, List<Poll> polls,
+			List<Orders0> orders0, List<Cart0> carts0, List<Publication> publications, List<Comment> comments,
+			List<Comments> pcomments) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.disabled = disabled;
+		this.favourite = favourite;
+		this.fav = fav;
+		
+		this.wishlist = wishlist;
+		this.lprofile = lprofile;
+		this.roles = roles;
+		this.polls = polls;
+		this.orders0 = orders0;
+		this.carts0 = carts0;
+		this.publications = publications;
+		this.comments = comments;
+		this.pcomments = pcomments;
+	}
+	
+	
+
+	
+	 
+	
+
+
+	public User(Long id, String username, @Email String email, String password, boolean disabled, Favourite favourite,
+			WishList wishlist, Lprofile lprofile, List<Role> roles, List<Poll> polls, List<Orders0> orders0,
+			List<Cart0> carts0, List<Publication> publications, List<Comment> comments, List<Comments> pcomments) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.disabled = disabled;
+		this.favourite = favourite;
+		this.wishlist = wishlist;
+		this.lprofile = lprofile;
+		this.roles = roles;
+		this.polls = polls;
+		this.orders0 = orders0;
+		this.carts0 = carts0;
+		this.publications = publications;
+		this.comments = comments;
+		this.pcomments = pcomments;
+		
+	}
+
+	public User(String username, @Email String email, String password, boolean disabled, Favourite favourite,
+			WishList wishlist, Lprofile lprofile, List<Role> roles, List<Poll> polls, List<Orders0> orders0,
+			List<Cart0> carts0, List<Publication> publications, List<Comment> comments, List<Comments> pcomments) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.disabled = disabled;
+		this.favourite = favourite;
+		this.wishlist = wishlist;
+		this.lprofile = lprofile;
+		this.roles = roles;
+		this.polls = polls;
+		this.orders0 = orders0;
+		this.carts0 = carts0;
+		this.publications = publications;
+		this.comments = comments;
+		this.pcomments = pcomments;
+	}
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "user3",optional = true)
+	  //  @PrimaryKeyJoinColumn
+	    private WishList wishlist;
+    
+
+
+	public WishList getWishlist() {
+		return wishlist;
+	}
+
+	public void setWishlist(WishList wishlist) {
+		this.wishlist = wishlist;
+	}
+
+	public User(Long id, String username, @Email String email, String password, boolean disabled, Lprofile lprofile,
 			List<Role> roles, List<Poll> polls, List<Publication> publications, List<Comment> comments,
 			List<Comments> pcomments) {
 		super();
@@ -292,7 +471,7 @@ public   class User implements UserDetails {
     @OneToMany(cascade=CascadeType.ALL,mappedBy = "user1")
     private List<Comment> comments ;
     
-    // @JsonManagedReference
+    @JsonManagedReference
     @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL,mappedBy = "user")
     private List<Comments> pcomments ;

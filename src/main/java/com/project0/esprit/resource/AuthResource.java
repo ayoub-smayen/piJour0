@@ -152,7 +152,7 @@ public class AuthResource {
         response2.put("token", token);
   
         
-        Cookie cookie = new Cookie("user1",userDetails.getUsername() );
+        Cookie cookie = new Cookie("user1",userDetails.getUsername().replace(" ", "")  );
         // add cookie in server response
         response.addCookie(cookie);
        // response2.put("email", user.getEmail());

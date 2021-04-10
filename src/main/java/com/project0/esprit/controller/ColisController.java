@@ -2,7 +2,9 @@ package com.project0.esprit.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,16 +20,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.project0.esprit.entity.Colis;
 import com.project0.esprit.entity.Etat;
+import com.project0.esprit.entity.Product1;
+import com.project0.esprit.payload.SmsRequest;
 import com.project0.esprit.repository.ColisRepository;
+import com.project0.esprit.repository.ProductRepository;
 import com.project0.esprit.service.ColisService1;
+import com.project0.esprit.service.Service;
 
 @RestController
 @RequestMapping("api")
 @CrossOrigin("*")
 public class ColisController {
+	
+	
+	
+	
+	
 	
 	
 	
@@ -37,6 +49,93 @@ public class ColisController {
 	
 	@Autowired
     ColisService1 service;
+	
+	   @Autowired
+	 Service service1;
+
+	   
+	   @Autowired
+	   private ProductRepository prodrep;
+ 
+   
+	   @Autowired
+	   private RestTemplate restTemplate;
+
+	    
+	   
+	   
+	   
+	   
+	    private String[] slotMachineSymbols = {
+	    		"A","B","C"
+	    };
+
+	     private  List<String> slotprooduct  =new ArrayList<>() ;
+	    
+	    
+	    
+	    @RequestMapping("/random")
+	    public int getRandomNumber(){
+	        return new   Random().nextInt() % 50;
+	    }
+
+	    @RequestMapping("/play")
+	    //@HystrixCommand(fallbackMethod = "defaultSpinResult")
+	    public String spin(){
+	    	
+	    	Long l = 1l;
+	    	Product1 p1 = prodrep.findById(l).get();
+	    	
+	    	String s1 =getSingleSpinResult() ;
+	    	String s2 =getSingleSpinResult();
+	    	String s3=getSingleSpinResult();
+	    	
+	    	if(s1.equals(s2) && s2.equals(s3) && s1.equals(s3))
+	    		
+	    	{
+	    		 service1.sensStringsms(" you win 🎁   💰💰💰💰     🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑  🎁  🎁  🎁   🎁      a  product "  + s1,p1.getProductImg());
+	    		 
+
+	 	        return String.format("  you win 🎁  🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑    a  product %s %s %s",s1 , s2, s3);
+	 	    	
+	    	}
+	    	else  return String.format("  you lose  😁  😁  😁  😁   try again    %s %s %s",s1 , s2, s3);
+	    }
+
+	    private String getSingleSpinResult(){
+	    	
+	    	for (Product1   m: prodrep.findAll()) {
+	    		slotprooduct.add(m.getProductname());
+	    	}
+	        int randomNumber = restTemplate.getForObject("http://localhost:8091/api/random", Integer.class);
+	       
+	         String[] arr =  new String[slotprooduct.size()];
+	         slotprooduct.toArray(arr);
+	        return    arr[Math.abs(randomNumber%slotprooduct.toArray().length)];
+	    }
+ 
+	    
+	    
+	    private String defaultSpinResult() {
+	        return "? ? ?";
+	    }
+
+
+    @PostMapping("/v1/sms")
+    public void sendSms(@Valid @RequestBody SmsRequest smsRequest) {
+        service1.sendSms(smsRequest);
+    }
+    
+    
+    @PostMapping("/v1/sms2")
+    public void sendSms2() {
+    	
+    	for(Colis b : colisrepo.findAll()) {
+    		service1.sendMsg(b);
+    	}
+        
+    }
+ 
  
     @GetMapping("/pagColis")
     public ResponseEntity<List<Colis>> getAllEmployees(

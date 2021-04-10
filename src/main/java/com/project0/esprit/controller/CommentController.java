@@ -70,8 +70,8 @@ public class CommentController {
 		
 	}*/
 	
-	/*@Autowired
-	private  UserRepository userRepository;*/
+	@Autowired
+	private  UserRepository userRepository;
 	@Autowired
 	private CommentRepository commntRepository;
 	
@@ -79,17 +79,17 @@ public class CommentController {
 	private ProductRepository prodrepo;
 	
 	 @PostMapping("/addComment/{product_id}")
-	 @Secured("ROLE_USER")
+	// @Secured("ROLE_USER")
 	 public ResponseEntity<?> post(@RequestBody Comment c,@PathVariable("product_id") Long prod_id, Principal p) {
 		 
 		 
 		 
 		 Product1 p1= prodrepo.findById2(prod_id);
 		 if(p1.equals(null)) {L.error("error  not products found"); return   ResponseEntity.status(HttpStatus.BAD_REQUEST).build() ;} 
-		// User user = userRepository.findOneByUsername(p.getName());
+		 User user = userRepository.findOneByUsername(p.getName());
 	      c.setProduct(p1);
 	      c.setCommentPic(this.picprofile);
-	      //c.setUser(user);
+	      c.setUser(user);
 	      
 	      
 		 Comment y =commntRepository.save(c);

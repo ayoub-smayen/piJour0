@@ -1,0 +1,43 @@
+package com.project0.esprit.payload;
+
+
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class SmsRequest {
+
+	@NotBlank
+    private final String phoneNumber; // destination
+
+    @NotBlank
+    private final String message;
+
+    public SmsRequest(@JsonProperty("phoneNumber") String phoneNumber,
+                      @JsonProperty("message") String message) {
+        this.phoneNumber = phoneNumber;
+        this.message = message;
+    }
+
+    public SmsRequest( String phoneNumber) {
+		super();
+		this.phoneNumber = phoneNumber;
+		this.message = "hello there    tis is  consomi tunsi hello";
+	}
+
+	public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    @Override
+    public String toString() {
+        return "SmsRequest{" +
+                "phoneNumber= ..." + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
+}

@@ -12,13 +12,13 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.project0.esprit.service.impl.SsseServiceimpl;
 @RestController
-@RequestMapping("/api/v1/sse/")
+@RequestMapping("api")
 public class SseEmitterResource {
 
 	@Autowired
     private SsseServiceimpl sseService;
 
-    @GetMapping("subscription")
+    @GetMapping("/v1/sse/subscription")
     public SseEmitter subscribe() throws IOException {
 
         SseEmitter emitter = new SseEmitter();
@@ -29,7 +29,7 @@ public class SseEmitterResource {
         return emitter;
     }
 
-    @GetMapping("producer/test/{data}")
+    @GetMapping("/v1/sse/producer/test/{data}")
     public String produce(@PathVariable String data) {
 
         sseService.getSsEmitters().forEach((SseEmitter emitter) -> {

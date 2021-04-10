@@ -1,8 +1,12 @@
 package com.project0.esprit.controller;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -99,12 +103,45 @@ public ResponseEntity<?> saveprodh(@Valid @RequestBody Product1 p1,@PathVariable
 		this.c.save(cat);
 		
 	}
-	@GetMapping("/products1")
+	@GetMapping("/productstunsi1")
 	
-	public Iterable<Product1> getAll(){
+	public ResponseEntity<?> getAll(){
+		//Iterable<Product1> 
+		List<Product1> p2 = new ArrayList<>();
+		List<Map<String , Object> > l2 = new ArrayList<>();
+		
 		
 		logger.info("all products ");
-		return this.c.findAll();
+		Locale l = new Locale("ar","TN");
+		 NumberFormat cuurencyFormat = NumberFormat.getCurrencyInstance(l);
+		List<Product1>  p1 = this.c.findAll();
+		for(Product1 p3 : p1) {
+			Map<String , Object> map1 = new HashMap<>();
+			map1.put("id", p3.getProduct_id());
+			map1.put("name", p3.getProductname());
+			map1.put("brand", p3.getBrand());
+			map1.put("cooemnt", p3.getComments());
+			
+			map1.put("image", p3.getProductImg());
+			map1.put("codebar","#" + p3.getCodebar());
+			
+			map1.put("price",cuurencyFormat.format(p3.getPrice()));
+			map1.put("remise_price",cuurencyFormat.format(p3.getRemise_price()));
+			
+			map1.put("price_finale", cuurencyFormat.format(p3.getPrice()-p3.getRemise_price()));
+			
+			l2.add(map1);
+			
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(l2);
+	}
+	
+@GetMapping("/products1")
+	
+	public ResponseEntity<?> getAll2(){
+		//Iterable<Product1> 
+		
+		return ResponseEntity.status(HttpStatus.OK).body(c.findAll());
 	}
 @GetMapping("/productAsc")
 	
@@ -126,8 +163,7 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
    //c.deleteById(id);
    //return new ResponseEntity<>("Product is deleted successsfully", HttpStatus.OK);
 }
-	
-	@RequestMapping(value = "/findproduct/{productname}", method = RequestMethod.GET)
+		@RequestMapping(value = "/findproduct/{productname}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Product1> findStudents(@PathVariable String productname) {
 		List<Product1> studentResponse = (List<Product1>) c.findByFirstNameAndLastName(productname);

@@ -1,6 +1,8 @@
 package com.project0.esprit.controller;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +28,12 @@ public class ProductController {
 	
 	@RequestMapping(value = "/products1", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<List<Product>> getProducts1() throws ProductNotFoundException {
+		Locale l = new Locale("ar","TN");
+		 NumberFormat cuurencyFormat = NumberFormat.getCurrencyInstance(l);
+		 
 		List<Product> products = productService.findAll();
+		
+		
 		return new ResponseEntity<List<Product>> (products, HttpStatus.FOUND);
 	}
 	

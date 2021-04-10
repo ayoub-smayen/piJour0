@@ -12,6 +12,7 @@ import org.springframework.http.converter.BufferedImageHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import java.awt.image.BufferedImage;
@@ -36,6 +37,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import com.google.maps.model.LatLng;
@@ -51,6 +53,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 
 @EnableScheduling
+@EnableAsync
 @SpringBootApplication
 @EnableAspectJAutoProxy(proxyTargetClass=true)
 @ComponentScan({"com.project0.esprit.aspect","com.project0.esprit.mycharts","com.project0.esprit.mycharts.service","com.project0.esprit.mycharts.Dao","com.project0.esprit.mycharts.Model","com.project0.esprit.mycharts.Controller","com.project0.esprit.mycharts.service.impl","com.project0.esprit.service","com.project0.esprit.resource","com.project0.esprit","com.project0.esprit.dao","com.project0.esprit.datentity","com.project0.esprit.utils","com.project0.esprit.security","com.project0.esprit.dao","com.project0.esprit.controller","com.project0.esprit.entity","com.project0.esprit.repository","com.project0.esprit.config"})
@@ -73,6 +76,13 @@ public class EspritApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EspritApplication.class, args);
 	}
+	
+	@Bean
+	//@LoadBalanced
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
 	
 	@Bean(name = "geocodeService")
 	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)

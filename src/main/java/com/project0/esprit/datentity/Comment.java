@@ -43,9 +43,9 @@ public class Comment  extends AuditModel{
 	
 	
 	
-	@JsonBackReference
-    //@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	//@JsonBackReference(value = "prod1")
+    @JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	    @JoinColumn(name = "product_id", nullable = true)
 	    private Product1 product;
 
@@ -167,17 +167,30 @@ public class Comment  extends AuditModel{
 	}
 
 
-	public User getUser() {
+
+
+	
+
+
+
+
+		public User getUser() {
 		return user1;
 	}
 
 
-	public void setUser(User user) {
-		this.user1 = user;
+
+
+
+
+	public void setUser(User user1) {
+		this.user1 = user1;
 	}
 
 
-	    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
+
+		@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	    @JsonIdentityReference(alwaysAsId = true)
 	    @ManyToOne
 	    private User user1;

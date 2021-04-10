@@ -121,7 +121,7 @@ public class Category1 extends AuditModel {
 		this.products = products;
 	}
 	
-	@JsonManagedReference
+	//@JsonManagedReference(value = "cat1")
     //@JsonIgnore
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)

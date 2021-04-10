@@ -24,6 +24,15 @@ public interface ProductRepository extends JpaRepository<Product1, Long> {
 	@Query("SELECT a  from Product1 a WHERE codebar like '619%' ")
 	List<Product1> findByFirstNameAndLastName2();
 	
+	
+
+	@Query("SELECT a  , max(a.likes) from Product1 a  ")
+	List<Product1> findBylikes();
+	
+	
+	/*@Query("SELECT a  from Product1  a  limit 3  ")
+	List<Product1> findThreeprod();
+	*/
 
 	@Query("SELECT r FROM Product1 r ORDER BY createdAt ASC")
 	 List<Product1> findAllByDate();

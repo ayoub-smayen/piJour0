@@ -46,8 +46,8 @@ public class DummyDataCmdLineRunner implements CommandLineRunner {
     @SuppressWarnings("deprecation")
 	@Override
     public void run(String... strings) throws Exception {
-    	/*
-    	 Role userRole = new Role(RoleEnum.DELIVERY_MAN.toString());
+    	
+    	/* Role userRole = new Role(RoleEnum.DELIVERY_MAN.toString());
          roleRepository.save(userRole);
         
 
@@ -101,11 +101,11 @@ public class DummyDataCmdLineRunner implements CommandLineRunner {
     	
     	
     	*/
-    	
-    	
+  /*  	
+   	
 
     	
-     /* Role userRole2 = new Role(RoleEnum.ROLE_USER.toString());
+      Role userRole2 = new Role(RoleEnum.ROLE_USER.toString());
         roleRepository.save(userRole2);
         Role adminRole = new Role(RoleEnum.ROLE_ADMIN.toString());
         roleRepository.save(adminRole);
