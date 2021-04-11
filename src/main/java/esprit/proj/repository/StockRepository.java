@@ -12,7 +12,7 @@ import esprit.proj.entity.Stock;
 
 @Repository
 public interface StockRepository extends CrudRepository <Stock, Integer> {
-	@Query(value="SELECT p.id FROM product p,stock s  WHERE   s.amount<10 ",nativeQuery=true)
+	@Query(value="SELECT p.product_id from products p join stock s  on p.stock_id = s.id  where   s.amount<10 ",nativeQuery=true)
 	List<Long> missingProduct();
 	
 

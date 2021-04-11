@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import esprit.proj.service.StockServiceImp;
+import esprit.proj.service.StockServiceImpl;
 import esprit.proj.entity.Stock;
 
 @RestController
@@ -20,7 +21,7 @@ import esprit.proj.entity.Stock;
 public class StockController {
 
 	@Autowired
-	StockServiceImp stockService;
+	StockServiceImpl stockService;
 	
 	@PostMapping("/addStock")	
 	public int addStock(@RequestBody Stock s) {
@@ -49,5 +50,9 @@ public class StockController {
 	public void orderProduct(@PathVariable("pid")int pid,@PathVariable("amount")int amount) {
 		 stockService.orderProduct(pid, amount);
 		
+	}
+	@PostMapping("sendMail")
+	public void SendMail(){
+		stockService.sendEmail();
 	}
 }
