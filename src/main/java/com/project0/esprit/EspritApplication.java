@@ -41,7 +41,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import com.google.maps.model.LatLng;
+import com.project0.esprit.entity.Dice;
 import com.project0.esprit.entity.Mail;
+import com.project0.esprit.entity.Rollable;
 import com.project0.esprit.entity.Shop;
 import com.project0.esprit.repository.MemoryStore;
 import com.project0.esprit.repository.Store;
@@ -97,6 +99,41 @@ public class EspritApplication {
 	public Store<Shop, LatLng> getMemoryStore() {
 		return new MemoryStore();
 	}
+	
+	 @Bean(name = "greenDice")
+	    public Rollable greenDice() {
+	        return new Dice(new Integer[]{1, 2, 3, 4, 5,6});
+	    }
+
+	    @Bean(name = "yellowDice")
+	    public Rollable yellowDice() {
+	        return new Dice(new Integer[]{0, 0, 1, 1, 1, 2});
+	    }
+
+	    @Bean(name = "brownDice")
+	    public Rollable brownDice() {
+	        return new Dice(new Integer[]{0, 1, 1, 2, 4, 5});
+	    }
+
+	    @Bean(name = "blueDice")
+	    public Rollable blueDice() {
+	        return new Dice(new Integer[]{0, 1, 1, 2, 3, 4});
+	    }
+
+	    @Bean(name = "greyDice")
+	    public Rollable greyDice() {
+	        return new Dice(new Integer[]{0, 0, 1, 1, 2, 3});
+	    }
+
+	    @Bean(name = "redDice")
+	    public Rollable redDice() {
+	        return new Dice(new Integer[]{0, 1, 1, 2, 2, 3});
+	    }
+
+	    @Bean(name = "blackDice")
+	    public Rollable blackDice() {
+	        return new Dice(new Integer[]{0, 0, 2, 2, 2, 3});
+	    }
 	
 	/*@Bean(name = "dataSource")
     public DataSource getDataSource() {

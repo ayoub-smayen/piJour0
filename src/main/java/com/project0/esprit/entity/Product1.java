@@ -346,6 +346,85 @@ public class Product1 extends AuditModel {
 	public Integer getLike() {
 		return likes;
 	}
+	@Column(name = "productViews", nullable = false, columnDefinition = "bigint(20) default 0")
+    private long productViews = 0;
+
+	public Integer getLikes() {
+		return likes;
+	}
+
+	public Product1(@NotNull(message = "Product name is required.") Double productWieght, Favourite favourite,
+			String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price, Integer likes, Integer deslike,
+			long productViews,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, WishList wishlist,
+			Orders orders) {
+		super();
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.likes = likes;
+		this.deslike = deslike;
+		this.productViews = productViews;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.wishlist = wishlist;
+		this.orders = orders;
+	}
+
+	public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
+			Favourite favourite, String productsize, String productname,
+			@NotBlank(message = "description  is mandatory") String productdescription, Integer quantity, Double price,
+			@NotBlank(message = "Brand is mandatory") String brand, Double remise_price, Integer likes, Integer deslike,
+			long productViews,
+			@Pattern(message = "codebar must start  with 619", regexp = "^619*[0-9]{9}") String codebar,
+			byte[] productImg, Publicity publicity, Category1 category, Set<Comment> comments, WishList wishlist,
+			Orders orders) {
+		super();
+		this.product_id = product_id;
+		this.productWieght = productWieght;
+		this.favourite = favourite;
+		this.productsize = productsize;
+		this.productname = productname;
+		this.productdescription = productdescription;
+		Quantity = quantity;
+		this.price = price;
+		Brand = brand;
+		this.remise_price = remise_price;
+		this.likes = likes;
+		this.deslike = deslike;
+		this.productViews = productViews;
+		this.codebar = codebar;
+		ProductImg = productImg;
+		this.publicity = publicity;
+		this.category = category;
+		this.comments = comments;
+		this.wishlist = wishlist;
+		this.orders = orders;
+	}
+
+	public void setLikes(Integer likes) {
+		this.likes = likes;
+	}
+
+	public long getProductViews() {
+		return productViews;
+	}
+
+	public void setProductViews(long productViews) {
+		this.productViews = productViews;
+	}
 
 	public void setLike(Integer like) {
 		this.likes = like;
