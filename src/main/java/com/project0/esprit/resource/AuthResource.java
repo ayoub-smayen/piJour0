@@ -23,6 +23,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,6 +41,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @RestController
@@ -68,6 +70,25 @@ public class AuthResource {
     
     @Autowired
    private  PublicityRepository prodrep;
+    
+    
+    
+    @GetMapping("/cuurentUser")
+    
+    public @ResponseBody ResponseEntity<?> getCurrentUser(Principal us)
+    {
+    	
+    	User u  = userrepo.findByUsernameAndFetchRoles(us.getName());
+    	if(u.equals(null)) {
+    		
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user no found");
+    	}
+
+    	return ResponseEntity.status(HttpStatus.FOUND).body(u);
+    	
+    	
+    }
+    
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
 
