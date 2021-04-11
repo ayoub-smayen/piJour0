@@ -129,6 +129,8 @@ public  class ProfitServiceImpl implements ProfitService {
 			        hj.put(s.getMonth(),( s.getOutcome() - s.getIncome() ));
 			 hj.put(s.getMonth(),( s.getOutcome() - s.getIncome() )/s.getIncome());      
 			ml.add(hj);
+			
+			
 			/*
 			 Double max_income =  (Double) (s.getIncome()  < income ?   income : s.getIncome()) ;
 			 
