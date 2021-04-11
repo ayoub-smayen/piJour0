@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.client.RestTemplate;
 
 import com.project0.esprit.entity.Dashboard;
 import com.project0.esprit.entity.Euser;
@@ -29,7 +30,6 @@ import com.project0.esprit.repository.EuserRepository;
 import com.project0.esprit.repository.ProductRepository;
 import com.project0.esprit.repository.ProfitRepository;
 import com.project0.esprit.service.DashboardService;
-import com.project0.esprit.service.ProductService;
 import com.project0.esprit.service.ProfitService;
 
 @RestController
@@ -40,8 +40,6 @@ public class DashboardController {
 	
 	@Autowired
 	private DashboardService dashboardservice;
-	@Autowired 
-	private ProductService productservice ;
 	@Autowired
 	private EuserRepository euserrep;
 	@Autowired
@@ -50,6 +48,8 @@ public class DashboardController {
 	private ProductRepository productRepository;
 	@Autowired
 	private ProfitService profitService;
+	@Autowired
+    private RestTemplate restTemplate;
 	
 	
 	
@@ -175,6 +175,48 @@ public ResponseEntity<?> getPieChart1() {
 		HashMap<String, Object> k = profitService.getTodayRevenueDash();
 	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
 	}
+ 
+ 
+ private static int r =0;
+ 
+ @RequestMapping("/random")
+ public int getRandomNumber(){
+     return new   Random().nextInt() % 50;
+ }
+ 
+    @RequestMapping("/visited")
+ public int  getvisiteder() {
+ 	this.r++;
+ 	return  r;
+ }
+ 
+ @RequestMapping("lvisit")
+ //@HystrixCommand(fallbackMethod = "defaultSpinResult")
+ public String visited(){
+ 	 return String.format("%s",getVisitor());
+ 	
+ }
+private String getVisitor(){
+ 	
+ 	
+     int randomNumber = restTemplate.getForObject("http://localhost:8091/api/visited", Integer.class);
+    
+   
+      
+     return    Integer.toString(randomNumber);
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 	////////////////////////////////
 	
