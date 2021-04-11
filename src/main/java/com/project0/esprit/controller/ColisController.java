@@ -1,5 +1,6 @@
 package com.project0.esprit.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.project0.esprit.datentity.User;
 import com.project0.esprit.entity.Colis;
 import com.project0.esprit.entity.DiceRoll;
 import com.project0.esprit.entity.Etat;
@@ -30,6 +32,7 @@ import com.project0.esprit.entity.Rollable;
 import com.project0.esprit.payload.SmsRequest;
 import com.project0.esprit.repository.ColisRepository;
 import com.project0.esprit.repository.ProductRepository;
+import com.project0.esprit.repository.UserRepository;
 import com.project0.esprit.service.ColisService1;
 import com.project0.esprit.service.Service;
 
@@ -65,7 +68,8 @@ public class ColisController {
 
 	   
 	   
-	   
+	   @Autowired
+	   private UserRepository userep;
 	   
 	   @Autowired(required = true)
 	    private Rollable greenDice;
@@ -167,7 +171,11 @@ public class ColisController {
 
 	    @RequestMapping("/play")
 	    //@HystrixCommand(fallbackMethod = "defaultSpinResult")
-	    public String spin(){
+	    public String spin(Principal us){
+	    	
+	    	User ui = userep.findByUsernameAndFetchRoles(us.getName());
+	    	
+	    	
 	    	
 	    	Long l = 1l;
 	    	Product1 p1 = prodrep.findById(l).get();
@@ -179,8 +187,12 @@ public class ColisController {
 	    	if(s1.equals(s2) && s2.equals(s3) && s1.equals(s3))
 	    		
 	    	{
-	    		 service1.sensStringsms(" you win 🎁   💰💰💰💰     🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑  🎁  🎁  🎁   🎁      a  product "  + s1,p1.getProductImg());
-	    		 
+	    		ui.setId(ui.getId());
+	    		ui.incrementsCoins();
+	    		
+	    		// service1.sensStringsms(" you " +  ui.getUsername()  +  " win 🎁   💰💰💰💰     🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑  🎁  🎁  🎁   🎁      a  product "  + s1,p1.getProductImg());
+	    		ui.setCoins(ui.getCoins()+1);
+	    		  userep.save(ui);
 
 	 	        return String.format("  you win 🎁  🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑    a  product %s %s %s",s1 , s2, s3);
 	 	    	

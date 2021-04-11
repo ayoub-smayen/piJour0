@@ -150,7 +150,9 @@ public class AuthResource {
         
         response2.put("roles1", userDetails.getAuthorities().toString());
         response2.put("token", token);
-  
+   
+        
+         response2.put("coins", user.getCoins());
         
         Cookie cookie = new Cookie("user1",userDetails.getUsername().replace(" ", "")  );
         // add cookie in server response

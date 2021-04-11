@@ -12,4 +12,7 @@ public interface ProductService {
 	List<Product> findByCategory(String category) throws ProductNotFoundException;
 	List<Product> findAll() throws ProductNotFoundException;
 	
+	
+	
+	
 }

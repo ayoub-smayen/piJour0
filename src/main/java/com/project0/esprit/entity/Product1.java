@@ -1,5 +1,6 @@
 package com.project0.esprit.entity;
 
+import java.util.Comparator;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -33,7 +34,7 @@ import com.project0.esprit.datentity.Favourite;
 import com.project0.esprit.datentity.WishList;
 @Entity
 @Table(name="product")
-public class Product1 extends AuditModel {
+public class Product1 extends AuditModel implements  Comparable<Product1> {
 	
 	
 	@Id
@@ -814,6 +815,34 @@ public class Product1 extends AuditModel {
 		ProductImg = productImg;
 		this.category = category;
 	}
+
+	@Override
+	public int compareTo(Product1 o) {
+	
+		return new Double(this.getPrice()).compareTo(o.getPrice());
+	}
+	
+	
+	 public static class Comparators {
+	    	public static Comparator<Product1> PRICE = new Comparator<Product1>(){
+	    		@Override
+	    		public int compare(Product1 p1, Product1 p2){
+	    			return new Double(p1.getPrice()).compareTo(p2.getPrice());
+	    		}
+	    	};
+	    	public static Comparator<Product1> VIEWS = new Comparator<Product1>(){
+	    		@Override
+	    		public int compare(Product1 p1, Product1 p2){
+	    			return new Long(p1.getProductViews()).compareTo(p2.getProductViews());
+	    		}
+	    	};
+	    	public static Comparator<Product1> DATE = new Comparator<Product1>(){
+	    		@Override
+	    		public int compare(Product1 p1, Product1 p2){
+	    			return (p1.getCreatedAt().after(p2.getCreatedAt())) ? 0:1;
+	    		}
+	    	};
+	    }
 
 	/*public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
 			Favourite favourite, String productsize, String productname,

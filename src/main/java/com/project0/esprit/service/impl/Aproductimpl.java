@@ -1,5 +1,6 @@
 package com.project0.esprit.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,4 +178,62 @@ public class Aproductimpl  implements  Iayproduct{
 		
 	}
 */
+
+	@Override
+	public void getVisited(Long productId) {
+		// TODO Auto-generated method stub
+		
+		Product1 product =  productrepo.findById2(productId);
+		product.setProductViews(product.getProductViews()+1);
+		productrepo.save(product);
+		
+	}
+
+	@Override
+	public List<Product1> getProductsByMainCategory(String mainCategoryName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product1> getProductsByCategory(Category1 category) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product1> getAllProducts2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product1 getProductById(Long productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Product1 product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Long productId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Product1> sort(List<Product1> products, String sortType) {
+		if(sortType.equals("0")){
+			Collections.sort(products, Product1.Comparators.PRICE);
+		}
+		if(sortType.equals("1")){
+			Collections.sort(products, Product1.Comparators.PRICE);
+			Collections.reverse(products);
+		}
+		return products;
+	}
 }

@@ -2,6 +2,7 @@ package com.project0.esprit.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -77,6 +78,14 @@ public class ProfitController {
 	public void removeProfit(@PathVariable("user_id") Long id) 
 	{
 	profitservice.deleteProfit(id);
+	}
+	
+	@GetMapping("/profitmonth")
+	  
+	@ResponseBody public ResponseEntity<?>  getGainmonthly( ){
+		
+		List<Map<String, Double>> k = profitservice.getgainmaithly();
+	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
 	}
   
 

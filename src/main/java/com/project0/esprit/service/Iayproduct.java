@@ -4,8 +4,31 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.project0.esprit.entity.Category1;
 import com.project0.esprit.entity.Product1;
 public interface Iayproduct {
+	
+	
+	
+	
+
+	void getVisited(Long productId);
+	
+	List<Product1> getProductsByMainCategory(String mainCategoryName);
+	
+	List<Product1> getProductsByCategory(Category1 category);
+	
+	List<Product1> getAllProducts2();
+	
+	Product1 getProductById(Long productId);
+	
+	void save(Product1 product);
+	
+	void delete(Long productId);
+	
+	List<Product1> sort(List<Product1> products, String sortType);
+	
+	
 	
 	
 	List<Product1> getAllProducts();

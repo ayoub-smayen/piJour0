@@ -42,7 +42,71 @@ public   class User implements UserDetails {
     @Column(unique = true)
     private String username;
     
-    @Column(unique=true)
+    
+    
+    public long getCoins() {
+		return coins;
+	}
+
+	public void setCoins(long coins) {
+		this.coins = coins;
+	}
+
+	
+	 public void incrementsCoins() {
+		  coins++;
+	 }
+	public User(String username, long coins, @Email String email, String password, boolean disabled,
+			Favourite favourite, Boolean fav, WishList wishlist, Lprofile lprofile, List<Role> roles, List<Poll> polls,
+			List<Orders0> orders0, List<Cart0> carts0, List<Publication> publications, List<Comment> comments,
+			List<Comments> pcomments) {
+		super();
+		this.username = username;
+		this.coins = coins;
+		this.email = email;
+		this.password = password;
+		this.disabled = disabled;
+		this.favourite = favourite;
+		this.fav = fav;
+		this.wishlist = wishlist;
+		this.lprofile = lprofile;
+		this.roles = roles;
+		this.polls = polls;
+		this.orders0 = orders0;
+		this.carts0 = carts0;
+		this.publications = publications;
+		this.comments = comments;
+		this.pcomments = pcomments;
+	}
+
+	@Column(name = "coins", nullable = false, columnDefinition = "bigint(20) default 0")
+    private long coins = 0;
+    
+    public User(Long id, String username, long coins, @Email String email, String password, boolean disabled,
+			Favourite favourite, Boolean fav, WishList wishlist, Lprofile lprofile, List<Role> roles, List<Poll> polls,
+			List<Orders0> orders0, List<Cart0> carts0, List<Publication> publications, List<Comment> comments,
+			List<Comments> pcomments) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.coins = coins;
+		this.email = email;
+		this.password = password;
+		this.disabled = disabled;
+		this.favourite = favourite;
+		this.fav = fav;
+		this.wishlist = wishlist;
+		this.lprofile = lprofile;
+		this.roles = roles;
+		this.polls = polls;
+		this.orders0 = orders0;
+		this.carts0 = carts0;
+		this.publications = publications;
+		this.comments = comments;
+		this.pcomments = pcomments;
+	}
+
+	@Column(unique=true)
     @Email
     private String email;
     //password is only passed when deseralization is happening - input request

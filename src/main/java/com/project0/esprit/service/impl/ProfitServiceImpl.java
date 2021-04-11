@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -108,6 +109,40 @@ public  class ProfitServiceImpl implements ProfitService {
         companyRevenueMap.put("totalIncome", CurrencyFormatter.format(totalRevenue));
         return companyRevenueMap;
     }
+	@Override
+	public 	List<Map<String , Double>> getgainmaithly() {
+		
+		
+		List<Map<String , Double>> ml =new ArrayList<>();
+		
+		
+		
+		
+		  List<Profit> p = (List<Profit> )  profitRepository.findAll();
+		  
+		  Double k = 0.0;
+		for ( Profit s : p) {
+			Map<String , Double>  hj    =new HashMap<>();
+			
+			
+			if(s.getIncome().equals(k))
+			        hj.put(s.getMonth(),( s.getOutcome() - s.getIncome() ));
+			 hj.put(s.getMonth(),( s.getOutcome() - s.getIncome() )/s.getIncome());      
+			ml.add(hj);
+			/*
+			 Double max_income =  (Double) (s.getIncome()  < income ?   income : s.getIncome()) ;
+			 
+			 Double max_outcome =  (Double) (s.getOutcome()  < outcome ?   outcome : s.getOutcome()) ;
+			 res = (res +( max_income-max_outcome)/(max_income ));
+			 System.out.println(  ( max_income-max_outcome )/(max_income));
+			 System.out.println(res);*/
+			 
+			
+		}
+		
+		return ml ;
+		//return null;
+	}
 
    
 }

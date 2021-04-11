@@ -1,5 +1,8 @@
 package com.project0.esprit.service;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.project0.esprit.entity.Profit;
 public interface ProfitService {
 
@@ -11,6 +14,6 @@ public interface ProfitService {
 	   Double getAllGain(Double income , Double outcome );
 	 //  HashMap<String, Object> getBestProduct();
 		
-	
+	List<Map<String , Double>>  getgainmaithly();
 	   
 }
