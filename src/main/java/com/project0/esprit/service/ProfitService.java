@@ -11,7 +11,7 @@ public interface ProfitService {
 	   void deleteProfit(Long id);
 	   Profit retrieveProfit(Long id);
 	   HashMap<String, Object> getTodayRevenueDash();
-	   Double getAllGain(Double income , Double outcome );
+	//   Double getAllGain(Double income , Double outcome );
 	 //  HashMap<String, Object> getBestProduct();
 		
 	List<Map<String , Double>>  getgainmaithly();
