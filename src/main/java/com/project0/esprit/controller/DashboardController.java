@@ -53,21 +53,24 @@ public class DashboardController {
 	
 	
 	
-	
-	@GetMapping("/dashboard2/bestprdslike")
+	//http://localhost:8091/api/dashboard/bestproductwithlikes
+	@GetMapping("/dashboard/bestproductwithlikes")
 	public List<Product1>  getProductsByLiks(){
 		
 		return productRepository.findBylikes();
 	}
 	
-	@GetMapping("/dashboard2/bestprdslikedeslike")
+	
+	//http://localhost:8091/api/dashboard/bestproductlikedeslike
+	@GetMapping("/dashboard/bestproductlikedeslike")
 	public List<Product1>  getProductsByLiksdeslike(){
 		
 		return productRepository.findBylikesanddeslikes();
 	}
 	
 	
-	@GetMapping("/dashboard2/get/{dashboard_id}")
+	//http://localhost:8091/api/dashboard/get/{dashboard_id}
+	@GetMapping("/dashboard/get/{dashboard_id}")
 	//@Secured("ROLE_ADMIN")
 	@ResponseBody
 	public Dashboard retrieveDashboard(@PathVariable("dashboard_id") Long id) {
@@ -75,42 +78,45 @@ public class DashboardController {
 	}
 	
 	
-	
-	@PostMapping("/dashboard2/add")
+	//http://localhost:8091/api/dashboard/add
+	/*@PostMapping("/dashboard/add")
 	//@Secured("ROLE_ADMIN")
 	@ResponseBody
 	public Dashboard addDashboard(@RequestBody Dashboard d) {
 		Dashboard dashboard = dashboardservice.addDashboard(d);
 	return dashboard;
-	}
+	}*/
 	
 	
-	/*@PostMapping("/add")
+	//http://localhost:8091/api/dashboard/add
+	@PostMapping("/dashboard/add")
     public @ResponseBody ResponseEntity<Dashboard> addDashboard( Dashboard d)
 	
 	{
 		
 		return new ResponseEntity<Dashboard>(dashboardservice.addDashboard(d),HttpStatus.CREATED);
-	}*/
+	}
 	
 	
-	@PutMapping("/dashboard2/update")
+	//http://localhost:8091/api/dashboard/update/{dashboard_id}
+/*	@PutMapping("/dashboard/update/{dashboard_id}")
 	//@Secured("ROLE_ADMIN")
 	@ResponseBody
 	public Dashboard modifyDashboard(@RequestBody Dashboard dashboard) {
 	return dashboardservice.updateDashboard(dashboard);
-	}
+	}*/
 	
-	/*@PutMapping("/update")
+	
+	//http://localhost:8091/api/dashboard/update/{dashboard_id}
+	@PutMapping("/dashboard/update/{dashboard_id}")
     public @ResponseBody ResponseEntity<Dashboard> updateDashboard( Dashboard d)
 
     {
-	147852369Az@
 	return new ResponseEntity<Dashboard>(dashboardservice.updateDashboard(d),HttpStatus.ACCEPTED);
-    }*/
+    }
 	
-    
-	@DeleteMapping("/dashboard2/delete/{dashboard_id}")
+	//http://localhost:8091/api/dashboard/delete/{dashboard_id}
+	@DeleteMapping("/dashboard/delete/{dashboard_id}")
 	//@Secured("ROLE_ADMIN")
 	@ResponseBody
 	public void removeDashboard(@PathVariable("dashboard_id") Long id) 
@@ -121,8 +127,8 @@ public class DashboardController {
 
 
 //les vues selon l'age,le sexe et city
-//http://localhost:8091/api/get-data
-@GetMapping("/get-data")
+//http://localhost:8091/api/agesexecity
+@GetMapping("/agesexecity")
 public ResponseEntity<Map<String, Integer>> getPieChart() {
     Map<String, Integer> graphData = new TreeMap<>();
     for(Euser e :euserrep.findAll() ) {
@@ -134,28 +140,36 @@ public ResponseEntity<Map<String, Integer>> getPieChart() {
     return new ResponseEntity<>(graphData, HttpStatus.OK);
 }
 
-//profit
-//http://localhost:8091/api/get-data1
- @GetMapping("/get-data1")
+//http://localhost:8091/api/profit/profitpermonth
+	@GetMapping("/profitpermonth")
+	  
+	@ResponseBody public ResponseEntity<?>  getGainmonthly( ){
+		
+		List<Map<String, Double>> k = profitService.getgainmaithly();
+	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
+	}
+/*//profit
+//http://localhost:8091/api/gain
+ @GetMapping("/gain")
 public ResponseEntity<?> getPieChart1() {
     Map<String, Double> graphData = new TreeMap<>();
     for(Profit p :profitRepository.findAll() ) {
     	graphData.put(p.getMonth(),profitService.getAllGain(p.getIncome(), p.getOutcome()));
     }
     return new ResponseEntity<>(graphData, HttpStatus.OK);
-}
+}*/
 
- //bestproduct
- //http://localhost:8091/api/dashboard2
-    @GetMapping("/dashboard2")
+
+
+ //bestproductselonlaquantite
+ //http://localhost:8091/api/bestproductquantity
+    @GetMapping("/bestproductquantity")
 	//@Secured("ROLE_ADMIN")
 	private List<Product1>  getBestprod(){
 		List<Product1>  bestproduct =new ArrayList<>();
-		//List<Product1> p1 =  productservice.findAll();
 		List<Product1> p1 = productRepository.findAll();
 		
 		for (Product1  x: p1 ) {
-			
 			if(x.getQuantity() <20) {
 				bestproduct.add(x);
 			}
@@ -166,8 +180,8 @@ public ResponseEntity<?> getPieChart1() {
 	}
 
  //outcome,income,marge ,total income,total outcome,total marge
- //http://localhost:8091/api/profit1
- @GetMapping("/profit1")
+ //http://localhost:8091/api/getTodayRevenueDash
+ @GetMapping("/getTodayRevenueDash")
  
 	@ResponseBody public ResponseEntity<?> getGain1()
 	{
@@ -184,6 +198,8 @@ public ResponseEntity<?> getPieChart1() {
      return new   Random().nextInt() % 50;
  }
  
+ 
+//http://localhost:8091/api/visited
     @RequestMapping("/visited")
  public int  getvisiteder() {
  	this.r++;
