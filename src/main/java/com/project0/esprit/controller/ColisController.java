@@ -41,13 +41,7 @@ import com.project0.esprit.service.Service;
 @CrossOrigin("*")
 public class ColisController {
 	
-	
-	
-	
-	
-	
-	
-	
+
 	@Autowired
 	ColisRepository colisrepo;
 	
@@ -58,77 +52,18 @@ public class ColisController {
 	   @Autowired
 	 Service service1;
 
-	   
 	   @Autowired
 	   private ProductRepository prodrep;
- 
-   
+
 	   @Autowired
 	   private RestTemplate restTemplate;
 
 	   
 	   
-	   @Autowired
+	      @Autowired
 	   private UserRepository userep;
 	   
-	   @Autowired(required = true)
-	    private Rollable greenDice;
 
-	    @Autowired(required = true)
-	    private Rollable yellowDice;
-
-	    @Autowired(required = true)
-	    private Rollable brownDice;
-
-	    @Autowired(required = true)
-	    private Rollable blueDice;
-
-	    @Autowired(required = true)
-	    private Rollable greyDice;
-
-	    @Autowired(required = true)
-	    private Rollable redDice;
-
-	    @Autowired(required = true)
-	    private Rollable blackDice;
-
-	 /*   @GetMapping("/dice/yellow/roll")
-	    public @ResponseBody DiceRoll yellowDiceRoll() {
-	        return DiceRoll.invoke("Yellow", yellowDice.roll());
-	    }
-
-	    @GetMapping("/dice/green/roll")
-	    public @ResponseBody DiceRoll greenDiceRoll() {
-	        return DiceRoll.invoke("Green", greenDice.roll());
-	    }
-
-	    @GetMapping("/dice/brown/roll")
-	    public @ResponseBody DiceRoll brownDiceRoll() {
-	        return DiceRoll.invoke("Brown", brownDice.roll());
-	    }
-
-	    @GetMapping("/dice/blue/roll")
-	    public @ResponseBody DiceRoll blueDiceRoll() {
-	        return DiceRoll.invoke("Blue", blueDice.roll());
-	    }
-
-	    @GetMapping("/dice/grey/roll")
-	    public @ResponseBody DiceRoll greyDiceRoll() {
-	        return DiceRoll.invoke("Grey", greyDice.roll());
-	    }
-
-	    @GetMapping("/dice/red/roll")
-	    public @ResponseBody DiceRoll redDiceRoll() {
-	        return DiceRoll.invoke("Red", redDice.roll());
-	    }
-
-	    @GetMapping("/dice/black/roll")
-	    public @ResponseBody DiceRoll blackDiceRoll() {
-	        return DiceRoll.invoke("Black", blackDice.roll());
-	    }*/
-	    
-	   
-	//   private static int r =0;
 	   
 	   
 	    private String[] slotMachineSymbols = {
@@ -136,37 +71,6 @@ public class ColisController {
 	    };
 
 	     private  List<String> slotprooduct  =new ArrayList<>() ;
-	    
-	    
-	    
-	/*    @RequestMapping("/random")
-	    public int getRandomNumber(){
-	        return new   Random().nextInt() % 50;
-	    }
-	    
-	    
-	    @RequestMapping("/visited")
-	    public int  getvisiteder() {
-	    	this.r++;
-	    	return  r;
-	    }
-	    
-	    @RequestMapping("lvisit")
-	    //@HystrixCommand(fallbackMethod = "defaultSpinResult")
-	    public String visited(){
-	    	 return String.format("%s",getVisitor());
-	    	
-	    }
- private String getVisitor(){
-	    	
-	    	
-	        int randomNumber = restTemplate.getForObject("http://localhost:8091/api/visited", Integer.class);
-	       
-	      
-	         
-	        return    Integer.toString(randomNumber);
-	    }*/
- 
 	    
 
 	    @RequestMapping("/play")
@@ -316,10 +220,7 @@ public class ColisController {
 		  }
 		  
 		  
-		  
-		  
-		  
-		  
+
 		  return  ResponseEntity.status(201).body(enatt);
 		 
 		 
