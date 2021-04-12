@@ -85,11 +85,11 @@ public class Euser extends AuditModel{
 	@OneToOne(mappedBy = "customer", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
 	  private Dashboard dashboard;
-	
+	*/
 	
 	public Long getUser_id() {
 		return user_id;
-	}*/
+	}
 
 	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
