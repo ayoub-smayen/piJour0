@@ -40,7 +40,7 @@ public class Euser extends AuditModel{
 	@Size(min=1, max=32, message="First name must be between 1 and 32 characters")
 	@Column(name="firstname")
 	private String membre_username ;
-	//@Lob
+	@Lob
 	@Column(name="userimg")
 	private byte[] userimg;
 	
