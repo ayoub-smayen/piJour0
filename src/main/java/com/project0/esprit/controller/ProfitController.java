@@ -35,44 +35,49 @@ public class ProfitController {
 	@Autowired 
 	private ProductRepository productservice;
 	
-	
+	//http://localhost:8091/api/profit/get/{profit_id}
 	@GetMapping("/profit/get/{profit_id}")
 	@ResponseBody
 	public Profit retrieveProfit(@PathVariable("profit_id") Long id) {
 	return profitservice.retrieveProfit(id);
 	}
 	
-	
-	@PostMapping("/profit/add")
+	//http://localhost:8091/api/profit/add
+	/*@PostMapping("/profit/add")
 	@ResponseBody
 	public Profit addProfit(@RequestBody Profit p) {
 	  Profit profit = profitservice.addProfit(p);
 	return profit;
-	}
-	/*@PostMapping("/add")
+	}*/
+	
+	
+	//http://localhost:8091/api/profit/add
+	@PostMapping("/profit/add")
     public @ResponseBody ResponseEntity<Profit> addProfit( Profit p)
 	
 	{
 		
 		return new ResponseEntity<Profit>(profitservice.addProfit(p),HttpStatus.CREATED);
-	}*/
+	}
 
 
-	
-	@PutMapping("/profit/update")
+	//http://localhost:8091/api/profit/update/{profit_id}
+	/*@PutMapping("/profit/update/{profit_id}")
 	@ResponseBody
 	public Profit modifyProfit(@RequestBody Profit profit) {
 	return profitservice.updateProfit(profit);
-	}
-	/*@PutMapping("/update")
+	}*/
+	
+	//http://localhost:8091/api/profit/update/{profit_id}
+	@PutMapping("/update")
     public @ResponseBody ResponseEntity<Profit> updateProfit( Profit p)
 
     {
 	
 	return new ResponseEntity<Profit>(profitservice.updateProfit(p),HttpStatus.ACCEPTED);
-    }*/
+    }
 	
-    
+	//http://localhost:8091/api/profit/delete/{profit_id}
 	@DeleteMapping("/profit/delete/{user_id}")
 	@ResponseBody
 	public void removeProfit(@PathVariable("user_id") Long id) 
@@ -80,22 +85,24 @@ public class ProfitController {
 	profitservice.deleteProfit(id);
 	}
 	
-	@GetMapping("/profitmonth")
+	
+	/*//http://localhost:8091/api/profit/profitpermonth
+	@GetMapping("/profitpermonth")
 	  
 	@ResponseBody public ResponseEntity<?>  getGainmonthly( ){
 		
 		List<Map<String, Double>> k = profitservice.getgainmaithly();
 	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
-	}
+	}*/
   
-
-	@GetMapping("/profit/{income}/{outcome}")
+/////////////////////////////
+	/*@GetMapping("/profit/{income}/{outcome}")
 	  
 	@ResponseBody public ResponseEntity<?>  getGain(@PathVariable("income") Double income,@PathVariable("outcome") Double outcome ){
 		
 		Double k = profitservice.getAllGain(income, outcome);
 	  return  ResponseEntity.status(HttpStatus.ACCEPTED).body(k);	
-	}
+	}*/
 
 
 	/*@GetMapping("/profit2")
