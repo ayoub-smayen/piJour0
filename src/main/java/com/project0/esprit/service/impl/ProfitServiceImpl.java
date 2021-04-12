@@ -47,7 +47,7 @@ public  class ProfitServiceImpl implements ProfitService {
 		L.info("profit returned :" + p);
 			return p;
 	}
-	@Override
+	/*@Override
 	public Double getAllGain(Double income, Double outcome) {
 		Double res = 0.0;
 		  List<Profit> p = (List<Profit> )  profitRepository.findAll();
@@ -67,7 +67,7 @@ public  class ProfitServiceImpl implements ProfitService {
 		}
 		
 		return res ;
-	}
+	}*/
 	
 	
 	
