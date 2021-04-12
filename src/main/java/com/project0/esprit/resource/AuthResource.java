@@ -71,7 +71,7 @@ public class AuthResource {
     @Autowired
    private  PublicityRepository prodrep;
     
-    
+ 
     
     @GetMapping("/cuurentUser")
     

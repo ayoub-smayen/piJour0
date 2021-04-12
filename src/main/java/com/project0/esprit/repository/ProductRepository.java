@@ -34,6 +34,11 @@ public interface ProductRepository extends JpaRepository<Product1, Long> {
 	List<Product1> findBylikesanddeslikes();
 	
 	
+	
+	/*@Query("SELECT * from product  ")
+	List<Product1> findPr();
+	
+	*/
 	/*@Query("SELECT a  from Product1  a  limit 3  ")
 	List<Product1> findThreeprod();
 	*/

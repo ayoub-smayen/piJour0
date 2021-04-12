@@ -44,11 +44,24 @@ public class Category1 extends AuditModel {
 	private String tags  ;
 	
 	
+	
 	@NotNull(message = "categoryType name is required.")
 	@Column(name="categorytype")
 	private String categoryType;
 	
 	 
+	
+	public Category1(@NotNull(message = "categoryname  is required.") String categoryName,
+			@NotNull(message = "categoryname name is required.") String tags,
+			@NotNull(message = "categoryType name is required.") String categoryType, Set<Product1> products, Ray ray) {
+		super();
+		this.categoryName = categoryName;
+		this.tags = tags;
+		this.categoryType = categoryType;
+		this.products = products;
+		this.ray = ray;
+	}
+
 	public Long getCategory_id() {
 		return category_id;
 	}
@@ -123,15 +136,15 @@ public class Category1 extends AuditModel {
 	}
 	
 	//@JsonManagedReference(value = "cat1")
-    //@JsonIgnore
+    @JsonIgnore
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)
 	    private Set<Product1> products;
     
     
 	@JsonBackReference
-    //@JsonIgnore
-   	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIgnore
+   	@ManyToOne(fetch = FetchType.LAZY, optional = true)
    	    @JoinColumn(name = "ray_id", nullable = true)
    	    private Ray ray;
 

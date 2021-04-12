@@ -19,6 +19,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name="ray")
 public class Ray  extends AuditModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ray_id;
@@ -45,7 +50,7 @@ public class Ray  extends AuditModel{
 	}
 
 	@JsonManagedReference
-	//@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy = "ray", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)
 	    private Set<Category1> categories;

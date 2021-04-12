@@ -92,7 +92,7 @@ public class ColisController {
 	    @Autowired(required = true)
 	    private Rollable blackDice;
 
-	 /*   @GetMapping("/dice/yellow/roll")
+	   @GetMapping("/dice/yellow/roll")
 	    public @ResponseBody DiceRoll yellowDiceRoll() {
 	        return DiceRoll.invoke("Yellow", yellowDice.roll());
 	    }
@@ -125,7 +125,7 @@ public class ColisController {
 	    @GetMapping("/dice/black/roll")
 	    public @ResponseBody DiceRoll blackDiceRoll() {
 	        return DiceRoll.invoke("Black", blackDice.roll());
-	    }*/
+	    }
 	    
 	   
 	//   private static int r =0;
@@ -139,12 +139,12 @@ public class ColisController {
 	    
 	    
 	    
-	/*    @RequestMapping("/random")
+	    @RequestMapping("/random")
 	    public int getRandomNumber(){
 	        return new   Random().nextInt() % 50;
 	    }
 	    
-	    
+	  /*  
 	    @RequestMapping("/visited")
 	    public int  getvisiteder() {
 	    	this.r++;

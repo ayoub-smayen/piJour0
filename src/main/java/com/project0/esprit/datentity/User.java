@@ -13,6 +13,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.mail.Multipart;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -42,7 +44,11 @@ public   class User implements UserDetails {
     @Column(unique = true)
     private String username;
     
+    /*
+    @Column(name="user_pic")
     
+    private Multipart jk;
+    */
     
     public long getCoins() {
 		return coins;

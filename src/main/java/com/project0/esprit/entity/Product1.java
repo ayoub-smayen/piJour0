@@ -552,8 +552,8 @@ public class Product1 extends AuditModel implements  Comparable<Product1> {
 	private byte[] ProductImg;
 	
 	
-	@JsonBackReference
-	//@JsonIgnore
+	//@JsonBackReference
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY, optional=true)
 	@JoinColumn(name="publicity_id",nullable = true)
 	private Publicity publicity;
