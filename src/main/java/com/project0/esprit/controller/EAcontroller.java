@@ -25,7 +25,7 @@ public class EAcontroller {
 	private ProductRepository prod ;
 	
 	
-	 @GetMapping("/users/export/excel")
+	 @GetMapping("/products/export/excel")
 	    public void exportToExcel(HttpServletResponse response) throws IOException {
 	        response.setContentType("application/octet-stream");
 	        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");

@@ -75,8 +75,8 @@ public class Publicity extends AuditModel {
 		this.publictyBody = publictyBody;
 		this.products = products;
 	}
-	@JsonManagedReference
-   // @JsonIgnore
+	//@JsonManagedReference
+    @JsonIgnore
 	@OneToMany(mappedBy = "publicity", fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Product1> products;
 	
