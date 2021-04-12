@@ -21,6 +21,10 @@ import javax.validation.constraints.NotNull;
 @Table(name="dashboard")
 public class Dashboard  extends AuditModel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long dashboard_id;
@@ -71,14 +75,6 @@ public class Dashboard  extends AuditModel{
 	
 	*/
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 }
