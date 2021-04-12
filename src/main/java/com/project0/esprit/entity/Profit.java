@@ -1,21 +1,14 @@
 package com.project0.esprit.entity;
 
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.project0.esprit.repository.ProfitRepository;
 
 @Entity
 @Table(name="profit")
@@ -31,8 +24,15 @@ public class Profit extends AuditModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long profit_id;
 	
+	@Column(name="income")     
+	private Double income ;
+	
 	@Column(name="outcome")
 	private Double outcome ;
+	
+	@Column(name="margins")
+	private Double margins ;
+	
 	@Column(name="month")
 	private String month ;
 	
@@ -40,16 +40,6 @@ public class Profit extends AuditModel {
 	public Profit() {
 		super();
 	}
-
-
-	public String getMonth() {
-		return month;
-	}
-
-	public void setMonth(String month) {
-		this.month = month;
-	}
-
 
 
 	public Profit(Double outcome, String month, Double income, Double margins) {
@@ -78,12 +68,15 @@ public class Profit extends AuditModel {
 	}
 
 
+	public String getMonth() {
+		return month;
+	}
 
-	@Column(name="income")     
-	private Double income ;
-	
-	@Column(name="margins")
-	private Double margins ;
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+
 	
 	public Long getProfit_id() {
 		return profit_id;
