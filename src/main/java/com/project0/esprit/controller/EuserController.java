@@ -18,16 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project0.esprit.entity.Euser;
-import com.project0.esprit.entity.Product1;
 import com.project0.esprit.repository.EuserRepository;
 import com.project0.esprit.service.EuserService;
 
@@ -55,13 +52,6 @@ public class EuserController {
 		
 		return new ResponseEntity<List<Euser>>(userservice.retrieveAllUsers(),HttpStatus.OK);
 	}
-	/*	@GetMapping("/retrieve_all_users")
-	@ResponseBody
-	public List<User> getUsers() {
-	List<User> list = userservice.retrieveAllUsers();
-	return list;
-
-    }*/
 	
 	
 	//http://localhost:8091/api/euser/get/{user_id}
@@ -80,27 +70,18 @@ public class EuserController {
 			this.bytes = file.getBytes();
 		}
 
-		//http://localhost:8091/api/euser/add
-		  @PostMapping("/add")
+		
+	 //http://localhost:8091/api/euser/add
+		  @PostMapping("/euser/add")
 		  public Euser addUser(@RequestBody Euser e) throws IOException {
 				e.setUserimg(this.bytes);
 				euserRepository.save(e);
 				this.bytes = null;
 				return e;
 			}
-
-	//http://localhost:8091/api/euser/update/{user_id}
-	/*@PutMapping("/euser/update/{user_id}")
-	@ResponseBody
-    public void updateUser(@RequestBody Euser u, @PathVariable("user_id") Long id)
-
-    {
-	
-	userservice.updateUserByFirstName(u.getMembre_username(),id);
-    }*/
 	
 	//http://localhost:8091/api/euser/update/{user_id}
-	@PutMapping("/update/{user_id}")
+	@PutMapping("/euser/update/{user_id}")
 	@ResponseBody
 	public Euser modifyUser(@RequestBody Euser user) {
 	return userservice.updateUser(user);
@@ -114,7 +95,7 @@ public class EuserController {
 	userservice.deleteUser(id);
 		
 	}
-  ///////////////
+ 
 	//http://localhost:8091/api/euser/finduserbyid/{user_id}
 	@GetMapping("/euser/finduserbyid/{user_id}")
 	@ResponseBody
