@@ -47,8 +47,7 @@ public class DashboardController {
     private RestTemplate restTemplate;
 	
 	
-	
-	
+
 	//http://localhost:8091/api/dashboard/get/{dashboard_id}
 	@GetMapping("/dashboard/get/{dashboard_id}")
 	//@Secured("ROLE_ADMIN")
@@ -142,19 +141,14 @@ public ResponseEntity<Map<String, Integer>> getPieChart() {
  
  private static int r =0;
  
- @RequestMapping("/random")
- public int getRandomNumber(){
-     return new   Random().nextInt() % 50;
- }
- 
 
-    @RequestMapping("/visited")
+
+ @RequestMapping("/visited")
  public int  getvisiteder() {
  	this.r++;
  	return  r;
  }
- 
-       
+    
  //http://localhost:8091/api/lvisit
  @RequestMapping("lvisit")
  //@HystrixCommand(fallbackMethod = "defaultSpinResult")
@@ -162,13 +156,11 @@ public ResponseEntity<Map<String, Integer>> getPieChart() {
  	 return String.format("%s",getVisitor());
  	
  }
+ 
 private String getVisitor(){
  	
  	
      int randomNumber = restTemplate.getForObject("http://localhost:8091/api/visited", Integer.class);
-    
-   
-      
      return    Integer.toString(randomNumber);
  }
 
