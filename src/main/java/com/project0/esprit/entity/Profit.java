@@ -1,11 +1,14 @@
 package com.project0.esprit.entity;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -35,6 +38,13 @@ public class Profit extends AuditModel {
 	
 	@Column(name="month")
 	private String month ;
+	
+	
+	
+
+	/*@OneToOne(mappedBy = "profit", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+	private Admin admin;*/
 	
 	
 	public Profit() {
