@@ -1,20 +1,20 @@
 package com.project0.esprit.repository;
 
-import org.springframework.data.jpa.repository.Modifying;
+
 import org.springframework.data.jpa.repository.Query;
 
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import com.project0.esprit.entity.Euser;
 
 @Repository
 public interface EuserRepository extends CrudRepository<Euser, Long> {
 
-//	@Transactional
+
 	@Query("SELECT a FROM Euser a WHERE user_id = ?1")
 	public Euser findByIdd(@Param(value="user_id" ) Long user_id);
 
