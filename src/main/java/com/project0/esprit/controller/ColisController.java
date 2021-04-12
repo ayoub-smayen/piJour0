@@ -72,6 +72,11 @@ public class ColisController {
 
 	     private  List<String> slotprooduct  =new ArrayList<>() ;
 	    
+	     @RequestMapping("/random")
+	     public int getRandomNumber(){
+	         return new   Random().nextInt() % 50;
+	     }
+	     
 
 	    @RequestMapping("/play")
 	    //@HystrixCommand(fallbackMethod = "defaultSpinResult")
