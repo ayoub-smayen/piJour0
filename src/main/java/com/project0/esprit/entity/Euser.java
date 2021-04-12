@@ -1,12 +1,18 @@
 package com.project0.esprit.entity;
 
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -71,10 +77,19 @@ public class Euser extends AuditModel{
 	@Column(name="sexe")
 	private String sexe ;
 
+
+	/*@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Messages> message;
+	
+	@OneToOne(mappedBy = "customer", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+	  private Dashboard dashboard;
+	
 	
 	public Long getUser_id() {
 		return user_id;
-	}
+	}*/
 
 	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
