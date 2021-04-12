@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +44,10 @@ public class EuserController {
 	@Autowired
 	private EuserService userservice;
 	@Autowired
-	private EuserRepository euserrepository;
+	private EuserRepository euserRepository;
 	
+	
+	//http://localhost:8091/api/euser/get
 	@GetMapping("/euser/get")
 	public @ResponseBody ResponseEntity<List<Euser>> getUser ()
 	
@@ -59,40 +62,51 @@ public class EuserController {
 	return list;
 
     }*/
+	
+	
+	//http://localhost:8091/api/euser/get/{user_id}
 	@GetMapping("/euser/get/{user_id}")
 	@ResponseBody
 	public Euser retrieveUser(@PathVariable("user_id") Long id) {
 	return userservice.retrieveUser(id);
 	}
 	
-/*	@PostMapping("/euser/add")
-    public @ResponseBody ResponseEntity<Euser> addUser(@RequestBody Euser u)
 	
-	{
-		
-		return new ResponseEntity<Euser>(userservice.addUser(u),HttpStatus.CREATED);
-	}*/
-	/*@PostMapping("/add")
-	@ResponseBody
-	public User addUser(@RequestBody User u) {
-	User user = userservice.addUser(u);
-	return user;*/
+	//http://localhost:8091/api/euser/uploadimage
+		@PostMapping("/uploadimage")
+		public void uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
+			
+			logger.info("upload image for user");
+			this.bytes = file.getBytes();
+		}
 
-	@PutMapping("/euser/update/{user_id}")
+		//http://localhost:8091/api/euser/add
+		  @PostMapping("/add")
+		  public Euser addUser(@RequestBody Euser e) throws IOException {
+				e.setUserimg(this.bytes);
+				euserRepository.save(e);
+				this.bytes = null;
+				return e;
+			}
+
+	//http://localhost:8091/api/euser/update/{user_id}
+	/*@PutMapping("/euser/update/{user_id}")
 	@ResponseBody
     public void updateUser(@RequestBody Euser u, @PathVariable("user_id") Long id)
 
     {
 	
 	userservice.updateUserByFirstName(u.getMembre_username(),id);
-    }
+    }*/
 	
-	/*@PutMapping("/update")
+	//http://localhost:8091/api/euser/update/{user_id}
+	@PutMapping("/update/{user_id}")
 	@ResponseBody
-	public User modifyUser(@RequestBody User user) {
+	public Euser modifyUser(@RequestBody Euser user) {
 	return userservice.updateUser(user);
-	}*/
+	}
     
+	//http://localhost:8091/api/euser/delete/{user_id}
 	@DeleteMapping("/euser/delete/{user_id}")
 	@ResponseBody
 	public void removeUser(@PathVariable("user_id") Long id) 
@@ -100,21 +114,15 @@ public class EuserController {
 	userservice.deleteUser(id);
 		
 	}
-  
-	///////////////////////////////////////
-	@PostMapping("/uploadmag")
-	public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
-		
-		logger.info("upload image for user");
-		this.bytes = file.getBytes();
+  ///////////////
+	//http://localhost:8091/api/euser/finduserbyid/{user_id}
+	@GetMapping("/euser/finduserbyid/{user_id}")
+	@ResponseBody
+	public Euser finduUser(@PathVariable Long user_id) {
+		Euser userResponse =  euserRepository.findByIdd(user_id);
+		return userResponse;
 	}
 
-
-	  @PostMapping("/adduserwithImage")
-	  public Euser addUser(@RequestBody Euser e) throws IOException {
-			e.setUserimg(this.bytes);
-			euserrepository.save(e);
-			this.bytes = null;
-			return e;
-		}
+	
+	
 }
