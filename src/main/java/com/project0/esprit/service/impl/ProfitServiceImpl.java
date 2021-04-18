@@ -47,29 +47,7 @@ public  class ProfitServiceImpl implements ProfitService {
 		L.info("profit returned :" + p);
 			return p;
 	}
-	@Override
-	public Double getAllGain(Double income, Double outcome) {
-		Double res = 0.0;
-		  List<Profit> p = (List<Profit> )  profitRepository.findAll();
-		  
-		  
-		for ( Profit s : p) {
-			
-			
-			 Double max_income =  (Double) (s.getIncome()  < income ?   income : s.getIncome()) ;
-			 
-			 Double max_outcome =  (Double) (s.getOutcome()  < outcome ?   outcome : s.getOutcome()) ;
-			 res = (res +( max_income-max_outcome)/(max_income ));
-			 System.out.println(  ( max_income-max_outcome )/(max_income));
-			 System.out.println(res);
-			 
-			
-		}
-		
-		return res ;
-	}
-	
-	
+
 	
 	
     @Override
@@ -113,29 +91,20 @@ public  class ProfitServiceImpl implements ProfitService {
 	public 	List<Map<String , Double>> getgainmaithly() {
 		
 		
-		List<Map<String , Double>> ml =new ArrayList<>();
-		
-		
-		
-		
+		  List<Map<String , Double>> ml =new ArrayList<>();
 		  List<Profit> p = (List<Profit> )  profitRepository.findAll();
 		  
 		  Double k = 0.0;
 		for ( Profit s : p) {
 			Map<String , Double>  hj    =new HashMap<>();
-			
-			
 			if(s.getIncome().equals(k))
 			        hj.put(s.getMonth(),( s.getOutcome() - s.getIncome() ));
-			 hj.put(s.getMonth(),( s.getOutcome() - s.getIncome() )/s.getIncome());      
-			ml.add(hj);
-			
-		
-			
+			        hj.put(s.getMonth(),( s.getOutcome() - s.getIncome() )/s.getIncome());      
+			        ml.add(hj);
+	
 		}
 		
 		return ml ;
-		//return null;
 	}
 
    

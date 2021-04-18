@@ -21,6 +21,10 @@ import javax.validation.constraints.NotNull;
 @Table(name="dashboard")
 public class Dashboard  extends AuditModel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long dashboard_id;
@@ -62,8 +66,8 @@ public class Dashboard  extends AuditModel{
 		super();
 		this.product_sold = product_sold;
 		this.monthly_payment = monthly_payment;
-	}
 	
+	}
 	
 	/*
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "dashboard")
@@ -71,14 +75,20 @@ public class Dashboard  extends AuditModel{
 	
 	*/
 	
+	/*//onetomany
+	 @OneToOne(cascade = CascadeType.ALL)
+	 @JoinColumn(name = "customer_id", referencedColumnName = "user_id")
+	
+	 private User customer ;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
+	private Product best_product ;
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	@OneToOne(mappedBy = "dashboard", fetch = FetchType.LAZY,   
+	           cascade = CascadeType.ALL)
+	private Admin admin;*/
 
-}
+
+	}
+	

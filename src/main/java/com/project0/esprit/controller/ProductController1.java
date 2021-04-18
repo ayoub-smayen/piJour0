@@ -1,6 +1,7 @@
 package com.project0.esprit.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -192,6 +194,11 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
 		List<Product1> ps1 =c.getProductSearching(productname);
 		return ResponseEntity.status(HttpStatus.OK).body(ps1);
 	}
+	@GetMapping("/serprodprice")
+	public ResponseEntity<?> getserachingprodprice(@RequestParam("productname") String productname,@RequestParam("price") Double price){
+		List<Product1> ps1 =c.findByFirstNameAndPrice(productname, price);
+		return ResponseEntity.status(HttpStatus.OK).body(ps1);
+	}
 	
 	@RequestMapping(value = "/findbyinterval/{price1}/{price2}", method = RequestMethod.GET)
 	@ResponseBody
@@ -218,28 +225,31 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
 		return studentResponse;
 	}
 	
-	/*eya*/
+    
 	
-	/*@GetMapping("/dashboard/produitbest")
-	//@Secured("ROLE_ADMIN")
-	private List<Product1>  getBestprod(){
-		List<Product1>  bestproduct =new ArrayList<>();
-		List<Product1> p1 = c.findAll();
-		
-		for (Product1  x: p1 ) {
-			
-			if(x.getQuantity() <20) {
-				bestproduct.add(x);
-			}
-			
-		}
-		
-		 return bestproduct;*/
-		
-	//	List<Product1> lp1 = c.getBesProducts();
-		 //return  lp1;
-				 //ResponseEntity.status(201).body(lp1);
-	//}
+	  @PutMapping("/updateprod/{product_id}/{quantity}")
+	  @ResponseBody 
+	  public  ResponseEntity<?>   updateProduct(@PathVariable("product_id") Long product_id , @PathVariable("quantity") Integer quantity) {
+		  
+		   Product1  pl  = c.findById2(product_id) ; 
+		 int month =   pl.getCreatedAt().getDate()+30;
+		   
+		   pl.setProduct_id(pl.getProduct_id());
+		    pl.decrementquantity(quantity);
+		    
+		   // c.save(pl);
+		    
+		     return  ResponseEntity.status(HttpStatus.FOUND).body(c.save(pl));
+		     
+		   
+		  
+	  }
+	  
+	  
+	
+	
+	
+	
 
 
 }

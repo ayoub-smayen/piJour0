@@ -22,7 +22,6 @@ import com.project0.esprit.service.UserService;
 @Service
 public class DashboardServiceImpl implements DashboardService {
 	
-	//private final ProductRepository prouit1;
 	
 	
 	 private final UserService userService;
@@ -32,7 +31,6 @@ public class DashboardServiceImpl implements DashboardService {
 	@Autowired
 	DashboardServiceImpl( UserService userService,DashboardRepository dashBoardRepo){
 		this.dashBoardRepo = dashBoardRepo;
-		//this.prouit1 = prouit1;
 		this.userService = userService;
 		
 	}
@@ -66,25 +64,9 @@ public class DashboardServiceImpl implements DashboardService {
 			return d;
 	}
 	
-	/*
-
-	@Transactional
-	@Override
-	public List<Product1> getBesProducts() {
-		List<Product1>  bestproduct =new ArrayList<>();
-		List<Product1> p1 = prouit1.findAll();
-		
-		for (Product1  x: p1 ) {
-			
-			if(x.getQuantity() <20) {
-				bestproduct.add(x);
-			}
-			
-		}
-		
-		 return bestproduct;
-	}
-*/
+	
+	/////////////?????????,
+	
 	@Transactional
 	@Override
 	public List<User> getAllUser() {

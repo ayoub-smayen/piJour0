@@ -2,6 +2,7 @@ package com.project0.esprit.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -24,12 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.project0.esprit.datentity.User;
+import com.project0.esprit.entity.Category1;
 import com.project0.esprit.entity.Colis;
 import com.project0.esprit.entity.DiceRoll;
 import com.project0.esprit.entity.Etat;
 import com.project0.esprit.entity.Product1;
 import com.project0.esprit.entity.Rollable;
 import com.project0.esprit.payload.SmsRequest;
+import com.project0.esprit.repository.CategoryRepository;
 import com.project0.esprit.repository.ColisRepository;
 import com.project0.esprit.repository.ProductRepository;
 import com.project0.esprit.repository.UserRepository;
@@ -41,13 +44,7 @@ import com.project0.esprit.service.Service;
 @CrossOrigin("*")
 public class ColisController {
 	
-	
-	
-	
-	
-	
-	
-	
+
 	@Autowired
 	ColisRepository colisrepo;
 	
@@ -58,19 +55,20 @@ public class ColisController {
 	   @Autowired
 	 Service service1;
 
-	   
 	   @Autowired
 	   private ProductRepository prodrep;
- 
-   
+	   
+	   @Autowired
+	   private CategoryRepository cat ;
+
 	   @Autowired
 	   private RestTemplate restTemplate;
 
 	   
 	   
-	   @Autowired
+	      @Autowired
 	   private UserRepository userep;
-	   
+
 	   @Autowired(required = true)
 	    private Rollable greenDice;
 
@@ -92,7 +90,7 @@ public class ColisController {
 	    @Autowired(required = true)
 	    private Rollable blackDice;
 
-	   @GetMapping("/dice/yellow/roll")
+	   /*@GetMapping("/dice/yellow/roll")
 	    public @ResponseBody DiceRoll yellowDiceRoll() {
 	        return DiceRoll.invoke("Yellow", yellowDice.roll());
 	    }
@@ -126,11 +124,14 @@ public class ColisController {
 	    public @ResponseBody DiceRoll blackDiceRoll() {
 	        return DiceRoll.invoke("Black", blackDice.roll());
 	    }
-	    
+	    */
 	   
 	//   private static int r =0;
+	    
+	    
 	   
-	   
+	    
+	    
 	    private String[] slotMachineSymbols = {
 	    		"A","B","C"
 	    };
@@ -138,11 +139,7 @@ public class ColisController {
 	     private  List<String> slotprooduct  =new ArrayList<>() ;
 	    
 	    
-	    
-	    @RequestMapping("/random")
-	    public int getRandomNumber(){
-	        return new   Random().nextInt() % 50;
-	    }
+
 	    
 	  /*  
 	    @RequestMapping("/visited")
@@ -169,6 +166,13 @@ public class ColisController {
  
 	    
 
+	     @RequestMapping("/random")
+	     public int getRandomNumber(){
+	         return new   Random().nextInt() % 50;// 0 - 49
+	     }
+	     
+
+
 	    @RequestMapping("/play")
 	    //@HystrixCommand(fallbackMethod = "defaultSpinResult")
 	    public String spin(Principal us){
@@ -190,7 +194,7 @@ public class ColisController {
 	    		ui.setId(ui.getId());
 	    		ui.incrementsCoins();
 	    		
-	    		// service1.sensStringsms(" you " +  ui.getUsername()  +  " win 🎁   💰💰💰💰     🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑  🎁  🎁  🎁   🎁      a  product "  + s1,p1.getProductImg());
+	    /// service1.sensStringsms(" you " +  ui.getUsername()  +  " win 🎁   💰💰💰💰     🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑  🎁  🎁  🎁   🎁      a  product "  + s1,p1.getProductImg());
 	    		ui.setCoins(ui.getCoins()+1);
 	    		  userep.save(ui);
 
@@ -218,7 +222,8 @@ public class ColisController {
 	        return "? ? ?";
 	    }
 
-
+	   
+	    
     @PostMapping("/v1/sms")
     public void sendSms(@Valid @RequestBody SmsRequest smsRequest) {
         service1.sendSms(smsRequest);
@@ -262,6 +267,32 @@ public class ColisController {
 		
 	}
 	
+	
+	@GetMapping("/prodwithcatalpha")
+	public @ResponseBody ResponseEntity<?> getProdcat(){
+		Date d = new Date();
+		List<Product1> pr = prodrep.findAll();
+		List<Category1> cats = cat.findAll();
+		
+		
+		
+		
+		for (Product1 p1 : pr) {
+			   
+			Category1 c = p1.getCategory();
+			
+			
+			
+			
+			
+			if(p1.getCreatedAt().getYear() ==  d.getYear()  ) {
+				return ResponseEntity.status(HttpStatus.FOUND).body("category" + p1.getProductname());
+			}
+			
+		}
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found ");
+	}
 	
 	@PutMapping("/putcolis")
 	//@Secured("ROLE_ADMIN")@RequestBody Colis coli
@@ -316,10 +347,7 @@ public class ColisController {
 		  }
 		  
 		  
-		  
-		  
-		  
-		  
+
 		  return  ResponseEntity.status(201).body(enatt);
 		 
 		 

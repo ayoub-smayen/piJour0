@@ -56,12 +56,31 @@ public class UserService {
             return userRepository.findAll().stream()
                 .filter(
                     u -> u.getRoles().stream()
+                    
                         .noneMatch(role -> role.getRole().equals(RoleEnum.ROLE_ADMIN.name()))
                 ).collect(Collectors.toList());
         }
     }
    
+    
+    public List<User> getAllAdmin(boolean includeAdmins) {
+        if (includeAdmins) {
+            return userRepository.findAll();
+        } else {
+            return userRepository.findAll().stream()
+            		
+                .filter(
+                    u -> u.getRoles().stream()
+                    
+                        .anyMatch(role -> (role.getRole().equals(RoleEnum.ROLE_ADMIN.name())  ) )
+                ).collect(Collectors.toList());
+        }
+    }
+   
      public  User  editProfile (Principal user, Lprofile l) {
+    	 
+    	 
+    	
     	 
          User u  = userRepository.findOneByUsername(user.getName());
          

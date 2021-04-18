@@ -42,7 +42,7 @@ public class SsePushNotificationService {
 	}
 
 	@Async
-	@Scheduled(fixedRate = 5000)
+	@Scheduled(fixedRate = 10000000)
 	public void doNotify() throws IOException {
 		
 		List<Product1> prod = prodrep.findAll();

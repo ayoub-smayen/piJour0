@@ -26,6 +26,7 @@ public class EuserExcelController {
 	private EuserRepository euserrepository ;
 	
 	
+	//http://localhost:8091/api/users/export/excel
 	 @GetMapping("/users/export/excel")
 	    public void exportToExcel(HttpServletResponse response) throws IOException {
 	        response.setContentType("application/octet-stream");
@@ -35,7 +36,6 @@ public class EuserExcelController {
 	        String headerKey = "Content-Disposition";
 	        String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
 	        response.setHeader(headerKey, headerValue);
-	         /////cast!!
 	        List<Euser> listUsers = (List<Euser>) euserrepository.findAll();
 	         
 	        EuserExcelDao excelExporter = new EuserExcelDao(listUsers);

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,6 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -40,24 +38,14 @@ public class Euser extends AuditModel{
 	@Size(min=1, max=32, message="First name must be between 1 and 32 characters")
 	@Column(name="firstname")
 	private String membre_username ;
-	//@Lob
+	
+	@Lob
 	@Column(name="userimg")
 	private byte[] userimg;
 	
-
-	public byte[] getUserimg() {
-		return userimg;
-	}
-
-	public void setUserimg(byte[] userimg) {
-		this.userimg = userimg;
-	}
-
 	@NotNull(message="password is required")
 	@Column(name="password")
 	private String password  ;
-	
-	
 	
 	@Column(name="confirmpassword")
 	@NotNull(message="confirmpassword is required")
@@ -65,29 +53,39 @@ public class Euser extends AuditModel{
 
 	@Column(name="email")
 	@NotNull(message="email is required")
-	//@Email
 	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Email address is invalid")
 	private String email  ;
-	
-	@Column(name="groups")
-	@NotNull(message="groups is required")
-	private String group ;
 	
 	@Column(name="city")
 	@NotNull(message="city is required")
 	private String city  ;
+	
 	@Column(name="address")
+	@NotNull(message="address is required")
 	private String address  ;
+	
 	@NotNull(message="phone is required")
 	@Pattern(regexp = "[0-9] {8}")
 	@Column(name="phonenumber")
 	private String phone_number  ;
+	
+	@NotNull(message="age is required")
 	@Column(name="age")
 	private String age ;
+	
 	@NotNull(message="sexe is required")
 	@Column(name="sexe")
 	private String sexe ;
 
+
+	/*@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Messages> message;
+	
+	@OneToOne(mappedBy = "customer", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+	  private Dashboard dashboard;
+	*/
 	
 	public Long getUser_id() {
 		return user_id;
@@ -131,13 +129,6 @@ public class Euser extends AuditModel{
 		this.email = email;
 	}
 
-	public String getGroup() {
-		return group;
-	}
-
-	public void setGroup(String group) {
-		this.group = group;
-	}
 
 	public String getCity() {
 		return city;
@@ -145,6 +136,14 @@ public class Euser extends AuditModel{
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public byte[] getUserimg() {
+		return userimg;
+	}
+
+	public void setUserimg(byte[] userimg) {
+		this.userimg = userimg;
 	}
 
 	public String getAddress() {
@@ -188,9 +187,10 @@ public void setAge(String age) {
 			byte[] userimg, @NotNull(message = "password is required") String password,
 			@NotNull(message = "confirmpassword is required") String confirm_password,
 			@NotNull(message = "email is required") @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email address is invalid") String email,
-			@NotNull(message = "groups is required") String group, @NotNull(message = "city is required") String city,
-			String address, @NotNull(message = "phone is required") @Pattern(regexp = "[0-9] {8}") String phone_number,
-			String age, @NotNull(message = "sexe is required") String sexe) {
+			@NotNull(message = "city is required") String city,
+			@NotNull(message = "address is required") String address,
+			@NotNull(message = "phone is required") @Pattern(regexp = "[0-9] {8}") String phone_number,
+			@NotNull(message = "age is required") String age, @NotNull(message = "sexe is required") String sexe) {
 		super();
 		this.user_id = user_id;
 		this.membre_username = membre_username;
@@ -198,7 +198,6 @@ public void setAge(String age) {
 		this.password = password;
 		this.confirm_password = confirm_password;
 		this.email = email;
-		this.group = group;
 		this.city = city;
 		this.address = address;
 		this.phone_number = phone_number;
@@ -211,22 +210,24 @@ public void setAge(String age) {
 			byte[] userimg, @NotNull(message = "password is required") String password,
 			@NotNull(message = "confirmpassword is required") String confirm_password,
 			@NotNull(message = "email is required") @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email address is invalid") String email,
-			@NotNull(message = "groups is required") String group, @NotNull(message = "city is required") String city,
-			String address, @NotNull(message = "phone is required") @Pattern(regexp = "[0-9] {8}") String phone_number,
-			String age, @NotNull(message = "sexe is required") String sexe) {
+			@NotNull(message = "city is required") String city,
+			@NotNull(message = "address is required") String address,
+			@NotNull(message = "phone is required") @Pattern(regexp = "[0-9] {8}") String phone_number,
+			@NotNull(message = "age is required") String age, @NotNull(message = "sexe is required") String sexe) {
 		super();
 		this.membre_username = membre_username;
 		this.userimg = userimg;
 		this.password = password;
 		this.confirm_password = confirm_password;
 		this.email = email;
-		this.group = group;
 		this.city = city;
 		this.address = address;
 		this.phone_number = phone_number;
 		this.age = age;
 		this.sexe = sexe;
 	}
+
+
 
 
 

@@ -11,6 +11,7 @@ import com.project0.esprit.service.*;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -117,6 +118,41 @@ public class UserResource {
     public List<User> getAllUsers(@RequestParam(defaultValue = "false") Boolean includeAdmins) {
         return userService.getAllUsers(includeAdmins);
     }
+    
+    
+    @SuppressWarnings("unlikely-arg-type")
+	@GetMapping("/testadmin")
+    public List<User> getAlladmin() {
+    	List<User> u = new ArrayList<>();
+    	
+    	for(User p :userrep.findAll() ) {
+    		
+    		System.out.println(p.getRoles());
+    		
+    		
+    		
+    		
+    		if(p.getRoles().contains(RoleEnum.ROLE_ADMIN.name())) {
+    			u.add(p);
+    		}
+    		
+    	}
+        return  u;
+    }
+    
+    
+    
+    @GetMapping("/testuser")
+    public List<User> getAllUsersbn(@RequestParam(defaultValue = "false") Boolean includeAdmins) {
+        return userService.getAllAdmin(includeAdmins);
+    }
+    
+    @GetMapping("/testuser2")
+    public List<User> getAllUsersbnu(@RequestParam(defaultValue = "true") Boolean includeAdmins) {
+        return userService.getAllUsers(includeAdmins);
+    }
+    
+    
     @PostMapping("/uploadprofimg")
 	public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
 		this.imgprof = file.getBytes();
@@ -188,7 +224,7 @@ public class UserResource {
     }
     
     
-    @GetMapping("/cuurentdetail")
+    @GetMapping("4")
     public ResponseEntity<?> getCureentUserDetails(Principal p1){
     	return ResponseEntity.status(HttpStatus.FOUND).body(userService.CureentDetails(p1));
     }

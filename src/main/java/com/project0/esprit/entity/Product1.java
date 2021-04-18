@@ -90,6 +90,11 @@ public class Product1 extends AuditModel implements  Comparable<Product1> {
 	public void setFavourite(Favourite favourite) {
 		this.favourite = favourite;
 	}
+	public void decrementquantity( Integer d) {
+		if(Quantity == 0)   Quantity = 0;
+		
+		else Quantity -= d ;
+	}
 
 	public Product1(Long product_id, @NotNull(message = "Product name is required.") Double productWieght,
 			Favourite favourite, String productsize, String productname,
