@@ -60,6 +60,40 @@ public class FavouriteController {
 		
 	}
 	
+	@PutMapping("/vues/{product_id}")
+	public ResponseEntity<?> addview(Principal p, @PathVariable("product_id") Long product_id) {
+		User u = userRepository.findByUsernameAndFetchRoles(p.getName());
+		
+	 	 
+	 Product1  p2 = prodrep.findById2(product_id);
+		Map<String , String> mes = new HashMap<>();
+		mes.put("msg", "you have already  have a favourite");
+
+			p2.incrementsvue();
+			
+			//p2.setIslik(Boolean.FALSE);
+			p2.setProduct_id(p2.getProduct_id());
+			u.setId(u.getId());
+		
+		
+			return  ResponseEntity.status(HttpStatus.CREATED).body(	prodrep.save(p2) );
+	 
+	
+	 
+	/* else {
+		 p2.increment();
+			
+			p2.setIslik(Boolean.TRUE);
+			p2.setProduct_id(p2.getProduct_id());
+			u.setId(u.getId());
+	
+		
+			return  ResponseEntity.status(HttpStatus.CREATED).body( prodrep.save(p2));
+		 
+	 }*/
+	}
+
+	
 	
 	
 	

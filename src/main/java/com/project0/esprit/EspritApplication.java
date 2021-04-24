@@ -14,8 +14,10 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import java.awt.image.BufferedImage;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -85,6 +87,13 @@ public class EspritApplication {
 		return new RestTemplate();
 	}
 
+	 @Scheduled(fixedRate = 5000)
+	 public void printDate() {
+		 System.out.println("Rc service tieme " + new GregorianCalendar().getTime());
+		 
+	 }
+	
+	
 	
 	@Bean(name = "geocodeService")
 	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)

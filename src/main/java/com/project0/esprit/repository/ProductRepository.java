@@ -70,6 +70,9 @@ public interface ProductRepository extends JpaRepository<Product1, Long> {
 	@Query("select a from Product1 a  WHERE  productname  like %?1%")
 	List<Product1> getProductSearching(@Param("productname") String productname);
 
+
+	//List<Product1> findAllProductByrayon(Long id);
+
   //  Page<Product1> findAllByOrderByProduct_id(Pageable pageable);
 	
 }

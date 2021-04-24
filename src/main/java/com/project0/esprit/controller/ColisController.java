@@ -125,13 +125,6 @@ public class ColisController {
 	        return DiceRoll.invoke("Black", blackDice.roll());
 	    }
 	    */
-<<<<<<< HEAD
-=======
-	   
-	//   private static int r =0;
-	    
-	    
->>>>>>> 8f09816dead7f2afbd2d1b47d752657912ee06d3
 	   
 	//   private static int r =0;
 	    

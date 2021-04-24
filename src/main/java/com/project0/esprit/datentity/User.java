@@ -491,7 +491,7 @@ public   class User implements UserDetails {
 		this.carts0 = carts0;
 	}
 
-	@JsonManagedReference
+	//@JsonManagedReference
 	@JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Cart0> carts0 ;
@@ -536,12 +536,12 @@ public   class User implements UserDetails {
     @JsonIgnore
     private List<Publication> publications;
 
-    
+  //  @JsonManagedReference
     @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL,mappedBy = "user1")
     private List<Comment> comments ;
     
-    @JsonManagedReference
+   //@JsonManagedReference
     @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL,mappedBy = "user")
     private List<Comments> pcomments ;

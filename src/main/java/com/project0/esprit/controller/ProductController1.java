@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -30,6 +32,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project0.esprit.datentity.RoleEnum;
+import com.project0.esprit.datentity.User;
 import com.project0.esprit.entity.Product1;
 import com.project0.esprit.entity.User1;
 import com.project0.esprit.repository.ProductRepository;
@@ -181,6 +185,32 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
 	}
  
 	
+	
+	
+	@GetMapping("/pr")
+	public @ResponseBody ResponseEntity<?> getProductfilter( @RequestParam ("product_name") String product_name){
+		List<Product1> prt  = new ArrayList<>();
+		Date d = new Date();
+	    System.out.println(product_name);
+		
+	        if (product_name.equals("")) {
+	            return  ResponseEntity.status(HttpStatus.FOUND).body( c.findAll());
+	        } else {
+	             
+	        
+	      prt  =   c.findAll().stream()
+	                .filter(
+	                    u -> c.getProductSearching(u.getProductname()).stream().anyMatch(p->
+	                    	p.getProductname().contains(product_name)
+	                    )
+	                    
+	                       
+	                ).collect(Collectors.toList());
+	        }
+	        
+	    	return ResponseEntity.status(HttpStatus.FOUND).body(prt);
+	   
+	}
 	
 	@GetMapping("/tunisiaProd")
 	@ResponseBody
