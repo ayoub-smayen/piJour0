@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -20,54 +21,77 @@ public class ImageT  extends AuditModel{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-    @GeneratedValue
-    Long id;
+	    @Id
+	    @Column(name = "id")
+	
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	    private Long id;
+	
+	    @Column(name = "name")
+	
+	    private String name;
+	
+	    @Column(name = "type")
+	
+	    private String type;
+	
+	    @Column(name = "picByte", length = 4915200)
+	    private byte[] picByte;
+	   
 
-    @Lob
-    byte[] content;
+		public Long getId() {
+			return id;
+		}
 
-    String name;
+		public void setId(Long id) {
+			this.id = id;
+		}
 
-	public Long getId() {
-		return id;
-	}
+		public String getName() {
+			return name;
+		}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+		public void setName(String name) {
+			this.name = name;
+		}
 
-	public byte[] getContent() {
-		return content;
-	}
+		public String getType() {
+			return type;
+		}
 
-	public void setContent(byte[] content) {
-		this.content = content;
-	}
+		public void setType(String type) {
+			this.type = type;
+		}
 
-	public String getName() {
-		return name;
-	}
+		public byte[] getPicByte() {
+			return picByte;
+		}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+		public void setPicByte(byte[] picByte) {
+			this.picByte = picByte;
+		}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+		public ImageT() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
 
-	public ImageT() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+		public ImageT(Long id, String name, String type, byte[] picByte) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.type = type;
+			this.picByte = picByte;
+		}
 
-	public ImageT(Long id, byte[] content, String name) {
-		super();
-		this.id = id;
-		this.content = content;
-		this.name = name;
-	}
+		public ImageT(String name, String type, byte[] picByte) {
+			super();
+			this.name = name;
+			this.type = type;
+			this.picByte = picByte;
+		}
+	    
     
     
 }

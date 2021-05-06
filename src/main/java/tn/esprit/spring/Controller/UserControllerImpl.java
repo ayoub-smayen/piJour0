@@ -18,7 +18,7 @@ import tn.esprit.spring.services.IUserService;
 @RestController
 @RequestMapping("/pi")
 @CrossOrigin(origins="*")
-public class UserControllerImpl implements IUserController  {
+public class UserControllerImpl  {
 	
 	@Autowired
 	IUserService user_service;

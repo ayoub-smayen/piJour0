@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import javax.jws.soap.SOAPBinding.Use;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,62 +36,13 @@ public class PublicationService implements IPublicationService {
 	@Override
 	public String AddPublication(int user_id,Publication pub) throws Exception {
 		// TODO Auto-generated method stub
-		/*List<String> title = publicationRep.findpubtitle();
-		List<String> pub_txt = publicationRep.findpubtxt();
-
-		int b=0,c=0;
-		for (int i = 1; i <= title.size(); i++) {
-			if (pub.getTitle().equalsIgnoreCase(title.get(i-1))) {
-
-				for (int j = 1; j <= pub_txt.size(); j++) {
-					if (pub.getPublication_txt().equalsIgnoreCase(pub_txt.get(j-1))) {
-
-						break;
-
-					}
-					else {
-						if (j == pub_txt.size()) {
-							userRep.findById(user_id).map(user -> {
-
-
-
-								pub.setUser(user);
-
-
-								publicationRep.save(pub);
-								return user;
-
-							}).get();
-							return "publication added succesfully";
-						}
-					}
-				}
-				break;
-			}
-			else{
-				if (i == title.size()) {
-					userRep.findById(user_id).map(user -> {
-
-
-
-						pub.setUser(user);
-
-
-						publicationRep.save(pub);
-						return user;
-
-					}).get();
-					return "publication added succesfully";
-				}
-			}
-			
-		}*/
+		
 		userRep.findById(user_id).map(u ->{
 			pub.setUser(u);
 			publicationRep.save(pub);
 			return u;
 		});
-		return "";
+		return "pub added successfully";
 
 
 		
@@ -103,9 +56,9 @@ public class PublicationService implements IPublicationService {
 
 
 	@Override
-	public List<Publication> RetrievePublication() {
+	public Page<Publication> RetrievePublication(Pageable pageable) {
 		// TODO Auto-generated method stub
-		List<Publication> pub = (List<Publication>) publicationRep.findAll();
+		Page<Publication> pub = publicationRep.findAll(pageable);
 		return pub;
 	}
 
@@ -113,7 +66,7 @@ public class PublicationService implements IPublicationService {
 
 
 	@Override
-	public void UpdatePublicationById(Publication pub) {
+	public void UpdatePublicationById(Publication pub, int id) {
 		// TODO Auto-generated method stub
 
 		this.publicationRep.save(pub);
@@ -216,12 +169,11 @@ public static int max(int... numbers) {
     public void DeletePostsWithoutInteraction(){
     	List<Publication> p = publicationRep.findAll();
     	for (int i = 0; i < p.size(); i++) {
-			if (publicationRep.NbreCommentsBypub(p.get(i))<=2 && publicationRep.NbreInteractionBypub(p.get(i))<=2) {
+			if (publicationRep.NbreCommentsBypub(p.get(i))<=2 && p.get(i).getLikecount()<=2 && p.get(i).getDislikecount()<=2) {
 				
 				publicationRep.deleteById(p.get(i).getId());
 				publicationRep.DeleteCommentsByPub(p.get(i));
-				publicationRep.DeleteInteractionsByPub(p.get(i));
-				publicationRep.DeleteInteractionsByCommentsByPuub(p.get(i));
+				
 			}
 		}
     }
@@ -230,6 +182,38 @@ public static int max(int... numbers) {
     	Comparator<Publication> comp = (x,y) -> y.getComments().size()-x.getComments().size();
     	return publicationRep.findAll().stream().sorted(comp).collect(Collectors.toList());
     }
+
+
+
+
+	@Override
+	public void AddLike(int id) {
+		// TODO Auto-generated method stub
+		publicationRep.findById(id).map(p -> {
+			p.setLikecount(p.getLikecount()+1);
+			publicationRep.save(p);
+			return p;
+		});
+		
+	}
+
+
+
+
+	@Override
+	public void AddDislike(int id) {
+		// TODO Auto-generated method stub
+		publicationRep.findById(id).map(p -> {
+			p.setDislikecount(p.getDislikecount()+1);
+			publicationRep.save(p);
+			return p;
+		});
+		
+	}
+	
+	public int getCommentsNumber(int id){
+		return publicationRep.nbreComments(id);
+	}
 
 
 

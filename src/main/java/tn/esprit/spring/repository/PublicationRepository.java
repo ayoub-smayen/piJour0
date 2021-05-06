@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,8 +27,7 @@ public interface PublicationRepository extends JpaRepository<Publication, Intege
 	/*@Query(value = "select publication_txt from publication p join user on user.user_id = p.user_id where user.user_id = ?1 )",nativeQuery =true)
 	List<Publication> findByuser_id(int id);*/
 	
-	List<Publication> findByUser(int id);
-	Optional<Publication> findByUserAndId(int id,int user_id);
+	
 	
 	@Query(value ="SELECT * FROM `publication` JOIN comments on comments.pub_id_id=publication.id WHERE publication.id = 1",nativeQuery=true)
 	List<Publication> findAllpub();
@@ -35,8 +35,7 @@ public interface PublicationRepository extends JpaRepository<Publication, Intege
 	@Query(value="select publication_txt from publication",nativeQuery=true)
 	List<String> findpubtxt();
 	
-	@Query(value="select title from publication",nativeQuery=true)
-	List<String> findpubtitle();
+
 	
 	@Modifying
 	@Transactional
@@ -46,7 +45,7 @@ public interface PublicationRepository extends JpaRepository<Publication, Intege
 	@Query(value="select count(*) from comments where pub_id_id =:pub_id",nativeQuery=true)
 	int NbreCommentsBypub(@Param("pub_id") Publication pub);
 	
-	@Query(value="select count(*) from like_posts where pub_id =:pub",nativeQuery=true)	
+	@Query(value="select likecount from publication where pub_id =:pub",nativeQuery=true)	
 	int NbreInteractionBypub(@Param("pub") Publication pub);
 	
 	@Transactional
@@ -54,15 +53,15 @@ public interface PublicationRepository extends JpaRepository<Publication, Intege
 	@Query(value="delete from comments where pub_id_id=:pub",nativeQuery=true)
 	void DeleteCommentsByPub(@Param("pub") Publication pub);
 	
-	@Transactional
-	@Modifying
-	@Query(value="delete from like_posts where pub_id=:pub",nativeQuery=true)
-	void DeleteInteractionsByPub(@Param("pub") Publication pub);
+	@Query(value="select count(*) from comments where comments.pub_id_id= :pub_id ",nativeQuery=true)
+	int nbreComments(@Param("pub_id") int pub_id);
+	@Query(value="select likecount,dislikecount,title from publication",nativeQuery=true)
+	Publication getpub();
 	
-	@Transactional
-	@Modifying
-	@Query(value="delete from like_comments where com_id in (select id from comments where pub_id_id=:pub)",nativeQuery=true)
-	void DeleteInteractionsByCommentsByPuub(@Param("pub") Publication pub);
+	@Query(value="select count(*) from publication",nativeQuery=true)
+	int NbrePub();
+	
+	
 	
 	
 

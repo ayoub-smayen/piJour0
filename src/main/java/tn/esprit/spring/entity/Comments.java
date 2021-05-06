@@ -30,18 +30,35 @@ public class Comments extends AuditModel {
 	private int id;
 	@Column
 	private String Comment_field;
-	@JsonIgnore
+	private int like_count = 0;
+	private int dislike_count = 0;
+	
 	@ManyToOne
 	private User user;
 	@JsonIgnore
 	@ManyToOne
 	private Publication pub_id;
-	@OneToMany(mappedBy="com",cascade=CascadeType.ALL)
-	private List<LikeComments> like_comments;
-	
-	
-	
-	
+	public Comments() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Comments(int id, String comment_field, int like_count, int dislike_count, User user, Publication pub_id) {
+		super();
+		this.id = id;
+		Comment_field = comment_field;
+		this.like_count = like_count;
+		this.dislike_count = dislike_count;
+		this.user = user;
+		this.pub_id = pub_id;
+	}
+	public Comments(String comment_field, int like_count, int dislike_count, User user, Publication pub_id) {
+		super();
+		Comment_field = comment_field;
+		this.like_count = like_count;
+		this.dislike_count = dislike_count;
+		this.user = user;
+		this.pub_id = pub_id;
+	}
 	public int getId() {
 		return id;
 	}
@@ -54,6 +71,18 @@ public class Comments extends AuditModel {
 	public void setComment_field(String comment_field) {
 		Comment_field = comment_field;
 	}
+	public int getLike_count() {
+		return like_count;
+	}
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
+	public int getDislike_count() {
+		return dislike_count;
+	}
+	public void setDislike_count(int dislike_count) {
+		this.dislike_count = dislike_count;
+	}
 	public User getUser() {
 		return user;
 	}
@@ -65,30 +94,6 @@ public class Comments extends AuditModel {
 	}
 	public void setPub_id(Publication pub_id) {
 		this.pub_id = pub_id;
-	}
-	public Comments(int id, String comment_field, User user, Publication pub_id) {
-		super();
-		this.id = id;
-		Comment_field = comment_field;
-		this.user = user;
-		this.pub_id = pub_id;
-	}
-	public Comments() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public List<LikeComments> getLike_comments() {
-		return like_comments;
-	}
-	public void setLike_comments(List<LikeComments> like_comments) {
-		this.like_comments = like_comments;
-	}
-	public Comments(String comment_field, User user, Publication pub_id, List<LikeComments> like_comments) {
-		super();
-		Comment_field = comment_field;
-		this.user = user;
-		this.pub_id = pub_id;
-		this.like_comments = like_comments;
 	}
 	
 	

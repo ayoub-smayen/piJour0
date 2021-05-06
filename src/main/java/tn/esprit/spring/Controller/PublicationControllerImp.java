@@ -4,18 +4,21 @@ package tn.esprit.spring.Controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,14 +42,15 @@ import tn.esprit.spring.repository.PublicationRepository;
 import tn.esprit.spring.repository.UserRepository;
 import tn.esprit.spring.services.IPublicationService;
 import tn.esprit.spring.services.IUserService;
+import tn.esprit.spring.services.PublicationService;
 
 @RestController
 @RequestMapping("/pi")
 @CrossOrigin("*")
-public class PublicationControllerImp implements IPublicationController {
+public class PublicationControllerImp {
 	
 	@Autowired
-	IPublicationService pub_service;
+	PublicationService pub_service;
 	@Autowired
 	UserRepository user_rep;
 	@Autowired
@@ -60,27 +64,34 @@ public class PublicationControllerImp implements IPublicationController {
 	}
 	
 	@GetMapping("/RetrievePublication")
-	public List<Publication> retrieveAllPublications(){
-		List<Publication> pub = pub_service.RetrievePublication();
+	public List<Publication> retrieveAllPublications(
+			/*/@RequestParam(defaultValue = "0",name="page") int page,
+	        @RequestParam(defaultValue = "3",name="size") int size*/){
+		
+		/*Pageable paging = PageRequest.of(page, size);
+		Page<Publication> publi = pub_service.RetrievePublication(paging);*/
+	        	List<Publication> pub = pub_rep.findAll();
+		
 		return pub;
 	}
 	
 	@PostMapping("/AddPublication/{id}")
-	public String AddPub( @RequestBody Publication pub,@PathVariable("id") int id) throws Exception{
+	public ResponseEntity<Publication> AddPub(@RequestBody Publication pub,@PathVariable("id") int id) throws Exception{
 		pub.setPic(this.bytes);
 		
 		this.bytes = null;
 		
-		return pub_service.AddPublication(id, pub);
+		pub_service.AddPublication(id, pub);
+		return ResponseEntity.accepted().body(pub);
 		
 		
 		
 	}
 	
-	@PutMapping("/UpdatePublication")
-	public void UpdatePub(@RequestBody Publication pub){
+	@PutMapping("/UpdatePublication/{id}")
+	public void UpdatePub(@RequestBody Publication pub,@PathVariable("id") int id){
 		
-		this.pub_service.UpdatePublicationById(pub);
+		this.pub_service.UpdatePublicationById(pub, id);
 		
 	}
 	
@@ -115,9 +126,96 @@ public class PublicationControllerImp implements IPublicationController {
 	public List<Publication> getPubAlaUne(){
 		return pub_service.AffichageDesSujetsAlaUne();
 	}
+	@PutMapping("AddLikeposts/{id}")
+	public void AddLikeposts(@PathVariable("id") int id){
+		pub_service.AddLike(id);
+	}
+	@PutMapping("AdddisLikeposts/{id}")
+	public void AdddisLikeposts(@PathVariable("id") int id){
+		pub_service.AddDislike(id);
+	}
 	
+	//@Scheduled(fixedDelay=1000*30)
+	@PutMapping("/getCommentsNumber")
+	public int NbreComments(){
+		List<Publication> p = pub_rep.findAll();
+		for (int i = 0; i < p.size(); i++) {
+			Publication x = p.get(i);
+			x.setCommentsNumber(pub_service.getCommentsNumber(x.getId()));
+			pub_rep.save(x);
+			System.out.println(pub_service.getCommentsNumber(p.get(i).getId()));
+		}
+		return 0;
+	}
 	
-	
+	@GetMapping("PubNumber")
+	public int pubnumber(){
+		return pub_rep.NbrePub();
+	}
+	public static byte[] compressBytes(byte[] data) {
+
+		Deflater deflater = new Deflater();
+
+		deflater.setInput(data);
+
+		deflater.finish();
+
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+
+		byte[] buffer = new byte[1024];
+
+		while (!deflater.finished()) {
+
+			int count = deflater.deflate(buffer);
+
+			outputStream.write(buffer, 0, count);
+
+		}
+
+		try {
+
+			outputStream.close();
+
+		} catch (IOException e) {
+
+		}
+
+		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+
+		return outputStream.toByteArray();
+
+	}
+	public static byte[] decompressBytes(byte[] data) {
+
+		Inflater inflater = new Inflater();
+
+		inflater.setInput(data);
+
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+
+		byte[] buffer = new byte[1024];
+
+		try {
+
+			while (!inflater.finished()) {
+
+				int count = inflater.inflate(buffer);
+
+				outputStream.write(buffer, 0, count);
+
+			}
+
+			outputStream.close();
+
+		} catch (IOException ioe) {
+
+		} catch (DataFormatException e) {
+
+		}
+
+		return outputStream.toByteArray();
+
+	}
 	
 
 }

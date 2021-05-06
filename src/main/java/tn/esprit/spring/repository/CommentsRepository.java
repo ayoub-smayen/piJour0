@@ -12,7 +12,7 @@ import tn.esprit.spring.entity.Comments;
 @Repository
 public interface CommentsRepository extends JpaRepository<Comments, Integer> {
 	
-	@Query(value="SELECT comments.* from comments join like_comments on comments.id = like_comments.com_id where pub_id_id = :publicationId GROUP by like_comments.com_id order by COUNT(like_comments.com_id) DESC",nativeQuery=true)
+	@Query(value="select * from comments where pub_id_id = :publicationId order by comments.like_count desc",nativeQuery=true)
 	List<Comments> RelevantComments(@Param("publicationId") int id);
 	@Query(value="select mots from dictionnaire", nativeQuery=true)
 	List<String> Dictionnaire();

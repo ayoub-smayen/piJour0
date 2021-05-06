@@ -16,6 +16,11 @@ public class Greetings {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	public Greetings() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 
 }

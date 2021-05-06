@@ -13,6 +13,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -26,10 +28,12 @@ public abstract class AuditModel implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="createdAt",nullable=false,updatable=false)
 	@CreatedDate
+	@JsonFormat()
 	private Date createdAt;
 	@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at", nullable = false)
     @LastModifiedDate
+    @JsonFormat()
     private Date updatedAt;
 	public Date getCreatedAt() {
 		return createdAt;

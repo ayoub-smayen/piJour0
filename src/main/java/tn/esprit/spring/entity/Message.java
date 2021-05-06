@@ -15,6 +15,11 @@ public class Message {
 	public Message(String name) {
 		this.name = name;
 	}
+
+	public Message() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 
