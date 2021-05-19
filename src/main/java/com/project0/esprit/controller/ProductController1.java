@@ -94,13 +94,18 @@ public ResponseEntity<?> saveprodh(@Valid @RequestBody Product1 p1,@PathVariable
 	
 	
 }
-//@RequestParam("imageFile") MultipartFile file
+//@RequestParam("imageFile") MultipartFile file @Valid
 
   @PostMapping("/addprowithImag")
-  public void createBook(@Valid  @RequestBody Product1 p) throws IOException {
+  public @ResponseBody ResponseEntity<?>   createBook(  @RequestBody Product1 p) throws IOException {
 		p.setProductImg(this.bytes);
+		p.setLike(0);
+		p.setDeslike(0);
 		c.save(p);
 		this.bytes = null;
+		
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(p) ;
 	}
 	
 	@PostMapping("/addproducts")
@@ -208,7 +213,7 @@ public boolean deleteProduct(@PathVariable("id") Long id) {
 	                ).collect(Collectors.toList());
 	        }
 	        
-	    	return ResponseEntity.status(HttpStatus.FOUND).body(prt);
+	    	return ResponseEntity.status(HttpStatus.OK).body(prt);
 	   
 	}
 	

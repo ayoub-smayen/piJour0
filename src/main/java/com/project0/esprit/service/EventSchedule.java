@@ -71,7 +71,7 @@ public class EventSchedule {
 	  
 	  private Myproduct m =new Myproduct();
 	
-	@Scheduled(fixedRate = 120000)
+	@Scheduled(fixedRate = 1000)
     public void create() {
 		
 		System.out.println(0.1 + 0.2);

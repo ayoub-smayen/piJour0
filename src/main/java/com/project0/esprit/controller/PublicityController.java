@@ -124,7 +124,7 @@ public class PublicityController {
 		
 		User u = userepo.findByUsernameAndFetchRoles(p1.getName());
 		Favourite f = favrepo.getUserFavourite(u);
-		return  ResponseEntity.status(HttpStatus.FOUND).body(f);
+		return  ResponseEntity.status(HttpStatus.OK).body(f);
 		
 	}
 	
@@ -163,9 +163,9 @@ public class PublicityController {
 		
 		ml.put(mp2, mp1);		
 		
-		return  ResponseEntity.status(HttpStatus.FOUND).body(ml);
+		return  ResponseEntity.status(HttpStatus.OK).body(ml);
 		}
-		return  ResponseEntity.status(HttpStatus.FOUND).body(mp1); 
+		return  ResponseEntity.status(HttpStatus.OK).body(mp1); 
 		
 	}
 

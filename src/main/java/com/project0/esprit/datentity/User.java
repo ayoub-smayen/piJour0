@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.project0.esprit.entity.Cart0;
+import com.project0.esprit.entity.Commande;
 import com.project0.esprit.entity.Orders0;
 import com.project0.esprit.entity.Product1;
 
@@ -437,6 +438,12 @@ public   class User implements UserDetails {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Orders0> orders0 ;
+    
+    
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Commande> commandes ;
+    
     
     public List<Orders0> getOrders0() {
 		return orders0;

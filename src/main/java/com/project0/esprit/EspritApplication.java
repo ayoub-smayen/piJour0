@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.converter.BufferedImageHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -59,6 +60,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @EnableScheduling
 @EnableAsync
 @SpringBootApplication
+
+@EnableJpaRepositories
 @EnableAspectJAutoProxy(proxyTargetClass=true)
 @ComponentScan({"com.project0.esprit.aspect","com.project0.esprit.mycharts","com.project0.esprit.mycharts.service","com.project0.esprit.mycharts.Dao","com.project0.esprit.mycharts.Model","com.project0.esprit.mycharts.Controller","com.project0.esprit.mycharts.service.impl","com.project0.esprit.service","com.project0.esprit.resource","com.project0.esprit","com.project0.esprit.dao","com.project0.esprit.datentity","com.project0.esprit.utils","com.project0.esprit.security","com.project0.esprit.dao","com.project0.esprit.controller","com.project0.esprit.entity","com.project0.esprit.repository","com.project0.esprit.config"})
 /*@EnableAutoConfiguration(exclude = { //  

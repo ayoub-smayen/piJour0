@@ -1,6 +1,7 @@
 package com.project0.esprit.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class Stock extends AuditModel {
 	private int amount;
 	@JsonIgnore
 	@OneToMany( mappedBy="stock",cascade = CascadeType.ALL)
-	private List<Product1> product;
+	private Set<Product1> product;
 	
 	public Long getId() {
 		return id;
@@ -42,19 +43,19 @@ public class Stock extends AuditModel {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	public List<Product1> getProduct() {
+	public Set<Product1> getProduct() {
 		return product;
 	}
-	public void setProduct(List<Product1> product) {
+	public void setProduct(Set<Product1> product) {
 		this.product = product;
 	}
-	public Stock(Long id, int amount, List<Product1> product) {
+	public Stock(Long id, int amount, Set<Product1> product) {
 		super();
 		this.id = id;
 		this.amount = amount;
 		this.product = product;
 	}
-	public Stock(int amount, List<Product1> product) {
+	public Stock(int amount, Set<Product1> product) {
 		super();
 		this.amount = amount;
 		this.product = product;

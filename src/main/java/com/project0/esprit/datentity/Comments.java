@@ -109,13 +109,69 @@ public class Comments  extends AuditModel {
 	@Column
 	private String Comment_field;
 	
-	@JsonBackReference
+	//@JsonBackReference
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "pub_id",nullable = true)
 	private Publication publication;
 	
 
+	private Integer like_count = 0;
+	private Integer dislike_count = 0;
+	
+	
+	
+	
+	
+	
+	
+
+
+	public Comments(String comment_field, Publication publication, int like_count, int dislike_count, User user) {
+		super();
+		Comment_field = comment_field;
+		this.publication = publication;
+		this.like_count = like_count;
+		this.dislike_count = dislike_count;
+		this.user = user;
+	}
+
+
+
+	public Comments(Long id, String comment_field, Publication publication, int like_count, int dislike_count,
+			User user) {
+		super();
+		this.id = id;
+		Comment_field = comment_field;
+		this.publication = publication;
+		this.like_count = like_count;
+		this.dislike_count = dislike_count;
+		this.user = user;
+	}
+
+
+
+	public int getLike_count() {
+		return like_count;
+	}
+
+
+
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
+
+
+
+	public int getDislike_count() {
+		return dislike_count;
+	}
+
+
+
+	public void setDislike_count(int dislike_count) {
+		this.dislike_count = dislike_count;
+	}
 
 
 

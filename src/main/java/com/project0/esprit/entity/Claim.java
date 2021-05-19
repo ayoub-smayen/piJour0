@@ -45,8 +45,44 @@ public class Claim {
 	private Date claimDateUpdated;
 	
 	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="deliveryMan_id",nullable=true )
+	private Delivery_Man delivery_man ;
+	
+	public Delivery_Man getDelivery_man() {
+		return delivery_man;
+	}
+
+	public void setDelivery_man(Delivery_Man delivery_man) {
+		this.delivery_man = delivery_man;
+	}
+
 	public Long getClaim_id() {
 		return claim_id;
+	}
+
+	public Claim(@NotNull(message = "subject name is required.") String subject,
+			@NotNull(message = "desription name is required.") String desc, Date claimDateCreated,
+			Date claimDateUpdated, Delivery_Man delivery_man) {
+		super();
+		this.subject = subject;
+		this.desc = desc;
+		this.claimDateCreated = claimDateCreated;
+		this.claimDateUpdated = claimDateUpdated;
+		this.delivery_man = delivery_man;
+	}
+
+	public Claim(Long claim_id, @NotNull(message = "subject name is required.") String subject,
+			@NotNull(message = "desription name is required.") String desc, Date claimDateCreated,
+			Date claimDateUpdated, Delivery_Man delivery_man) {
+		super();
+		this.claim_id = claim_id;
+		this.subject = subject;
+		this.desc = desc;
+		this.claimDateCreated = claimDateCreated;
+		this.claimDateUpdated = claimDateUpdated;
+		this.delivery_man = delivery_man;
 	}
 
 	public void setClaim_id(Long claim_id) {

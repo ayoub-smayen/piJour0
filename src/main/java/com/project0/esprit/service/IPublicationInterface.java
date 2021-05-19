@@ -15,4 +15,11 @@ public interface IPublicationInterface {
 	public void UpdatePublicationById(Publication pub, Long id);
 	public void DeletePublication(Long id);
 	public Publication GetPubById(Long pubId);
+	
+	
+	public void deletePubRedondant();
+	public void DeletePostsWithoutInteraction();
+	public void AddLike(Long id);
+	public void AddDislike(Long id);
+	public List<Publication> AffichageDesSujetsAlaUne();
 }

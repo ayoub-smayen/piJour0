@@ -106,6 +106,11 @@ public  class ProfitServiceImpl implements ProfitService {
 		
 		return ml ;
 	}
+	@Override
+	public List<Profit> getPr() {
+		
+		return  ( List<Profit>)  profitRepository.findAll();
+	}
 
    
 }

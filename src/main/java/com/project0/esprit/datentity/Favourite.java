@@ -67,7 +67,7 @@ public class Favourite extends AuditModel {
 	}
 
 
-	@JsonManagedReference
+	//@JsonManagedReference
 	
 	@OneToMany(mappedBy = "favourite",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Product1> products ;

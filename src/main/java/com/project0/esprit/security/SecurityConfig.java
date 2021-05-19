@@ -65,7 +65,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable()
+    	http.cors()
+        .and()
+    .headers()
+        .frameOptions().disable()
+        .and()
+    .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -78,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/",
                 		"/api/**",
                 		"/api2/**",
-                		//"mail/**",
+                		"/mail/**",
                 		"/paypal/**",
                         "/api1/polls/**",
                         "/api1/user/**",
@@ -90,21 +95,44 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/gs-guide-websocket/**",
                         "/webjars/jquery/jquery.min.map",
                         "/app.js",
+                       "/socket",
+                       "/socket/**",
                        "/socket/",
-                        
+                       "/socket/info/**",
+                       "/socket/info/",
+                       "/Facture/**",
+                       "/Panier/**",
+                       
+                       "/apiyes/**",
+                       
+                     //   "/ws",
                         "/pub/**",
                         
+                        "/Commande/**",
+                        
+                       /* 
+                        
+                  
+                        
+                    
+                        
+                        "/app/**",
+                        */
                         
                         
-                        
-                        "/socket/info",
-                        "/socket/**",
                         "/webjars/stomp-websocket/stomp.min.js"
                         
                 )
                 .permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                
+                .and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //.and().
+                ;
         
         //http.authorizeRequests().antMatchers().permitAll();
         

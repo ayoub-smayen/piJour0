@@ -1,9 +1,19 @@
 package com.project0.esprit.entity;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 public class Shop {
 
 	private String shopName;
 
+	
+	public Shop() {
+		super();
+	}
+
+	@Embedded
 	private Address shopAddress;
 
 	private double shopLatitude;

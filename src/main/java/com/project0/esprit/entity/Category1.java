@@ -142,7 +142,7 @@ public class Category1 extends AuditModel {
 	    private Set<Product1> products;
     
     
-	@JsonBackReference
+	//@JsonBackReference
     @JsonIgnore
    	@ManyToOne(fetch = FetchType.LAZY, optional = true)
    	    @JoinColumn(name = "ray_id", nullable = true)

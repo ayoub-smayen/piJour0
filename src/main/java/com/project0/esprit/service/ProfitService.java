@@ -12,5 +12,6 @@ public interface ProfitService {
 	   Profit retrieveProfit(Long id);
 	   HashMap<String, Object> getTodayRevenueDash();
 	   List<Map<String , Double>>  getgainmaithly();
+	   List<Profit> getPr();
 	   
 }

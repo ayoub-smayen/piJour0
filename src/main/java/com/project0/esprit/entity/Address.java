@@ -1,4 +1,8 @@
 package com.project0.esprit.entity;
+
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Address {
 
 	private String number;
@@ -12,6 +16,12 @@ public class Address {
 	public String getNumber() {
 		return number;
 	}
+	
+
+	public Address() {
+		super();
+	}
+
 
 	public void setNumber(String number) {
 		this.number = number;

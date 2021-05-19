@@ -175,7 +175,7 @@ public class ColisController {
 
 	    @RequestMapping("/play")
 	    //@HystrixCommand(fallbackMethod = "defaultSpinResult")
-	    public String spin(Principal us){
+	    public ResponseEntity<?> spin(Principal us){
 	    	
 	    	User ui = userep.findByUsernameAndFetchRoles(us.getName());
 	    	
@@ -198,16 +198,20 @@ public class ColisController {
 	    		ui.setCoins(ui.getCoins()+1);
 	    		  userep.save(ui);
 
-	 	        return String.format("  you win 🎁  🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑    a  product %s %s %s",s1 , s2, s3);
+	 	        return   ResponseEntity.status(HttpStatus.OK).body( String.format("  you win 🎁  🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑 🤑    a  product %s %s %s",s1 , s2, s3));
 	 	    	
 	    	}
-	    	else  return String.format("  you lose  😁  😁  😁  😁   try again    %s %s %s",s1 , s2, s3);
+	    	else  return  ResponseEntity.status(HttpStatus.OK).body( String.format("  you lose  😁  😁  😁  😁   try again    %s %s %s",s1 , s2, s3));
 	    }
 
 	    private String getSingleSpinResult(){
 	    	
+	    	int i=0;
+	    	
 	    	for (Product1   m: prodrep.findAll()) {
 	    		slotprooduct.add(m.getProductname());
+	    		i++;
+	    		if(i<3) break;
 	    	}
 	        int randomNumber = restTemplate.getForObject("http://localhost:8091/api/random", Integer.class);
 	       

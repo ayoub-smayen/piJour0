@@ -76,7 +76,7 @@ public class RayController {
 		RaySer.updateRay(ray);
 	}
 
-	@GetMapping("/notif")
+	@GetMapping("/notif2")
 	public String notif(){
 		List<Ray2> ray = ray_rep.findAll();
 		for (int i = 0; i < ray.size(); i++) {
@@ -120,6 +120,8 @@ public class RayController {
 public List<Ray> getAllRayName(@PathVariable("rayname") String rayname ){
 	return this.rayrepository.getRayByName(rayname);
 }
+
+
 
 
 @GetMapping("/rayon/{id}")

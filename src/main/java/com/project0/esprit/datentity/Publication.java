@@ -54,15 +54,73 @@ public class Publication extends AuditModel {
    // @JsonIgnore
     private User user2;
 
-    @JsonManagedReference
+   // @JsonManagedReference
 	@JsonIgnore
     @OneToMany(cascade=CascadeType.ALL,mappedBy = "publication")
     private List<Comments> comments ;
 	
 
+	 
+	private Integer like_count = 0;
+	private Integer dislike_count = 0;
+	
+	
+	
+	
+	
+	  
+
+	public Integer getLike_count() {
+		return like_count;
+	}
+
+
+
+	public void setLike_count(Integer like_count) {
+		this.like_count = like_count;
+	}
+
+
+
+	public Integer getDislike_count() {
+		return dislike_count;
+	}
+
+
+
+	public void setDislike_count(Integer dislike_count) {
+		this.dislike_count = dislike_count;
+	}
+
+
 
 	public List<Comments> getComments() {
 		return comments;
+	}
+
+
+
+	public Publication(Long id, String publication_txt, User user2, List<Comments> comments, Integer like_count,
+			Integer dislike_count) {
+		super();
+		this.id = id;
+		this.publication_txt = publication_txt;
+		this.user2 = user2;
+		this.comments = comments;
+		this.like_count = like_count;
+		this.dislike_count = dislike_count;
+	}
+
+
+
+	public Publication(String publication_txt, User user2, List<Comments> comments, Integer like_count,
+			Integer dislike_count) {
+		super();
+		this.publication_txt = publication_txt;
+		this.user2 = user2;
+		this.comments = comments;
+		this.like_count = like_count;
+		this.dislike_count = dislike_count;
 	}
 
 

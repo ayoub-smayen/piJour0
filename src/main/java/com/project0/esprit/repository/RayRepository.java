@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.project0.esprit.entity.Category1;
 import com.project0.esprit.entity.Product1;
 import com.project0.esprit.entity.Ray;
 
@@ -43,6 +44,10 @@ public interface RayRepository extends JpaRepository<Ray, Long> {
 	
 	@Query("SELECT a.categories from Ray a WHERE rayname =?1   ")
 	public List<Ray>  getCategoriesRayName(@Param("rayname") String rayname);
+	
+	
+	@Query("SELECT a FROM Category1 a WHERE ray_id = ?1 ")
+    List<Category1> findByCategory(@Param("ray_id") Long ray_id);
 	
 	
 	

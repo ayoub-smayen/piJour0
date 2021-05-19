@@ -42,6 +42,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @RestController
@@ -88,6 +89,16 @@ public class AuthResource {
     	
     	
     }
+    @GetMapping("/authenticate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void authenticate() {
+      // we don't have to do anything here
+      // this is just a secure endpoint and the JWTFilter
+      // validates the token
+      // this service is called at startup of the app to check
+      // if the jwt token is still valid
+    }
+    
     
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {

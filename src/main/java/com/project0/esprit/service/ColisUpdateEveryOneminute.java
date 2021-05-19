@@ -25,6 +25,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,7 @@ import com.project0.esprit.repository.ProductRepository;
 import com.project0.esprit.repository.UserRepository;
 
 @Service 
+@EnableScheduling
 public class ColisUpdateEveryOneminute {
 	
 	
@@ -80,6 +82,9 @@ public class ColisUpdateEveryOneminute {
 			   props.put("mail.smtp.auth", "true");
 			   props.put("mail.smtp.starttls.enable", "true");
 			   props.put("mail.smtp.host", "smtp.gmail.com");
+props.put("mail.smtp.starttls.enable", "true");
+			    props.put("mail.smtp.starttls.required", "true");
+			    props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 			   props.put("mail.smtp.port", "587");
 			   
 			   Session session = Session.getInstance(props, new javax.mail.Authenticator() {
@@ -112,7 +117,7 @@ public class ColisUpdateEveryOneminute {
 			}
 			   MimeBodyPart attachPart = new MimeBodyPart();
 
-			   try {
+			 /*  try {
 				attachPart.attachFile(p2.getProductImg().toString());
 				 multipart.addBodyPart(attachPart);
 				   msg.setContent(multipart);
@@ -121,7 +126,7 @@ public class ColisUpdateEveryOneminute {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			  
+			  */
 			 
 			 SimpleMailMessage message = new SimpleMailMessage(); 
 		        message.setFrom("ayoubjobs.2019@gmail.com");

@@ -51,9 +51,15 @@ public class StockServiceImpl implements StockServiceImp {
 	@Override
 	public List<Long> missingProduct() {
 
-		List<Long> products = (List<Long>) stockRepository.missingProduct();	
+		Long  l1 = (long) 1.0;
+		
+		 List<Long>  l = new ArrayList<>();
+		 
+		 l.add(l1);
+		return l;
+		/*List<Long> products = (List<Long>) stockRepository.missingProduct();	
 
-		return products;
+		return products;*/
 	}
 
 
@@ -67,7 +73,7 @@ public class StockServiceImpl implements StockServiceImp {
 
 
 	public void sendEmail() {
-		try
+		/*try
 		{
 			String ch="";
 			List <Product1> prods=new ArrayList<Product1>();
@@ -102,7 +108,7 @@ public class StockServiceImpl implements StockServiceImp {
 
 			System.out.println("erreur"+e);
 		}
-
+*/
 	}
 
 

@@ -28,6 +28,12 @@ public class ProfitController {
 	@Autowired
 	private ProfitService profitservice;
 	
+	
+	 @GetMapping("/profits")
+	 public @ResponseBody   ResponseEntity<?> getprf(){
+		 return ResponseEntity.status(HttpStatus.FOUND).body(profitservice.getPr());
+	 }
+	
 	//http://localhost:8091/api/profit/get/{profit_id}
 	@GetMapping("/profit/get/{profit_id}")
 	@ResponseBody

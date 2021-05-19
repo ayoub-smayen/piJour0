@@ -5,6 +5,7 @@ import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.project0.esprit.service.MailService;
 
 @RequestMapping("mail")
 @RestController
+@CrossOrigin("*")
 public class MailController {
 	
 	@Autowired

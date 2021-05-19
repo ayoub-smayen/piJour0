@@ -63,7 +63,7 @@ public class EuserController {
 	
 	
 	//http://localhost:8091/api/euser/uploadimage
-		@PostMapping("/uploadimage")
+		@PostMapping("/euser/uploadimage")
 		public void uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
 			
 			logger.info("upload image for user");

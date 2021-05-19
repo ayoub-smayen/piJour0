@@ -49,7 +49,7 @@ public class Ray  extends AuditModel{
 		super();
 	}
 
-	@JsonManagedReference
+	//@JsonManagedReference
 	@JsonIgnore
 	@OneToMany(mappedBy = "ray", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)

@@ -44,7 +44,7 @@ public class FavouriteController {
 	@GetMapping("/favourite")
 	public ResponseEntity<?> getfavourit(Principal p ) {
 		
-		try {
+	/*	try {
 		User u = userRepository.findByUsernameAndFetchRoles(p.getName());
 		System.out.println(u.getId());
 	
@@ -55,7 +55,15 @@ public class FavouriteController {
 		}
 		catch(Exception ex) {
 			return ResponseEntity.status(HttpStatus.FOUND).body("no favourite" + ex.getMessage());	
-		}
+		}*/
+		
+		User u = userRepository.findByUsernameAndFetchRoles(p.getName());
+		System.out.println(u.getId());
+	
+		
+		//if(!u.getFavourite().getProducts().equals(null))
+			return ResponseEntity.status(HttpStatus.OK).body(u.getFavourite());
+		
 		
 		
 	}
