@@ -118,6 +118,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         
                         "/app/**",
                         */
+                        "/chat/**",
                         
                         
                         "/webjars/stomp-websocket/stomp.min.js"
