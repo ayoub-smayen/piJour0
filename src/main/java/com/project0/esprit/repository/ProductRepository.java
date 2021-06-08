@@ -18,6 +18,14 @@ import com.project0.esprit.entity.User1;
 @Repository
 public interface ProductRepository extends JpaRepository<Product1, Long> {
 	
+
+	
+	@Query("SELECT a    FROM   Product1 a  join  a.comments  c  WHERE  c.product.product_id = ?1  ")
+    List<Product1> JoinProductComment(@Param("product_id") Long product_id);
+	
+	
+	
+	
 	@Query("SELECT a FROM Product1 a WHERE productname = ?1")
     List<Product1> findByFirstNameAndLastName(@Param("productname") String productname);
  

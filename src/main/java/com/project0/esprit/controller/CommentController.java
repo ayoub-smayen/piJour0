@@ -78,6 +78,14 @@ public class CommentController {
 	@Autowired
 	private ProductRepository prodrepo;
 	
+@GetMapping("/comment/{product_id}")
+	
+	public List<Comment> getproductcoment(@PathVariable("product_id") Long product_id){
+	
+		return commntRepository.JComment(product_id);
+	}
+	
+	
 	 @PostMapping("/addComment/{product_id}")
 	// @Secured("ROLE_USER")
 	 public ResponseEntity<?> post(@RequestBody Comment c,@PathVariable("product_id") Long prod_id, Principal p) {
@@ -124,11 +132,13 @@ public class CommentController {
 			System.out.println("Original Image Byte Size - " + file.getBytes().length);
 			/*ImageT img = new ImageT(file.getOriginalFilename(), file.getContentType(),@RequestPart
 					compressBytes(file.getBytes()));*/
-			this.picprofile = compressBytes(file.getBytes());
+			/*this.picprofile = compressBytes(file.getBytes());
 			
 			if(this.picprofile != null) {
 				System.out.println(this.picprofile);
-			}
+			}*/
+			
+			this.picprofile = file.getBytes();
 			//imageRepository.save(img);
 			//return ResponseEntity.status(HttpStatus.OK);
 		}

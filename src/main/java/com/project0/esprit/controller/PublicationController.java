@@ -27,7 +27,7 @@ import com.project0.esprit.repository.UserRepository;
 import com.project0.esprit.service.IPublicationInterface;
 
 @RestController
-@RequestMapping("/pub")
+@RequestMapping("/api")
 @CrossOrigin("*")
 public class PublicationController {
 	
@@ -41,15 +41,15 @@ public class PublicationController {
 	
 	private byte[] bytes;
 	@PostMapping("/upload2")
-	@Secured("ROLE_USER")
+	//@Secured("ROLE_USER")
 	public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
 		this.bytes = file.getBytes();
 	}
 	
 	
 	
-	@PostMapping("/AddPublication")
-	@Secured("ROLE_USER")
+	@PostMapping("AddPublication")
+	//@Secured("ROLE_USER")
 	public ResponseEntity<?> AddPub(@RequestBody Publication pub, Principal p ){
 		
 		
@@ -60,7 +60,7 @@ public class PublicationController {
 	}
 
 	@GetMapping("/RetrievePublication")
-	@Secured("ROLE_USER")
+	//@Secured("ROLE_USER")
 	public  ResponseEntity<?> retrieveAllPublications(){
 		List<Publication> pub = pub_service.RetrievePublication();
 		
@@ -81,7 +81,7 @@ public class PublicationController {
 	}
 	
 	@DeleteMapping("remove-publication/{id}")
-	@Secured("ROLE_USER")
+	//@Secured("ROLE_USER")
 	public void DeletePub(@PathVariable("id") Long id){
 		this.pub_service.DeletePublication(id);
 	}
@@ -100,19 +100,19 @@ public void DeletePubWithoutInteraction(){
 }
 
 @GetMapping("GetPubAlaune")
-@Secured("ROLE_USER")
+//@Secured("ROLE_USER")
 public List<Publication> getPubAlaUne(){
 	return pub_service.AffichageDesSujetsAlaUne();
 }
 @PutMapping("AddLikeposts/{id}")
-@Secured("ROLE_USER")
+//@Secured("ROLE_USER")
 public void AddLikeposts(@PathVariable("id") Long id){
 	pub_service.AddLike(id);
 }
 
 
 @PutMapping("AdddisLikeposts/{id}")
-@Secured("ROLE_USER")
+//@Secured("ROLE_USER")
 public void AdddisLikeposts(@PathVariable("id") Long id){
 	pub_service.AddDislike(id);
 }

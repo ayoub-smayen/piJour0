@@ -61,6 +61,13 @@ public class ProductController1 {
 	 private ProductRepository c;
 	
 	
+@GetMapping("/productcomment/{product_id}")
+	
+	public List<Product1> getproductcoment(@PathVariable("product_id") Long product_id){
+		logger.info("product list");
+		return c.JoinProductComment(product_id);
+	}
+	
 	@GetMapping("/newproducts")
 	
 	public List<Product1> getNewproduct(){

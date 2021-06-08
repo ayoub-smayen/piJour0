@@ -73,9 +73,7 @@ public class Delivery_man0 {
 
 	
 
-	public Delivery_man0() {
-		super();
-	}
+	
 
 	@Column(name="salaire")
     private int salaire;

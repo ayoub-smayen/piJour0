@@ -85,7 +85,7 @@ public class AuthResource {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user no found");
     	}
 
-    	return ResponseEntity.status(HttpStatus.FOUND).body(u);
+    	return ResponseEntity.status(HttpStatus.OK).body(u);
     	
     	
     }
